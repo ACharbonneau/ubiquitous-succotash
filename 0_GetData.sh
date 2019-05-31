@@ -9,7 +9,7 @@ wget -r ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/GRC
 
 # Chromatin states Core 15-state model (5 marks, 127 epigenomes)
 
-wget E001_15_coreMarks_hg38lift_dense.bed.gz
+wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E001_15_coreMarks_hg38lift_dense.bed.gz
 
 
 
