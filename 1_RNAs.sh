@@ -2,6 +2,7 @@
 
 # First, make a list of chromosome names to go through. It will be faster to loop through them then search every name in every chromosome file
 
+rm lincExons.txt antisenseExons.txt snoExons.txt miExons.txt rnas.txt 
 chromo="`seq 1 22` MT Y X"
 
 # Then, get coding regions for lincRNAs. Need to first get lincRNA names, then pull out their exons
