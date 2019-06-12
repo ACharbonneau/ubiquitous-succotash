@@ -4,7 +4,7 @@
 
 featurelist="lincRNA antisense snoRNA miRNA"
 
-# Then, get coding regions for lincRNAs. Need to first get lincRNA names, then pull out their exons
+# Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
 for feature in `echo ${featurelist}`
    do
@@ -12,3 +12,6 @@ for feature in `echo ${featurelist}`
    zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".txt
    rm rnas.txt 
    done
+ 
+
+
