@@ -2,16 +2,16 @@
 
 # First, make a list of chromosome names to go through. It will be faster to loop through them then search every name in every chromosome file
 
-rm lincExons.txt antisenseExons.txt snoExons.txt miExons.txt rnas.txt 
-chromo="`seq 1 22` MT Y X"
+featurelist="lincRNA antisense snoRNA miRNA"
 
 # Then, get coding regions for lincRNAs. Need to first get lincRNA names, then pull out their exons
 
-for c in `echo $chromo`
+for feature in `echo ${featurelist}`
    do
-   zgrep 'lincRNA' Homo_sapiens.GRCh38.96.chromosome.${c}.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt   
-   zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chromosome.${c}.gff3.gz | grep 'exon'
-   done >> lincExons.txt
+   zgrep "${feature}" Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
+   zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".txt
+   rm rnas.txt 
+   done
    
 # Run the same code, but to get exons for other RNAs
 
