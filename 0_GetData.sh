@@ -11,5 +11,7 @@ wget -r ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/GRC
 
 wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E001_15_coreMarks_hg38lift_dense.bed.gz
 
+# SNP locations
 
+wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
 
