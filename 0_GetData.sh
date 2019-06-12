@@ -1,7 +1,6 @@
 # Human gene list with exons, as gff3 
 
-wget -r ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/
-mv ftp.ensembl.org/ HumanGenes
+wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
 
 # Human genome
 
