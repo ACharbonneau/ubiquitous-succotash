@@ -6,12 +6,42 @@ featurelist="lincRNA antisense snoRNA miRNA"
 
 # Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
-for feature in `echo ${featurelist}`
+for feature in ${featurelist}
    do
    zgrep "${feature}" Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
-   zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".txt
+   zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".gff
    rm rnas.txt 
    done
- 
 
+# Rename chromosomes to match location file
+
+chromosomes=`seq 1 9`
+
+for feature in ${featurelist}
+do 
+   for chromo in ${chromosomes}
+      do sed -ri s/^${chromo}\\t/NC_00000${chromo}.11\\t/g ${feature}.gff
+   done
+done
+
+chromosomes=`seq 10 22`
+
+for feature in ${featurelist}
+do 
+   for chromo in ${chromosomes}
+      do sed -ri s/^${chromo}\\t/NC_0000${chromo}.11\\t/g ${feature}.gff
+   done
+done
+
+for feature in ${featurelist}
+   do sed -ri s/^X\\t/NC_000023.11\\t/g ${feature}.gff
+done
+
+for feature in ${featurelist}
+   do sed -ri s/^Y\\t/NC_000024.11\\t/g ${feature}.gff
+done
+
+for feature in ${featurelist}
+   do bedtools intersect -a GCF_000001405.38.gz -b ${feature}.gff > ${feature}_SNP_Locations.txt
+done
 
