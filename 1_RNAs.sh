@@ -49,5 +49,9 @@ done
 
 # Filter intersection lists by 10M SNP list
 
+for feature in ${featurelist}
+   do grep -f snps.csv ${feature}_SNP_Locations.txt > filteredSNPs_${feature}.txt
+done
 
+# Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
 
