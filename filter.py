@@ -1,6 +1,6 @@
-#Written by Luiz Irber @luizirber
-
 #! /usr/bin/env python
+
+#Written by Luiz Irber @luizirber
 
 import argparse
 
