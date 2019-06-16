@@ -1,8 +1,9 @@
 # We want to find SNPs that fall inside coding regions of antisense, lincRNA, snoRNA, and miRNAs
 
 # First, make a list of features to search for in the Ensembl genome gff, then loop through searching for them
-# To run interactivly do either:
-## salloc -N 1 -c 1 --time=12:00:00 --mem=20000
+
+
+# To run interactivly do 
 ## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=20gb -N myjob
 
 featurelist="lincRNA antisense snoRNA miRNA"
