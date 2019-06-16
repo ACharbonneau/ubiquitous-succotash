@@ -5,7 +5,7 @@
 ## salloc -N 1 -c 1 --time=12:00:00 --mem=20000
 ## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=20gb -N myjob
 
-featurelist="lncRNA lincRNA antisense snoRNA miRNA"
+featurelist="lincRNA antisense snoRNA miRNA"
 
 # Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
@@ -64,7 +64,7 @@ done
 
 # Put in single file for Mark
 
-cat lincRNA_final.txt lncRNA_final.txt > linc_lnc_final.txt
+#cat lincRNA_final.txt lncRNA_final.txt > linc_lnc_final.txt
 
 # Make files for LDSR
 
