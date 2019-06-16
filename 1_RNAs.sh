@@ -59,3 +59,9 @@ for feature in ${featurelist}
    sed -i "s/$/ ${feature}/g" ${feature}_final.txt
 done
 
+# Put in single file for Mark
+
+cat lincRNA_final.txt lncRNA_final.txt > linc_lnc_final.txt
+
+# Make files for LDSR
+
