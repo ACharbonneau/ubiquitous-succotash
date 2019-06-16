@@ -2,13 +2,13 @@
 
 # First, make a list of features to search for in the Ensembl genome gff, then loop through searching for them
 
-featurelist="lincRNA antisense snoRNA miRNA"
+featurelist="lncRNA lincRNA antisense snoRNA miRNA"
 
 # Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
 for feature in ${featurelist}
    do
-   zgrep "${feature}" Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
+   zgrep "biotype=${feature}" Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
    zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".gff
    rm rnas.txt 
    done
@@ -65,3 +65,6 @@ cat lincRNA_final.txt lncRNA_final.txt > linc_lnc_final.txt
 
 # Make files for LDSR
 
+for feature in ${featurelist}
+   do awk '{ print $3 }' ${feature}_filteredSNP.txt > ${feature}_LSDR.txt
+done
