@@ -50,8 +50,12 @@ done
 # Filter intersection lists by 10M SNP list
 
 for feature in ${featurelist}
-   do python filter.py snps.csv ${feature}_SNP_Locations.txt > filteredSNPs_${feature}.txt
+   do python filter.py snps.csv ${feature}_SNP_Locations.txt > ${feature}_filteredSNP.txt
 done
 
 # Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
+for feature in ${featurelist}
+   do awk '{ print $3, $1, $2 }' ${feature}_filteredSNP.txt > ${feature}_final.txt
+   sed -i "s/$/ ${feature}/g" ${feature}_final.txt
+done
 
