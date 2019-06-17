@@ -20,4 +20,4 @@ wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
 
 cd .. || exit 
 
-sh 1_RNAs.sh
+# sh 1_RNAs.sh
