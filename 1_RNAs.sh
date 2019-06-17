@@ -37,13 +37,13 @@ do
    done
 done
 
-for feature in ${featurelist}
-   do sed -ri s/^X\\t/NC_000023.11\\t/g ${feature}.gff
-done
+# Remove X and Y
 
 for feature in ${featurelist}
-   do sed -ri s/^Y\\t/NC_000024.11\\t/g ${feature}.gff
+   do grep -v "^X" ${feature}.gff | grep -v "^Y" > ${feature}.gff
 done
+
+
 
 # Use bedtools to find the location intersection between the overall SNP list from NCBI that has SNP locations, and the feature list that has feature locations
 
