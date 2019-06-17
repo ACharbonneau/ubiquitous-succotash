@@ -1,3 +1,7 @@
+mkdir RawData || exit
+
+cd RawData || exit
+
 # Human gene list with exons, as gff3 
 
 wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
@@ -14,3 +18,6 @@ wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmMo
 
 wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
 
+cd .. || exit 
+
+sh 1_RNAs.sh
