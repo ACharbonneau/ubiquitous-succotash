@@ -4,7 +4,7 @@
 
 
 # To run interactivly do 
-## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=20gb -N myjob
+## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=30gb -N myjob
 
 featurelist="lincRNA antisense snoRNA miRNA"
 
@@ -17,25 +17,17 @@ for feature in ${featurelist}
    rm rnas.txt 
    done
 
-# Rename chromosomes in feature gffs to match SNP location file from NCBI: GCF_000001405.38.gz
+# Rename chromosomes in feature gffs to match SNP location file from hg38PGCMasterSnps.bed
 
-chromosomes=`seq 1 9`
-
-for feature in ${featurelist}
-do 
-   for chromo in ${chromosomes}
-      do sed -ri s/^${chromo}\\t/NC_00000${chromo}.11\\t/g ${feature}.gff
-   done
-done
-
-chromosomes=`seq 10 22`
+chromosomes=`seq 1 22`
 
 for feature in ${featurelist}
 do 
    for chromo in ${chromosomes}
-      do sed -ri s/^${chromo}\\t/NC_0000${chromo}.11\\t/g ${feature}.gff
+      do sed -ri s/^${chromo} /chr${chromo} /g ${feature}.gff
    done
 done
+
 
 # Remove X and Y
 
@@ -45,17 +37,12 @@ done
 
 
 
-# Use bedtools to find the location intersection between the overall SNP list from NCBI that has SNP locations, and the feature list that has feature locations
+# Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, and the feature list that has feature locations
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a RawData/GCF_000001405.38.gz -b ${feature}.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a RawData/hg38PGCMasterSnps.bed -b ${feature}.gff > ${feature}_SNP_Locations.txt
 done
 
-# Filter intersection lists by 10M SNP list
-
-for feature in ${featurelist}
-   do python filter.py RawData/snps.csv ${feature}_SNP_Locations.txt > ${feature}_filteredSNP.txt
-done
 
 # Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
 for feature in ${featurelist}
