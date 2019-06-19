@@ -12,8 +12,8 @@ featurelist="lincRNA antisense snoRNA miRNA"
 
 for feature in ${featurelist}
    do
-   zgrep "biotype=${feature}" Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
-   zgrep -f rnas.txt Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".gff
+   zgrep "biotype=${feature}" RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
+   zgrep -f rnas.txt RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | grep 'exon' > "${feature}".gff
    rm rnas.txt 
    done
 
@@ -48,13 +48,13 @@ done
 # Use bedtools to find the location intersection between the overall SNP list from NCBI that has SNP locations, and the feature list that has feature locations
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a GCF_000001405.38.gz -b ${feature}.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a RawData/GCF_000001405.38.gz -b ${feature}.gff > ${feature}_SNP_Locations.txt
 done
 
 # Filter intersection lists by 10M SNP list
 
 for feature in ${featurelist}
-   do python filter.py snps.csv ${feature}_SNP_Locations.txt > ${feature}_filteredSNP.txt
+   do python filter.py RawData/snps.csv ${feature}_SNP_Locations.txt > ${feature}_filteredSNP.txt
 done
 
 # Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
