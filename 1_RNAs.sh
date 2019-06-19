@@ -24,17 +24,9 @@ chromosomes=`seq 1 22`
 for feature in ${featurelist}
 do 
    for chromo in ${chromosomes}
-      do sed -ri s/^${chromo} /chr${chromo} /g ${feature}.gff
+      do sed -ri s/^${chromo}\\t/chr${chromo}\\t/g ${feature}.gff
    done
 done
-
-
-# Remove X and Y
-
-for feature in ${featurelist}
-   do grep -v "^X" ${feature}.gff | grep -v "^Y" > ${feature}.gff
-done
-
 
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, and the feature list that has feature locations
