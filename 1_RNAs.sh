@@ -38,7 +38,7 @@ done
 
 # Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
 for feature in ${featurelist}
-   do awk '{ print $4, $1, $2 }' ${feature}_SNP_Locations.txt > ${feature}_final.txt
+   do awk '{ print $4, $1, $2 }' ${feature}_SNP_Locations.txt | sort | uniq > ${feature}_final.txt
    sed -i "s/$/ ${feature}/g" ${feature}_final.txt
 done
 
@@ -49,5 +49,5 @@ done
 # Make files for LDSR
 
 for feature in ${featurelist}
-   do awk '{ print $4 }' ${feature}_filteredSNP.txt > ${feature}_LSDR.txt
+   do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LSDR.txt
 done
