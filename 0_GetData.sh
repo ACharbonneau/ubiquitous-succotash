@@ -21,3 +21,11 @@ wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
 cd .. || exit 
 
 # sh 1_RNAs.sh
+
+
+## Conservation scores for alignments of 30 mammalian (27 primate) genomes with human
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/hg38.phastCons30way.bw
+
+
+## Basewise conservation scores (phyloP) of 30 mammalian (27 primate) genomes with human
+wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/phyloP30way/hg38.phyloP30way.mod
