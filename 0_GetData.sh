@@ -29,3 +29,10 @@ wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/hg38.phastCon
 
 ## Basewise conservation scores (phyloP) of 30 mammalian (27 primate) genomes with human
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/phyloP30way/hg38.phyloP30way.mod
+
+
+## Get the sql database for the conserved elements in human +29
+
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.MYD
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.MYI
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.frm
