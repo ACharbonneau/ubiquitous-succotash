@@ -36,3 +36,7 @@ wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/phyloP30way/hg38.phyloP30way
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.MYD
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.MYI
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.frm
+
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYD
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYI
+wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
