@@ -39,3 +39,7 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastConsElements30way.frm
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYD
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYI
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
+
+## The current set of regulatory features along with their predicted activity in every cell type.
+
+wget ftp://ftp.ensembl.org/pub/release-97/regulation/homo_sapiens/homo_sapiens.GRCh38.Regulatory_Build.regulatory_features.20190329.gff.gz
