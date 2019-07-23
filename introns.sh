@@ -1,5 +1,14 @@
 # get all the full mrna coordinates
 
+module load Anaconda2/4.2.0
+
+conda create --name psyche python=3.3
+
+conda install --channel bioconda gffutils
+
+conda install --channel bioconda pybedtools bedtools biopython
+
+
 zcat RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | grep mRNA > hg38mRNA.gff
 
 # To run interactivly do 
