@@ -15,20 +15,21 @@ rm mrnas.txt
 
 bedtools subtract -a hg38mRNA.gff -b mrna_exons.gff -s > mrna_introns.gff
 
-# Get coordinates that are first 50 bases
+# Get coordinates that are first 50 bases (replace end coordinate with starting coordinate + 50)
 
-awk '{ print $1, "\t", $2, "\t", $3, "\t", $4, "\t", $4 + 50, "\t", $6, "\t", $7, "\t", $8, "\t", $9}' mrna_introns.gff > first50_mrna_introns.gff
+awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $4 + 50 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > first50_mrna_introns.gff
 
-# Get coordinates that are last 50 bases 
+# Get coordinates that are last 50 bases (replace start coordinate with ending coordinate + 50)
 
-awk '{ print $1, "\t", $2, "\t", $3, "\t", $5 - 50, "\t", $5, "\t", $6, "\t", $7, "\t", $8, "\t", $9}' mrna_introns.gff > last50_mrna_introns.gff
+awk '{ print $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > last50_mrna_introns.gff
 
-# Remove overlap for short introns (keeps in first 50, truncates last 50)
+# Remove overlap for any introns < 100 bases (overlap stays in first 50 file, is removed from last 50 file)
 
 bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > last50_mrna_introns_trun.gff
 
-#Remove any exon sequence (for very short introns)
+#Remove any exon sequence that was added by addition/subtraction operations (for very short introns)
 
-bedtools subtract -a last50_mrna_introns_trun.gff -b mrna_exons.gff
+bedtools subtract -a last50_mrna_introns_trun.gff -b mrna_exons.gff > last50_mrna_introns_final.gff
 
-bedtools subtract -a first50_mrna_introns_trun.gff -b mrna_exons.gff
+bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns.final.gff
+
