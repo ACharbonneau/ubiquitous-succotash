@@ -1,6 +1,6 @@
 
 # To run interactivly do 
-## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=100gb -N myjob
+## qsub -I -l nodes=1:ppn=1,walltime=24:00:00,mem=100gb -N myjob
 
 
 # get all the full mrna coordinates
@@ -40,6 +40,11 @@ bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_i
 
 featurelist="last50_mrna_introns_final first50_mrna_introns_final"
 
+for feature in ${featurelist}
+
+    awk '{ print chr $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
+done
+
 chromosomes=`seq 1 22`
 
 for feature in ${featurelist}
@@ -54,7 +59,7 @@ done
 
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a RawData/hg38PGCMasterSnps.bed -b ${feature}.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
 done
 
 
