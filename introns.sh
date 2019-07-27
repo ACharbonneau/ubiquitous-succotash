@@ -1,8 +1,11 @@
 
+# To run interactivly do 
+## qsub -I -l nodes=1:ppn=1,walltime=12:00:00,mem=100gb -N myjob
+
 
 # get all the full mrna coordinates
 
-zcat RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | grep mRNA > hg38mRNA.gff
+zgrep "biotype=protein_coding" RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > hg38mRNA.gff
 
 # get all the exon coordinates
 
@@ -31,5 +34,38 @@ bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > la
 
 bedtools subtract -a last50_mrna_introns_trun.gff -b mrna_exons.gff > last50_mrna_introns_final.gff
 
-bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns.final.gff
+bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns_final.gff
 
+# Rename chromosomes in feature gffs to match SNP location file from hg38PGCMasterSnps.bed
+
+featurelist="last50_mrna_introns_final first50_mrna_introns_final"
+
+chromosomes=`seq 1 22`
+
+for feature in ${featurelist}
+do 
+   for chromo in ${chromosomes}
+      do sed -ri s/^${chromo}\\t/chr${chromo}\\t/g ${feature}.gff
+   done
+done
+
+
+# Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, intron files
+
+
+for feature in ${featurelist}
+   do bedtools intersect -wa -wb -a RawData/hg38PGCMasterSnps.bed -b ${feature}.gff > ${feature}_SNP_Locations.txt
+done
+
+
+# Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
+for feature in ${featurelist}
+   do awk '{ print $4, $1, $2 }' ${feature}_SNP_Locations.txt | sort | uniq > ${feature}_final.txt
+   sed -i "s/$/ ${feature}/g" ${feature}_final.txt
+done
+
+# Make files for LDSR
+
+for feature in ${featurelist}
+   do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LSDR.txt
+done
