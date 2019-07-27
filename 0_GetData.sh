@@ -18,7 +18,7 @@ wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmMo
 
 wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
 
-cd .. || exit 
+
 
 # sh 1_RNAs.sh
 
@@ -43,3 +43,8 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
 ## The current set of regulatory features along with their predicted activity in every cell type.
 
 wget ftp://ftp.ensembl.org/pub/release-97/regulation/homo_sapiens/homo_sapiens.GRCh38.Regulatory_Build.regulatory_features.20190329.gff.gz
+
+
+
+
+cd .. || exit 
