@@ -1,16 +1,20 @@
 
+mkdir introns
+
+cd introns || exit
+
 # To run interactivly do 
 ## qsub -I -l nodes=1:ppn=1,walltime=24:00:00,mem=100gb -N myjob
 
 
 # get all the full mrna coordinates
 
-zgrep "biotype=protein_coding" RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > hg38mRNA.gff
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > hg38mRNA.gff
 
 # get all the exon coordinates
 
-zgrep "biotype=protein_coding" RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
-zgrep 'exon' RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
+zgrep 'exon' ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
 zgrep -f mrnas.txt allexons.gff > mrna_exons.gff
 rm mrnas.txt 
 
@@ -59,7 +63,7 @@ done
 
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a ../RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
 done
 
 
