@@ -45,6 +45,7 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
 wget ftp://ftp.ensembl.org/pub/release-97/regulation/homo_sapiens/homo_sapiens.GRCh38.Regulatory_Build.regulatory_features.20190329.gff.gz
 
 
+zgrep 'exon' Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
 
 
 cd .. || exit 
