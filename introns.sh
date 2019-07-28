@@ -45,36 +45,33 @@ bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_i
 featurelist="last50_mrna_introns_final first50_mrna_introns_final"
 
 for feature in ${featurelist}
-
-    awk '{ print chr $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
-done
-
-chromosomes=`seq 1 22`
-
-for feature in ${featurelist}
-do 
-   for chromo in ${chromosomes}
-      do sed -ri s/^${chromo}\\t/chr${chromo}\\t/g ${feature}.gff
-   done
+   do awk '{ print "chr" $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
 done
 
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, intron files
 
-
 for feature in ${featurelist}
    do bedtools intersect -wa -wb -a ../RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
 done
 
-
-# Reduce matrix to requested format: rsID, chr, locus, ENSEMBL annotation
+# Get rid of X, Y chromosomes
 for feature in ${featurelist}
-   do awk '{ print $4, $1, $2 }' ${feature}_SNP_Locations.txt | sort | uniq > ${feature}_final.txt
-   sed -i "s/$/ ${feature}/g" ${feature}_final.txt
+    do grep -v chrX ${feature}_SNP_Locations.txt > temp
+       grep -v chrY temp > ${feature}_SNP_Somatic.txt
 done
+rm temp
+
+# File has lots of mostly duplicate rows because many genes have more than one mrna that use the same exons. 
+# Need to remove duplicates and Reduce matrix to: chr, snpstart, snpend, rsID, allele, alt, intronstart, intronstop, strand, genename
+
+for feature in ${featurelist}
+    do awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $13 "\t" $15 }' ${feature}_SNP_Somatic.txt | sed 's/ID=transcript:\w\+;//g' | sed 's/ID=gene://g' | sed 's/Parent=gene://g' | cut -f 1 -d ';' | sort | uniq > ${feature}_SNP_Filtered.txt 
+done
+
 
 # Make files for LDSR
 
 for feature in ${featurelist}
-   do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LSDR.txt
+   do awk '{ print $4 }' ${feature}_SNP_Filtered.txt | sort | uniq  > ${feature}_LSDR.txt
 done
