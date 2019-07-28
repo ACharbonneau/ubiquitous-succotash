@@ -14,8 +14,7 @@ zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > h
 # get all the exon coordinates
 
 zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
-zgrep 'exon' ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
-zgrep -f mrnas.txt allexons.gff > mrna_exons.gff
+zgrep -f mrnas.txt ../RawData/allexons.gff > mrna_exons.gff
 rm mrnas.txt 
 
 # remove all the exons from the mrnas: subtract searches for features in B that overlap A, and removes B from A. (leaves just introns) 
