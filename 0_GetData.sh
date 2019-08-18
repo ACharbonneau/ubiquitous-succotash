@@ -16,7 +16,7 @@ wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmMo
 
 # SNP locations
 
-wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.bgz
+wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.gz
 
 
 
