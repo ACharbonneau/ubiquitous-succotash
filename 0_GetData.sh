@@ -47,5 +47,8 @@ wget ftp://ftp.ensembl.org/pub/release-97/regulation/homo_sapiens/homo_sapiens.G
 
 zgrep 'exon' Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
 
+## ATACseq peaks
+
+wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 
 cd .. || exit 
