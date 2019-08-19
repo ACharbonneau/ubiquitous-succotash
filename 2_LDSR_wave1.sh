@@ -2,8 +2,7 @@ export PATH=$PATH:/mnt/research/PsychGenetics/rerunTraits/tools/bin/
 
 # Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
 
-# Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, 
-CTCF, Quiescent, Intron_UCSC, TxFlnk, and snoRNA
+# Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC,  Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
 
 
 # ========= ld score estimation =========
