@@ -1,3 +1,7 @@
+
+#WIP
+
+
 cut -f 1,2,3,4,5,6 first50_mrna_introns_final_SNP_Filtered.txt
 
 python3
