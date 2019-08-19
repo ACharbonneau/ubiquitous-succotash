@@ -51,4 +51,6 @@ zgrep 'exon' Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
 
 wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 
+unzip boca_peaks.zip
+
 cd .. || exit 
