@@ -23,8 +23,7 @@ for feature in ${featurelist}
 done
 rm temp
 
-# File has lots of mostly duplicate rows because many genes have more than one mrna that use the same exons. 
-# Need to remove duplicates and Reduce matrix to: chr, snpstart, snpend, rsID, allele, alt, intronstart, intronstop, strand, genename
+# Reduce matrix to: chr, snpstart, snpend, rsID, allele, alt, intronstart, intronstop, strand, genename
 
 for feature in ${featurelist}
     do awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $13 "\t" $15 }' ${feature}_SNP_Somatic.txt  > ${feature}_SNP_Final.txt 
