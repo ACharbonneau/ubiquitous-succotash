@@ -56,6 +56,8 @@ bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > la
 
 # Rename chromosomes in feature gffs to match SNP location file from hg38PGCMasterSnps.bed
 
+mv last50_mrna_introns_trun.gff last50_mrna_introns.gff
+
 featurelist="last50_mrna_introns first50_mrna_introns"
 
 for feature in ${featurelist}
