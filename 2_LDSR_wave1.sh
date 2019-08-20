@@ -1,4 +1,12 @@
-## This program is ridiculously finicky. You can't have any modules loaded, or anything in your path it doesn't expect. I also had to uninstall linuxbrew completely, because for some reason it was still trying to use the linuxbrew glibc *even though it was absolutly not in my path anymore* I don't even know how that's possible.
+########
+
+## This program is ridiculously finicky. You can't have any modules loaded, or anything in your path 
+## it doesn't expect. I also had to uninstall linuxbrew completely, because for some reason it was 
+## still trying to use the linuxbrew glibc *even though it was absolutly not in my path anymore* I 
+## don't even know how that's possible.
+
+########
+
 
 screen 
 
