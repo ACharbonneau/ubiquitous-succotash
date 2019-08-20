@@ -21,3 +21,5 @@ sed 's/, /\t/g' ConsByBase.csv | awk '{if($7>.5)print $1 "\t" $2 "\t" $3 "\t" $4
 
 #to add faster than expected evolution
 #sed 's/, /\t/g' ConsByBase.csv | awk '{if($7<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7}' >> ConsByBase.tsv
+
+awk '{ print $4 }' ConsByBase.tsv > ConsByBase_LSDR.txt
