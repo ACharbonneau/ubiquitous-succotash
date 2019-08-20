@@ -1,15 +1,19 @@
+## This program is ridiculously finicky. You can't have any modules loaded, or anything in your path it doesn't expect. I also had to uninstall linuxbrew completely, because for some reason it was still trying to use the linuxbrew glibc *even though it was absolutly not in my path anymore* I don't even know how that's possible.
+
+screen 
+
+qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
+
 cd /mnt/research/PsychGenetics/runTraitshg19
 
 export PATH=$PATH:/mnt/research/PsychGenetics/rerunTraits/tools/bin/
 
 module load Anaconda2/4.2.0
+conda env create -f joryenv.yml
+
 conda create --name ldsr python=2
 source activate ldsr
-conda install pandas==0.17.0
-conda install numpy==1.8.0
-conda install scipy==0.11.0
-conda install bitarray
-
+pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
 
 # Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
 
