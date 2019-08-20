@@ -1,4 +1,15 @@
+cd /mnt/research/PsychGenetics/runTraitshg19
+
 export PATH=$PATH:/mnt/research/PsychGenetics/rerunTraits/tools/bin/
+
+module load Anaconda2/4.2.0
+conda create --name ldsr python=2
+source activate ldsr
+conda install pandas==0.17.0
+conda install numpy==1.8.0
+conda install scipy==0.11.0
+conda install bitarray
+
 
 # Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
 
@@ -8,10 +19,10 @@ export PATH=$PATH:/mnt/research/PsychGenetics/rerunTraits/tools/bin/
 # ========= ld score estimation =========
 
 # create annot files
-bash src/s6-create-annot.sh s3/subset. oldannots/* roadmapannots/* pecannots/* rna
+bash src/s6-create-annot.sh -f s3/subset. oldannots/* roadmapannots/* pecannots/* rnaannots/* atacseqannots/* consannots/* spliceannots/*
 
 # create ldscore files based on annots (takes 24h at 8x parallel)
-bash src/s7-create-ldscores.sh -j 8
+bash src/s7-create-ldscores.sh  -f -j 8
 
 # ======== prepare summary stats ========
 
