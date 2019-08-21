@@ -17,11 +17,10 @@ cd /mnt/research/PsychGenetics/runTraitshg19
 export PATH=$PATH:/mnt/research/PsychGenetics/rerunTraits/tools/bin/
 
 module load Anaconda2/4.2.0
-conda env create -f joryenv.yml
 
-conda create --name ldsr python=2
+#conda create --name ldsr python=2
 source activate ldsr
-pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
+# pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
 
 # Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
 # Alzheimers: mss/munged.niagads.ad.sumstats.gz
