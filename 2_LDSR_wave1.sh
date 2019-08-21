@@ -24,6 +24,10 @@ source activate ldsr
 pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
 
 # Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
+# Alzheimers: mss/munged.niagads.ad.sumstats.gz
+# Alcohol use: mss/munged.pgc.aud.sumstats.gz
+# Major Depressive Disorder: mss/munged.pgc.mdd.sumstats.gz
+# Schizophrenia: mss/munged.pgc.scz2.sumstats.gz
 
 # Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC,  Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
 
