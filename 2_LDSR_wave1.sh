@@ -31,7 +31,10 @@ source activate ldsr
 # Bipolar: daner_PGC_BIP32b_mds7a_0416a
 # Autism: iPSYCH-PGC_ASD_Nov2017
 # Extraversion: GPC-2.EXTRAVERSION.full.txt 
-
+# Parkinsons's                 ### Pankratz_Parkinsons_22687-SuppTable1.txt               *** Pankratz et al. 
+# Multiple Sclerosis           ### clinical_c_G35.v2.tar                                 
+# Epilepsy                     ### ILAE_All_Epi_11.8.14.txt                           
+# Alzheimers                   ### AD_sumstats_Jansenetal.txt                             *** Jansen et al 2018
 
 # Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC, Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
 
@@ -67,9 +70,22 @@ python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --ou
 
 # view columns for Extraversion and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 160958 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
+python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
+# view columns for Parkinsons and munge
+bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
+# view columns for Multiple Sclerosis and munge  
+#bash src/s5-provide-summary-statistics.sh ss/clinical_c_G35.v2.tar
+
+# view columns for Epilepsy and munge  
+bash src/s5-provide-summary-statistics.sh ss/ILAE_All_Epi_11.8.14.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+
+# view columns for Alzheimers and munge
+bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
 
 # view columns for AD (autism) and munge
 bash src/s5-provide-summary-statistics.sh ss/niagads.ad.gz
@@ -98,4 +114,7 @@ bash src/s8-do-regression.sh mss/munged.daner_PGC_BIP32b_mds7a_0416a.ad.sumstats
 bash src/s8-do-regression.sh mss/munged.GWAS_EA_excl23andMe.ad.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.iPSYCH-PGC_ASD_Nov2017.ad.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.Pankratz_Parkinsons_22687-SuppTable1.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.AD_sumstats_Jansenetal.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.ILAE_All_Epi_11.8.14.ad.sumstats.gz
 
