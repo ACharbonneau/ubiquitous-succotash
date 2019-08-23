@@ -27,6 +27,11 @@ source activate ldsr
 # Alcohol use: mss/munged.pgc.aud.sumstats.gz
 # Major Depressive Disorder: mss/munged.pgc.mdd.sumstats.gz
 # Schizophrenia: mss/munged.pgc.scz2.sumstats.gz
+# Education: GWAS_EA_excl23andMe.txt
+# Bipolar: daner_PGC_BIP32b_mds7a_0416a
+# Autism: iPSYCH-PGC_ASD_Nov2017
+# Extraversion: GPC-2.EXTRAVERSION.full.txt 
+
 
 # Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC, Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
 
@@ -43,6 +48,28 @@ bash src/s7-create-ldscores.sh  -f -j 8
 
 # folder for munged sumstats files
 mkdir -p mss
+
+# view columns for Bipolar
+bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
+# munge bipolar
+# let it calculate N from daner columns
+python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a.ad --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
+
+# view columns for Education and munge
+# N from http://ssgac.org/documents/README_EA3.txt
+bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+
+# view columns for Autism and munge
+# N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
+bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
+
+# view columns for Extraversion and munge
+bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 160958 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
+
+
 
 # view columns for AD (autism) and munge
 bash src/s5-provide-summary-statistics.sh ss/niagads.ad.gz
@@ -67,15 +94,8 @@ bash src/s8-do-regression.sh mss/munged.pgc.scz2.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.niagads.ad.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.pgc.mdd.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.pgc.aud.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.daner_PGC_BIP32b_mds7a_0416a.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.GWAS_EA_excl23andMe.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.iPSYCH-PGC_ASD_Nov2017.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.ad.sumstats.gz
 
-
-In addition to our four current traits, Brad is gathering GWAS summaries for autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height.
-
-I’d like to run LDSR on all these trait GWAS in the next few days, with the following changes to annotations:
-
-Let’s drop these several annotation classes:
-CTCF, Quiescent, Intron_UCSC, TxFlnk, and snoRNA
-(the first two would be expected to have low h2; the third to be redundant with other better categories (in fact all three do have low h2 so far); TxFlnk and snoRNA are so rare as to be hard to estimate.
-
-Let’s add  these several annotation classes:
-Atac-Seq peaks primate conservation, (both PhastCons & PhyloP) and those within 50 nt of splice site.
