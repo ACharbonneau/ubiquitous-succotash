@@ -22,19 +22,20 @@ module load Anaconda2/4.2.0
 source activate ldsr
 # pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
 
-# Traits autism, BPD, Edu years (and one other behavioral trait), one new neurological trait, and height
-# Alzheimers: mss/munged.niagads.ad.sumstats.gz
-# Alcohol use: mss/munged.pgc.aud.sumstats.gz
+# Traits: 
+# Alzheimers: mss/munged.niagads.ad.sumstats.gz 
+# Alcohol use pgc_alcdep.eur_discovery.aug2018_release.txt.gz EU Discovery Neff Eur. 11,569 34,999 All Yes
 # Major Depressive Disorder: mss/munged.pgc.mdd.sumstats.gz
 # Schizophrenia: mss/munged.pgc.scz2.sumstats.gz
 # Education: GWAS_EA_excl23andMe.txt
 # Bipolar: daner_PGC_BIP32b_mds7a_0416a
 # Autism: iPSYCH-PGC_ASD_Nov2017
 # Extraversion: GPC-2.EXTRAVERSION.full.txt 
-# Parkinsons's                 ### Pankratz_Parkinsons_22687-SuppTable1.txt               *** Pankratz et al. 
-# Multiple Sclerosis           ### clinical_c_G35.v2.tar                                 
-# Epilepsy                     ### ILAE_All_Epi_11.8.14.txt                           
-# Alzheimers                   ### AD_sumstats_Jansenetal.txt                             *** Jansen et al 2018
+# Parkinsons's: Pankratz_Parkinsons_22687-SuppTable1.txt        *** Pankratz et al. 
+# Multiple Sclerosis           ### clinical_c_G35.v2.tar                           *** G35 multiple sclerosis from the GeneAtlas UKBB                               
+# Epilepsy                     ### ILAE_All_Epi_11.8.14.txt                        *** International League Against Epilepsy Consortium on Complex Epilepsies
+# Alzheimers                   ### AD_sumstats_Jansenetal.txt                      *** Jansen et al 2018
+
 
 # Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC, Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
 
