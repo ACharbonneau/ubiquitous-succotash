@@ -82,36 +82,36 @@ mkdir -p mss
 bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
 # munge bipolar
 # let it calculate N from daner columns
-python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a.ad --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
+python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
 
 # view columns for Education and munge
 # N from http://ssgac.org/documents/README_EA3.txt
 bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 
 # view columns for Autism and munge
 # N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
 bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
+python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
 
 # view columns for Extraversion and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
+python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
 # view columns for Parkinsons and munge
 bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
 # view columns for Multiple Sclerosis and munge  
 #bash src/s5-provide-summary-statistics.sh ss/clinical_c_G35.v2.tar
 
 # view columns for Epilepsy and munge  
 bash src/s5-provide-summary-statistics.sh ss/ILAE_All_Epi_11.8.14.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal.ad --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
+python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
 
 # view columns for AD (autism) and munge
 bash src/s5-provide-summary-statistics.sh ss/niagads.ad.gz
@@ -128,6 +128,10 @@ mv mss/munged.sumstats.gz mss/munged.pgc.aud.gz
 bash src/s5-provide-summary-statistics.sh ss/pgc.mdd.gz
 python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.mdd --a1-inc --N-cas 59851 --N-con 113154
 
+# scz 
+bash src/s5-provide-summary-statistics.sh ss/pgc.scz2.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.scz2.gz --out mss/munged.pgc.scz2 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 36989 --N-con 113075 --snp snpid --a1 a1 --a2 a2 --p p
+
 # ======== perform a regression =========
 
 # perform the regression for niagads.ad
@@ -136,11 +140,11 @@ bash src/s8-do-regression.sh mss/munged.pgc.scz2.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.niagads.ad.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.pgc.mdd.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.pgc.aud.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.daner_PGC_BIP32b_mds7a_0416a.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.GWAS_EA_excl23andMe.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.iPSYCH-PGC_ASD_Nov2017.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.Pankratz_Parkinsons_22687-SuppTable1.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.AD_sumstats_Jansenetal.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.ILAE_All_Epi_11.8.14.ad.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.daner_PGC_BIP32b_mds7a_0416a.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.GWAS_EA_excl23andMe.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.iPSYCH-PGC_ASD_Nov2017.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.Pankratz_Parkinsons_22687-SuppTable1.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.AD_sumstats_Jansenetal.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.ILAE_All_Epi_11.8.14.sumstats.gz
 
