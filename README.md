@@ -9,6 +9,9 @@ git 2.10.1
 bedtools v2.27.1
 
 python 3.6.4
+- This requires several conflicting packages and should be installed in a conda envrionment *but need to do the install with pip* Installing via conda will get non-conflicting package versions, which won't work with the LDSR code :/ 
+- Also note that changing the order of the packages in the call below will break the install
+- `pip install numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3 pandas==0.17.0`
 
 R 3.2.0 (packages will auto-install)
 
@@ -25,6 +28,7 @@ TLDR:
 > bash ubiquitous-succotash/0_GetData.sh
 5. Each SNP dataset needs it's own unique processing pipeline, all of these are in the '1_preprocess' folder and can be run in any order, or in parallel. Most can just be run with bash, i.e. `bash scriptname`, but a few are fiddly and need individual lines run, or <sigh> require setting up and querying a MySQL server. Some will take in excess of 12 hours to run.
 6. Most of the phenotype data is controlled access and must be downloaded *manually and individually*. Filenames and links to the data portals for these files are provided in the **Traits** section below. These files must be saved in a folder called "ss" in the main directory
+7. Copy in the various tools folders: `tools/bin/`, 
 7. Run 2_LDSR_wave1.sh which processes all of the above files into a LDSR run. This will take days to run. I've been using interactive jobs, because it crashes often: qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
 
 
