@@ -1,4 +1,3 @@
-
 #!/bin/bash --login
 ########## SBATCH Lines for Resource Request ##########
  
