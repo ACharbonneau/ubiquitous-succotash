@@ -2,8 +2,6 @@
 
 Code for building various datasets for LDSR
 
-Each dataset needs it's own unique pipeline, all of these are in the '1_preprocess' folder.
-
 Unless otherwise noted, all of these scripts were built on the MSU High Performance Computing Cluster. Building it elsewhere may require installing several programs, and may require some editing of scripts. At a minimum, the machine running it will need:
 
 git 2.10.1
@@ -18,18 +16,17 @@ pandoc 1.17.3
 
 mySQL 5.7 
 
-TLDR;
+TLDR:
 
 1. Make a main directory
 2. Clone repo into that directory
 3. Change hardcoded file paths to snp files if necessary
-4. Run script 0_GetData.sh, from the main directory to download all the raw data.
-
+4. Run script 0_GetData.sh, from the main directory to download all the raw SNP data
 > bash ubiquitous-succotash/0_GetData.sh
+5. Each SNP dataset needs it's own unique processing pipeline, all of these are in the '1_preprocess' folder and can be run in any order, or in parallel. Most can just be run with bash, i.e. `bash scriptname`, but a few are fiddly and need individual lines run, or <sigh> require setting up and querying a MySQL server.
+6. Most of the phenotype data is controlled access and must be downloaded *manually and individually*. Filenames and links to the data portals for these files are provided in the **Traits** section below. These files must be saved in a folder called "ss" in the main directory
+7. Run 2_LDSR_wave1.sh which processes all of the above files into a LDSR run
 
-5. Run individual scripts from '1_preprocess'. Most can just be run with bash, i.e. `bash scriptname`, but a few are fiddly and need individual lines run
-
-6. Run 2_LDSR_wave1.sh
 
 ## Files
 
