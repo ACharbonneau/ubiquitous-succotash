@@ -24,8 +24,8 @@ TLDR:
 1. Make a main directory
 2. Clone repo into that directory
 3. Change hardcoded file paths to snp files if necessary
-4. Run script 0_GetData.sh, from the main directory to download all the raw SNP data
-> bash ubiquitous-succotash/0_GetData.sh
+4. Run script 0_GetData.sb, from the main directory to download all the raw SNP data
+> sbatch ubiquitous-succotash/0_GetData.sb
 5. Each SNP dataset needs it's own unique processing pipeline, all of these are in the '1_preprocess' folder and can be run in any order, or in parallel. Most can just be run with bash, i.e. `bash scriptname`, but a few are fiddly and need individual lines run, or <sigh> require setting up and querying a MySQL server. Some will take in excess of 12 hours to run.
 6. Most of the phenotype data is controlled access and must be downloaded *manually and individually*. Filenames and links to the data portals for these files are provided in the **Traits** section below. These files must be saved in a folder called "ss" in the main directory
 7. You'll also need some things that Jory made/built in ways that are mysterious to me, but that I will get filled in before I let anyone get close to publishing this. These are two tools folders: `tools/bin/` and `src`, which are some mix of Jory code and the original LDSR code. And th s3 folder contents, which are the files [here](https://data.broadinstitute.org/alkesgroup/LDSCORE/1000G_Phase3_plinkfiles.tgz), but renamed.
