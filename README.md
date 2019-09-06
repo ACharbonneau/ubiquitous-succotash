@@ -28,8 +28,8 @@ TLDR:
 > bash ubiquitous-succotash/0_GetData.sh
 5. Each SNP dataset needs it's own unique processing pipeline, all of these are in the '1_preprocess' folder and can be run in any order, or in parallel. Most can just be run with bash, i.e. `bash scriptname`, but a few are fiddly and need individual lines run, or <sigh> require setting up and querying a MySQL server. Some will take in excess of 12 hours to run.
 6. Most of the phenotype data is controlled access and must be downloaded *manually and individually*. Filenames and links to the data portals for these files are provided in the **Traits** section below. These files must be saved in a folder called "ss" in the main directory
-7. Copy in the various tools folders: `tools/bin/`, 
-7. Run 2_LDSR_wave1.sh which processes all of the above files into a LDSR run. This will take days to run. I've been using interactive jobs, because it crashes often: qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
+7. You'll also need some things that Jory made/built in ways that are mysterious to me, but that I will get filled in before I let anyone get close to publishing this. These are two tools folders: `tools/bin/` and `src`, which are some mix of Jory code and the original LDSR code. And th s3 folder contents, which are the files [here](https://data.broadinstitute.org/alkesgroup/LDSCORE/1000G_Phase3_plinkfiles.tgz), but renamed.
+8. Run 2_LDSR_wave1.sh which processes all of the above files into a LDSR run. This will take days to run. I've been using interactive jobs, because it crashes often: qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
 
 
 
