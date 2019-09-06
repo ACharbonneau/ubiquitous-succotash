@@ -18,8 +18,8 @@ mkdir RawData
 cd RawData || exit                  ### change to the directory where your code is located
 
 # Human gene list with exons, as gff3 
-
-wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
+wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
+#wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
 
 # Human genome
 
