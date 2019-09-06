@@ -14,7 +14,7 @@
 module purge
 
 #module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
-cd /mnt/research/PsychGenetics/Sept6_runTraits || exit 
+cd $SLURM_SUBMIT_DIR || exit 
 mkdir RawData
 cd RawData || exit                  ### change to the directory where your code is located
 
