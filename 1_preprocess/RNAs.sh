@@ -15,7 +15,7 @@ featurelist="lincRNA antisense snoRNA miRNA"
 
 for feature in ${featurelist}
    do
-   zgrep "biotype=${feature}" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
+   zgrep "biotype=${feature}" ../RawData/Homo_sapiens.GRCh37.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
    zgrep -f rnas.txt ../RawData/allexons.gff > "${feature}".gff
    rm rnas.txt 
 done
@@ -29,7 +29,7 @@ done
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, and the feature list that has feature locations
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a ../RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a ../RawData/NoMHC_GPHN_SNP.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
 done
 
 
