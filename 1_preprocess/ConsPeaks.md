@@ -1,4 +1,24 @@
-## This won't actually run in one place. I had to set up MySQL locally and then move the output to the HPC
+# Getting Conservation peaks
+
+This all has to be run manually and is terrible. Sorry.
+
+Mark wants to use conservation scores from the 30 mammal (27 primate) [multiple alignment from UCSC](http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/). They did this on HG38, and the calculated
+peaks are only available as MySQL databases. However, Mark also wants to use Hg37/Hg19 as our reference.
+
+So, the basic flow here is to 
+
+1. Download the UCSC MySQL database (Hg38) and set up a MySQL server.
+2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. I had to use the online liftover tool: https://genome.ucsc.edu/cgi-bin/hgLiftOver
+
+- Original Genome: Human   
+- Original Assembly: Dec. 2013 (GRCh38/hg38)  
+- New Genome: Human  
+- New Assembly: Feb. 2009 (GRCh37/hg19)
+- Minimum ratio of bases that must rempa: .95
+
+3. Do SNP filtering
+4. Retain the SNP names, but ignore the locations (which are now for Hg38)
+
 
 ### local bash
 ``` local bash
