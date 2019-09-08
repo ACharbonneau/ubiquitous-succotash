@@ -26,6 +26,7 @@ cd RawData || exit                  ### change to the directory where your code 
 # Human gene list with exons, as gff3 
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
+wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
 
 # Chromatin states Core 15-state model (5 marks, 127 epigenomes)
 
