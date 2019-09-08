@@ -54,7 +54,7 @@ bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > la
 
 #bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns_final.gff
 
-# Rename chromosomes in feature gffs to match SNP location file from hg37PGCMasterSnps.bed
+# Rename chromosomes in feature gffs to match SNP location file from NoMHC_GPHN_SNP.bed
 
 mv last50_mrna_introns_trun.gff last50_mrna_introns.gff
 
