@@ -98,7 +98,7 @@ chmod +x liftOver
 
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
 
-liftOver NoMHC_GPHN_SNP.bed hg19ToHg38.over.chain.gz NoMHC_GPHN_SNP_Hg38.bed unMapped
+./liftOver NoMHC_GPHN_SNP.bed hg19ToHg38.over.chain.gz NoMHC_GPHN_SNP_Hg38.bed unMapped
 
 
 cd .. || exit 
