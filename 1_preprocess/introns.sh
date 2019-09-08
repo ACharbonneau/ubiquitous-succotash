@@ -5,7 +5,7 @@
 #SBATCH --nodes=1-5                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem-per-cpu=2G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
+#SBATCH --mem-per-cpu=100G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name Introns      # you can give your job a name for easier identification (same as -J)
  
 ########## Command Lines to Run ##########
