@@ -1,3 +1,5 @@
+# called from introns.sh
+
 import pyBigWig
 bw = pyBigWig.open("../RawData/hg38.phyloP30way.bw")
 new_cons = open("ConsByBase.csv",'w')
