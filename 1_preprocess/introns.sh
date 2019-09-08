@@ -9,17 +9,17 @@ cd introns || exit
 
 # get all the full mrna coordinates
 
-zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz > hg38mRNA.gff
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.96.chr.gff3.gz > hg37mRNA.gff
 
 # get all the exon coordinates
 
-zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh38.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.96.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
 zgrep -f mrnas.txt ../RawData/allexons.gff > mrna_exons.gff
 rm mrnas.txt 
 
 # remove all the exons from the mrnas: subtract searches for features in B that overlap A, and removes B from A. (leaves just introns) 
 
-bedtools subtract -a hg38mRNA.gff -b mrna_exons.gff -s > mrna_introns.gff
+bedtools subtract -a hg37mRNA.gff -b mrna_exons.gff -s > mrna_introns.gff
 
 # Get coordinates that are first 100 bases (replace start coordinate with starting -50, end coordinate with starting coordinate + 50)
 
@@ -54,7 +54,7 @@ bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > la
 
 #bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns_final.gff
 
-# Rename chromosomes in feature gffs to match SNP location file from hg38PGCMasterSnps.bed
+# Rename chromosomes in feature gffs to match SNP location file from hg37PGCMasterSnps.bed
 
 mv last50_mrna_introns_trun.gff last50_mrna_introns.gff
 
