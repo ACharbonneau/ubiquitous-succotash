@@ -77,23 +77,23 @@ awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/su
 diff s3/subset.6.bim MHCsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.bed
 diff s3/subset.14.bim GPHNsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format=  > chr14noGPHN.bed
 
-rm NoMHC_GPHN.txt
-touch NoMHC_GPHN.txt
+rm NoMHC_GPHN_SNP.bed
+touch NoMHC_GPHN_SNP.bed
 for i in `seq 1 5`
 do cat s3/subset.${i}.bim
-done >> NoMHC_GPHN.txt
+done >> NoMHC_GPHN_SNP.bed
 
-cat chr6noMHC.bed >> NoMHC_GPHN.txt
+cat chr6noMHC.bed >> NoMHC_GPHN_SNP.bed
 
 for i in `seq 7 13`
 do cat s3/subset.${i}.bim
-done >> NoMHC_GPHN.txt
+done >> NoMHC_GPHN_SNP.bed
 
-caft chr14noGPHN.bed >> NoMHC_GPHN.txt
+caft chr14noGPHN.bed >> NoMHC_GPHN_SNP.bed
 
 for i in `seq 15 22`
 do cat s3/subset.${i}.bim
-done >> /NoMHC_GPHN.txt
+done >> NoMHC_GPHN_SNP.bed
 
 
 cd .. || exit 
