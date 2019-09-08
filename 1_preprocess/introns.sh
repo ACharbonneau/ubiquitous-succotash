@@ -112,3 +112,16 @@ done
 for feature in ${featurelist}
    do awk '{ print $4 }' ${feature}_SNP_Filtered.txt | sort | uniq  > ${feature}_LSDR.txt
 done
+
+
+mkdir ../ConsBySplice
+cd ../ConsBySplice || exit
+
+
+cut -f 1,2,3,4,5,6 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4,5,6 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
+
+
+python3 ConservationBySplice.py
+
+scontrol show job $SLURM_JOB_ID 
