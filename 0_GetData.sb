@@ -89,4 +89,8 @@ done >> NoMHC_GPHN_SNP.txt
 
 awk '{ print "chr" $1 "\t" $4 "\t" $4, "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
+wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver
+
+chmod +x liftOver
+
 cd .. || exit 
