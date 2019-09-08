@@ -8,7 +8,7 @@ peaks are only available as MySQL databases. However, Mark also wants to use Hg3
 So, the basic flow here is to 
 
 1. Download the UCSC MySQL database (Hg38) and set up a MySQL server.
-2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. I had to use the online liftover tool
+2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. 
 3. Do SNP filtering
 4. Retain the SNP names, but ignore the locations (which are now for Hg38)
 
