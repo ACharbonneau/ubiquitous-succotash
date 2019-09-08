@@ -64,27 +64,27 @@ wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 unzip boca_peaks.zip
 
 #Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
-awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.bed
-awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.bed
-diff s3/subset.6.bim MHCsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.bed
-diff s3/subset.14.bim GPHNsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format=  > chr14noGPHN.bed
+awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.bed
+awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.bed
+diff ../s3/subset.6.bim MHCsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.bed
+diff ../s3/subset.14.bim GPHNsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format=  > chr14noGPHN.bed
 
 rm NoMHC_GPHN_SNP.bed
 touch NoMHC_GPHN_SNP.bed
 for i in `seq 1 5`
-do cat s3/subset.${i}.bim
+do cat ../s3/subset.${i}.bim
 done >> NoMHC_GPHN_SNP.bed
 
 cat chr6noMHC.bed >> NoMHC_GPHN_SNP.bed
 
 for i in `seq 7 13`
-do cat s3/subset.${i}.bim
+do cat ../s3/subset.${i}.bim
 done >> NoMHC_GPHN_SNP.bed
 
 cat chr14noGPHN.bed >> NoMHC_GPHN_SNP.bed
 
 for i in `seq 15 22`
-do cat s3/subset.${i}.bim
+do cat ../s3/subset.${i}.bim
 done >> NoMHC_GPHN_SNP.bed
 
 
