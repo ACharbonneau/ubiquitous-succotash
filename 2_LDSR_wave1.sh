@@ -22,7 +22,6 @@ module load Anaconda2/4.2.0
 #Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
 awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.bed
 awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.bed
-comm -23 s3/subset.6.bim MHCsnps.bed
 diff s3/subset.6.bim MHCsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.bed
 diff s3/subset.14.bim GPHNsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format=  > chr14noGPHN.bed
 
