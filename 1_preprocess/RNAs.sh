@@ -13,6 +13,8 @@
 module purge
 
 #module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
+module load icc/2016.3.210-GCC-5.4.0-2.26
+module load impi/5.1.3.181
 module load BEDTools
 
 cd $SLURM_SUBMIT_DIR || exit 
@@ -34,7 +36,7 @@ featurelist="lincRNA antisense snoRNA miRNA"
 
 for feature in ${featurelist}
    do
-   zgrep "biotype=${feature}" ../RawData/Homo_sapiens.GRCh37.87.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
+   zgrep "biotype=${feature}" ../RawData/Homo_sapiens.GRCh37.87.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > rnas.txt
    zgrep -f rnas.txt ../RawData/allexons.gff > "${feature}".gff
    rm rnas.txt 
 done
