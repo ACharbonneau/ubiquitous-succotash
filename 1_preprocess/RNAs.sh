@@ -20,7 +20,7 @@ for feature in ${featurelist}
    rm rnas.txt 
 done
 
-# Rename chromosomes in feature gffs to match SNP location file from hg38PGCMasterSnps.bed
+# Rename chromosomes in feature gffs to match SNP location file from NoMHC_GPHN_SNP.bed
 
 for feature in ${featurelist}
    do awk '{ print "chr" $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
