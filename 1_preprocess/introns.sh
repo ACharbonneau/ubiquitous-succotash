@@ -14,6 +14,8 @@ module purge
 
 #module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
 
+module load icc/2016.3.210-GCC-5.4.0-2.26
+module load impi/5.1.3.181
 module load BEDTools
 
 cd $SLURM_SUBMIT_DIR || exit 
@@ -28,11 +30,11 @@ cd introns || exit
 
 # get all the full mrna coordinates
 
-zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.87.chr.gff3.gz > hg37mRNA.gff
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.87.gff3.gz > hg37mRNA.gff
 
 # get all the exon coordinates
 
-zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.87.chr.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
+zgrep "biotype=protein_coding" ../RawData/Homo_sapiens.GRCh37.87.gff3.gz | cut -f 2 -d ':' | cut -f 1 -d ';' > mrnas.txt
 zgrep -f mrnas.txt ../RawData/allexons.gff > mrna_exons.gff
 rm mrnas.txt 
 
