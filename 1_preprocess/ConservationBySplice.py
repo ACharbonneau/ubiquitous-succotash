@@ -1,13 +1,5 @@
 
-# Relies on output from introns.sh
-
-mkdir ConsBySplice
-
-cut -f 1,2,3,4,5,6 introns/first50_mrna_introns_SNP_Filtered.txt > ConsBySplice/first50_mrna_introns_SNP_Filtered.bed
-cut -f 1,2,3,4,5,6 introns/last50_mrna_introns_SNP_Filtered.txt > ConsBySplice/last50_mrna_introns_SNP_Filtered.bed
-
-
-python3
+# called from introns.sh
 
 import pyBigWig
 bw = pyBigWig.open("RawData/hg38.phyloP30way.bw")
