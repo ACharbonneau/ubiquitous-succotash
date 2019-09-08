@@ -87,7 +87,7 @@ for i in `seq 15 22`
 do cat ../s3/subset.${i}.bim
 done >> NoMHC_GPHN_SNP.txt
 
-awk '{ print "chr" $1 "\t" $4 "\t" $4+1, "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
+awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
 
 ### Program and file needed for Hg19/Hg37 to Hg38 liftover
