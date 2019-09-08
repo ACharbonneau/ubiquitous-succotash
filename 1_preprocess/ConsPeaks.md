@@ -11,9 +11,9 @@ So, the basic flow here is to
 2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. I had to use the online liftover tool: https://genome.ucsc.edu/cgi-bin/hgLiftOver
 
 - Original Genome: Human   
-- Original Assembly: Dec. 2013 (GRCh38/hg38)  
+- Original Assembly: Feb. 2009 (GRCh37/hg19  
 - New Genome: Human  
-- New Assembly: Feb. 2009 (GRCh37/hg19)
+- New Assembly: Dec. 2013 (GRCh38/hg38))
 - Minimum ratio of bases that must rempa: .95
 
 3. Do SNP filtering
