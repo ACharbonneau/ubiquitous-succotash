@@ -43,7 +43,6 @@ mysql.server start
 ``` HPC bash
 mkdir ConsPeaks
 cd ConsPeaks/ || exit
-../RawData/liftOver ../RawData/NoMHC_GPHN_SNP.bed ../RawData/hg19ToHg38.over.chain.gz NoMHC_GPHN_SNP_Hg38.bed unMapped
 ```
 
 ### local bash
@@ -59,7 +58,7 @@ cut -f 2,3,4,5,6 phastConsElements30way.tsv > phastConsElements30way.bed
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, atacseq files
 module load BEDTools
-bedtools intersect -wa -wb -a NoMHC_GPHN_SNP_Hg38.bed -b phastConsElements30way.bed > 30Cons_SNP_Locations.txt
+bedtools intersect -wa -wb -a ../RawData/NoMHC_GPHN_SNP_Hg38.bed -b phastConsElements30way.bed > 30Cons_SNP_Locations.txt
 
 
 # Get rid of X, Y chromosomes
