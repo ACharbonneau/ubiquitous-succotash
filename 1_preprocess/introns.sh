@@ -68,7 +68,7 @@ done
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, intron files
 
 for feature in ${featurelist}
-   do bedtools intersect -wa -wb -a ../RawData/hg38PGCMasterSnps.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
+   do bedtools intersect -wa -wb -a ../RawData/NoMHC_GPHN_SNP.bed -b ${feature}_chr.gff > ${feature}_SNP_Locations.txt
 done
 
 # Get rid of X, Y chromosomes
