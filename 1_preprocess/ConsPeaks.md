@@ -8,14 +8,7 @@ peaks are only available as MySQL databases. However, Mark also wants to use Hg3
 So, the basic flow here is to 
 
 1. Download the UCSC MySQL database (Hg38) and set up a MySQL server.
-2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. I had to use the online liftover tool: https://genome.ucsc.edu/cgi-bin/hgLiftOver
-
-- Original Genome: Human   
-- Original Assembly: Feb. 2009 (GRCh37/hg19  
-- New Genome: Human  
-- New Assembly: Dec. 2013 (GRCh38/hg38))
-- Minimum ratio of bases that must rempa: .95
-
+2. Use a liftover version of SNP list (Hg37 to Hg38) to find SNPs. I had to use the online liftover tool
 3. Do SNP filtering
 4. Retain the SNP names, but ignore the locations (which are now for Hg38)
 
@@ -50,6 +43,7 @@ mysql.server start
 ``` HPC bash
 mkdir ConsPeaks
 cd ConsPeaks/ || exit
+../RawData/liftOver ../RawData/NoMHC_GPHN_SNP.bed ../RawData/hg19ToHg38.over.chain.gz NoMHC_GPHN_SNP_Hg38.bed unMapped
 ```
 
 ### local bash
@@ -64,8 +58,8 @@ scp phastConsElements30way.tsv charbo24@hpcc.msu.edu:/mnt/research/PsychGenetics
 cut -f 2,3,4,5,6 phastConsElements30way.tsv > phastConsElements30way.bed
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, atacseq files
-
-bedtools intersect -wa -wb -a ../RawData/hg38PGCMasterSnps.bed -b phastConsElements30way.bed > 30Cons_SNP_Locations.txt
+module load BEDTools
+bedtools intersect -wa -wb -a NoMHC_GPHN_SNP_Hg38.bed -b phastConsElements30way.bed > 30Cons_SNP_Locations.txt
 
 
 # Get rid of X, Y chromosomes
