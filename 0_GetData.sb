@@ -17,28 +17,19 @@ cd $SLURM_SUBMIT_DIR || exit
 mkdir RawData
 cd RawData || exit                  ### change to the directory where your code is located
 
+#### NOTES ####
+# Everything in the final analysis is using HG37/HG19
+# But some of the SNP catagories we're using ONLY exist for Hg38, so we are downloading both, 
+# and doing a backwards liftover of some of the files after filtering
+###############
+
 # Human gene list with exons, as gff3 
-wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
-
-#wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
-
-# Human genome
-
-#wget -r ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/GRCh38_positions/
 
 # Chromatin states Core 15-state model (5 marks, 127 epigenomes)
 
 wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E001_15_coreMarks_hg38lift_dense.bed.gz
-
-# SNP locations
-
-wget ftp://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.gz
-
-
-
-# sh 1_RNAs.sh
 
 
 ## Conservation scores for alignments of 30 mammalian (27 primate) genomes with human
@@ -58,12 +49,12 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYD
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYI
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
 
-## The current set of regulatory features along with their predicted activity in every cell type.
+## The regulatory features along with their predicted activity in every cell type.
 
-wget ftp://ftp.ensembl.org/pub/release-97/regulation/homo_sapiens/homo_sapiens.GRCh38.Regulatory_Build.regulatory_features.20190329.gff.gz
+wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
 
 
-zgrep 'exon' Homo_sapiens.GRCh38.96.chr.gff3.gz > allexons.gff
+zgrep 'exon' Homo_sapiens.GRCh37.96.chr.gff3.gz > allexons.gff
 
 ## ATACseq peaks
 
