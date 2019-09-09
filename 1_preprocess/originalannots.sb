@@ -33,8 +33,8 @@ cd originalannots || exit
 
 for col in `seq 6 57`
     do for baseline in `seq 1 22`
-        do NAME=`zcat baseline_v1.1/baseline.${baseline}.annot.gz | head -1 | cut -f ${col}`
-        zcat baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' 
+        do NAME=`zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | head -1 | cut -f ${col}`
+        zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' 
     done > ${NAME}_LDSR.txt
 done
         
