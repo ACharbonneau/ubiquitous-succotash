@@ -31,7 +31,12 @@ cd $SLURM_SUBMIT_DIR || exit
 mkdir originalannots
 cd originalannots || exit
 
-for i in `seq 1 22`
-    do zcat baseline_v1.1/baseline.9.annot.gz | head | cut -f 3,20 | awk '{if($2==1)print $1}'
+for col in `seq 6 57`
+    do for baseline in `seq 1 22`
+        do NAME=`zcat baseline_v1.1/baseline.${baseline}.annot.gz | head -1 | cut -f ${col}`
+        zcat baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' 
+    done > ${NAME}_LDSR.txt
+done
+        
 
 scontrol show job $SLURM_JOB_ID 
