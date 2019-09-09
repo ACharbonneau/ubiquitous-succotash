@@ -2,6 +2,11 @@
 
 #Written by Luiz Irber @luizirber
 
+#Usage python filter.py tinysnps.csv tinymiRNA.txt
+
+# tinysnps file should be file of just SNPids, one per row
+# tinymiRNA files should be a text file where the SNPids might appear
+
 import argparse
 
 if __name__ == "__main__":
