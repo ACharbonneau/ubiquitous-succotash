@@ -74,6 +74,6 @@ awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $
 
 
 # Make files for LDSR
-awk '{ print $4 }' 30Cons_SNP_Final.txt | sort | uniq  > 30Cons_LSDR.txt
+awk '{ print $4 }' 30Cons_SNP_Final.txt | sort | uniq  > 30Cons_LDSR.txt
 ```
 
