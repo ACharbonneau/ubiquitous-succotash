@@ -23,6 +23,11 @@ cd RawData || exit                  ### change to the directory where your code 
 # and doing a liftovers as necessary
 ###############
 
+# Recommended SNP list from https://www.nature.com/articles/s41588-018-0081-4
+
+wget https://data.broadinstitute.org/alkesgroup/LDSCORE/w_hm3.snplist.bz2
+bzip2 -d w_hm3.snplist.bz2
+
 ################################
 # In Hg37/Hg19
 
