@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem-per-cpu=30G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
-#SBATCH --job-name chromatin      # you can give your job a name for easier identification (same as -J)
+#SBATCH --job-name roadmap      # you can give your job a name for easier identification (same as -J)
  
 ########## Command Lines to Run ##########
  
@@ -24,8 +24,8 @@ cd $SLURM_SUBMIT_DIR || exit
 # Run from main directory
 #################
 
-mkdir chromatin
-cd chromatin || exit
+mkdir roadmap
+cd roadmap || exit
 
 featurelist="10_TssBiv 11_BivFlnk 12_EnhBiv 13_ReprPC 14_ReprPCWk 15_Quies 1_TssA 2_TssAFlnk 3_TxFlnk 4_Tx 5_TxWk 6_EnhG 7_Enh 8_ZNF 9_Het"
 
