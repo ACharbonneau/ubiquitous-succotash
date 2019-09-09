@@ -90,6 +90,9 @@ done >> NoMHC_GPHN_SNP.txt
 awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
 
+#Build a SNP list file to pass to LD score calculation
+cut -f 2 NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNPlist.txt
+
 ### Program and file needed for Hg19/Hg37 to Hg38 liftover
 
 wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver
