@@ -20,7 +20,7 @@ cd RawData || exit                  ### change to the directory where your code 
 #### NOTES ####
 # Everything in the final analysis is using HG37/HG19
 # But some of the SNP catagories we're using ONLY exist for Hg38, so we are downloading both, 
-# and doing a backwards liftover of some of the files after filtering
+# and doing a liftovers as necessary
 ###############
 
 # Human gene list with exons, as gff3 
