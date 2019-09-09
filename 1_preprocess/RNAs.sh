@@ -67,7 +67,7 @@ done
 # Make files for LDSR
 
 for feature in ${featurelist}
-   do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LSDR.txt
+   do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LDSR.txt
 done
 
 scontrol show job $SLURM_JOB_ID 
