@@ -23,15 +23,32 @@ cd RawData || exit                  ### change to the directory where your code 
 # and doing a liftovers as necessary
 ###############
 
-# Human gene list with exons, as gff3 
+################################
+# In Hg37/Hg19
+
+## The regulatory features along with their predicted activity in every cell type.
+
+wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
+
+## ATACseq peaks
+
+wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
+
+unzip boca_peaks.zip
+
+## Human gene list with exons, as gff3 
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
-wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
 
-# Chromatin states Core 15-state model (5 marks, 127 epigenomes)
+## Chromatin states Core 15-state model (5 marks, 127 epigenomes)
 
 wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E001_15_coreMarks_hg38lift_dense.bed.gz
 
+################################
+# In Hg38
+
+## Human gene list with exons, as gff3 
+wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
 
 ## Conservation scores for alignments of 30 mammalian (27 primate) genomes with human
 wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/hg38.phastCons30way.bw
@@ -50,20 +67,10 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYD
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.MYI
 wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
 
-## The regulatory features along with their predicted activity in every cell type.
+################################
+# Pre-processing
 
-wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
-
-
-zgrep 'exon' Homo_sapiens.GRCh37.87.gff3.gz > allexons.gff
-
-## ATACseq peaks
-
-wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
-
-unzip boca_peaks.zip
-
-#Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
+## Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
 awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.txt
 awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.txt
 diff ../s3/subset.6.bim MHCsnps.txt --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.txt
@@ -90,10 +97,10 @@ done >> NoMHC_GPHN_SNP.txt
 awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
 
-#Build a SNP list file to pass to LD score calculation
+## Build a SNP list file to pass to LD score calculation
 cut -f 2 NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNPlist.txt
 
-### Program and file needed for Hg19/Hg37 to Hg38 liftover
+## Program and file needed for Hg19/Hg37 to Hg38 liftover
 
 wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver
 
@@ -102,6 +109,13 @@ chmod +x liftOver
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
 
 ./liftOver NoMHC_GPHN_SNP.bed hg19ToHg38.over.chain.gz NoMHC_GPHN_SNP_Hg38.bed unMapped
+
+
+## Make some files that might get re-used
+
+zgrep 'exon' Homo_sapiens.GRCh37.87.gff3.gz > allexons.gff
+
+
 
 
 cd .. || exit 
