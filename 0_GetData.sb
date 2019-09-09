@@ -19,45 +19,32 @@ cd RawData || exit                  ### change to the directory where your code 
 
 #### NOTES ####
 # Everything in the final analysis is using HG37/HG19
-# But some of the SNP catagories we're using ONLY exist for Hg38, so we are downloading both, 
-# and doing a liftovers as necessary
 ###############
 
-# Recommended SNP list from https://www.nature.com/articles/s41588-018-0081-4
-
-wget https://data.broadinstitute.org/alkesgroup/LDSCORE/w_hm3.snplist.bz2
-bzip2 -d w_hm3.snplist.bz2
 
 ################################
 # In Hg37/Hg19
 
-## The regulatory features along with their predicted activity in every cell type.
-
-wget ftp://ftp.ensembl.org/pub/grch37/current/regulation/homo_sapiens/homo_sapiens.GRCh37.Regulatory_Build.regulatory_features.20180925.gff.gz
-
-## ATACseq peaks
+## ATACseq peaks: for atacseq.sb
 
 wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 
 unzip boca_peaks.zip
 
-## Human gene list with exons, as gff3 
+## Human gene list with exons, as gff3: for introns.sb and RNAs.sb
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
 
-## Roadmap Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067
+## Roadmap Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067: for roadmap.sb
 
 https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E067_15_coreMarks_mnemonics.bed.gz
 
-## PsychENCODE enhancer list and H3K27ac peaks
+## PsychENCODE enhancer list and H3K27ac peaks: for psychencode.sb
 
 wget http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed
 
 ################################
-# In Hg38
-
-## Human gene list with exons, as gff3 
-wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chr.gff3.gz
+# In Hg38, for the conservation scores
 
 ## Conservation scores for alignments of 30 mammalian (27 primate) genomes with human
 wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/hg38.phastCons30way.bw
@@ -78,7 +65,25 @@ wget ftp://hgdownload.soe.ucsc.edu/mysql/hg38/phastCons30way.frm
 ################################
 # Pre-processing
 
+# Recommended SNP list from https://www.nature.com/articles/s41588-018-0081-4
+
+wget https://data.broadinstitute.org/alkesgroup/LDSCORE/w_hm3.snplist.bz2
+bzip2 -d w_hm3.snplist.bz2
+
+
 ## Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
+## The paper suggests using the one above, however it is about 1/10th the list of 
+## SNPs used in the subset files, and there are SNPS in the hm3 list that aren't
+## in the subsets, which seems odd. It may be that the hm3 list is filtered by 
+## MAF or similar, and is a faster list to process, but for now, I'm going to 
+## run both and see if it makes a difference.
+
+
+## This takes all of the SNPs in the subsets *except* those in the MHC and GPHN
+## region, and puts them in a single list. Even if we end up using the hm3 SNP
+## list, we'll need this as a whitelist for the --print-snps flag when 
+## calculating LD scores.
+
 awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.txt
 awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' ../s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.txt
 diff ../s3/subset.6.bim MHCsnps.txt --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.txt
@@ -102,21 +107,24 @@ for i in `seq 15 22`
 do cat ../s3/subset.${i}.bim
 done >> NoMHC_GPHN_SNP.txt
 
+## This makes a bedfile version, which is helpful for checking other code
 awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
 
-## Build a SNP list file to pass to LD score calculation
+## This suilds a list of just the SNP names, which is what the --print-snps flag expects
 cut -f 2 NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNPlist.txt
 
-
-## Build a SNP bed file from the recommended snplist: w_hm3.snplist and the location files
+## The hm3 SNP list doesn't have locations. So, to compare the output from using the
+## hm3 SNPS vs all the SNPs in the subsets, I need to make it into a proper bed file
+## This builds a SNP bed file from the recommended snplist: w_hm3.snplist and the location files
 for i in `seq 1 22`
 do cat ../s3/subset.${i}.bim
 done >> allchr.bim
 
 grep -Fwf names_w_hm3.snplist allchr.bim | awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' > w_hm3.bed
 
-## Program and file needed for Hg19/Hg37 to Hg38 liftover
+## The conservation data we need only comes in Hg38. This is the 
+## program and file needed for Hg19/Hg37 to Hg38 liftover
 
 wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver
 
