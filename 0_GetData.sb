@@ -42,7 +42,13 @@ wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRC
 
 ## Chromatin states Core 15-state model (5 marks, 127 epigenomes)
 
-wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E001_15_coreMarks_hg38lift_dense.bed.gz
+wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/all.mnemonics.bedFiles.tgz
+
+tar -xzvf all.mnemonics.bedFiles.tgz
+
+## PsychENCODE enhancer list and H3K27ac peaks
+
+wget http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed
 
 ################################
 # In Hg38
