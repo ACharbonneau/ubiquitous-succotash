@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem-per-cpu=5G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
-#SBATCH --job-name GetRawSNPs      # you can give your job a name for easier identification (same as -J)
+#SBATCH --job-name atacseq      # you can give your job a name for easier identification (same as -J)
  
 ########## Command Lines to Run ##########
  
