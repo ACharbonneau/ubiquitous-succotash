@@ -11,6 +11,9 @@
 ########## Command Lines to Run ##########
  
 module purge
+module load icc/2016.3.210-GCC-5.4.0-2.26
+module load impi/5.1.3.181
+module load BEDTools
 
 #module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
 cd $SLURM_SUBMIT_DIR || exit                 ### change to the directory where your code is located
