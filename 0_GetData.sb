@@ -43,6 +43,12 @@ https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/
 
 wget http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed
 
+## Some annotations from the original paper. https://www.nature.com/articles/s41588-018-0081-4
+
+wget https://data.broadinstitute.org/alkesgroup/LDSCORE/1000G_Phase3_baseline_v1.1_ldscores.tgz
+tar -xvzf 1000G_Phase3_baseline_v1.1_ldscores.tgz
+
+
 ################################
 # In Hg38, for the conservation scores
 
