@@ -45,7 +45,7 @@ unzip boca_peaks.zip
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
 
-## Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067
+## Roadmap Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067
 
 https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E067_15_coreMarks_mnemonics.bed.gz
 
