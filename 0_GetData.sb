@@ -45,11 +45,9 @@ unzip boca_peaks.zip
 
 wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.gff3.gz
 
-## Chromatin states Core 15-state model (5 marks, 127 epigenomes)
+## Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067
 
-wget https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/all.mnemonics.bedFiles.tgz
-
-tar -xzvf all.mnemonics.bedFiles.tgz
+https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E067_15_coreMarks_mnemonics.bed.gz
 
 ## PsychENCODE enhancer list and H3K27ac peaks
 
@@ -63,7 +61,6 @@ wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.
 
 ## Conservation scores for alignments of 30 mammalian (27 primate) genomes with human
 wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/phastCons30way/hg38.phastCons30way.bw
-
 
 ## Basewise conservation scores (phyloP) of 30 mammalian (27 primate) genomes with human
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/phyloP30way/hg38.phyloP30way.bw
@@ -110,6 +107,14 @@ awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPH
 
 ## Build a SNP list file to pass to LD score calculation
 cut -f 2 NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNPlist.txt
+
+
+## Build a SNP bed file from the recommended snplist: w_hm3.snplist and the location files
+for i in `seq 1 22`
+do cat ../s3/subset.${i}.bim
+done >> allchr.bim
+
+grep -Fwf names_w_hm3.snplist allchr.bim | awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' > w_hm3.bed
 
 ## Program and file needed for Hg19/Hg37 to Hg38 liftover
 
