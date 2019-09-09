@@ -69,3 +69,5 @@ done
 for feature in ${featurelist}
    do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LSDR.txt
 done
+
+scontrol show job $SLURM_JOB_ID 
