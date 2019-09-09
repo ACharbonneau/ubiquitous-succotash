@@ -121,12 +121,12 @@ cd ../ConsBySplice || exit
 cut -f 1,2,3,4,5,6 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
 cut -f 1,2,3,4,5,6 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
 
-python3 ../ubiquitous-succotash/ConservationBySplice.py
+python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
 mkdir ../ConsByBase
 cd ../ConsByBase || exit
 
-python3 ../ubiquitous-succotash/ConservationByBase.py
+python3 ../ubiquitous-succotash/1_preprocess/ConservationByBase.py
 
 #slower than expected evolution
 sed 's/, /\t/g' ConsByBase.csv | awk '{if($7>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7}' > ConsByBase.tsv
