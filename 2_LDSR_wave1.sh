@@ -1,11 +1,28 @@
-########
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+#SBATCH --time=4:00:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --nodes=1-24                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
+#SBATCH --ntasks=24                # number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem-per-cpu=64G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
+#SBATCH --job-name Wave2      # you can give your job a name for easier identification (same as -J)
+ 
+########## Command Lines to Run ##########
+ 
+module purge
 
+#module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
+cd $SLURM_SUBMIT_DIR || exit 
+export PATH=$PATH:$PWD/tools/bin/
+
+
+#### NOTES ####
 ## This LDSR program is ridiculously finicky. You can't have any modules loaded, or anything in your path 
 ## it doesn't expect. I also had to uninstall linuxbrew completely, because for some reason it was 
 ## still trying to use the linuxbrew glibc *even though it was absolutly not in my path anymore* I 
 ## don't even know how that's possible.
-
-########
+#######################
 
 
 #screen 
@@ -13,35 +30,8 @@
 #qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
 
 
-cd /mnt/research/PsychGenetics/aug31_runTraits
-
-export PATH=$PATH:/mnt/research/PsychGenetics/aug31_runTraits/tools/bin/
-
 module load Anaconda2/4.2.0
 
-#Build a SNP list file to pass to LD score calculation of chromosome 6 and 14
-awk '{if($4 > 66705000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.14.bim | awk '{if($4 < 67900000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > GPHNsnps.bed
-awk '{if($4 > 28477000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' s3/subset.6.bim | awk '{if($4 < 33448000 )print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > MHCsnps.bed
-diff s3/subset.6.bim MHCsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format= > chr6noMHC.bed
-diff s3/subset.14.bim GPHNsnps.bed --suppress-common-lines --new-line-format= --unchanged-line-format=  > chr14noGPHN.bed
-
-rm s6/NoMHC_GPHN.txt
-touch s6/NoMHC_GPHN.txt
-for i in `seq 1 5`
-do cut -f 2 s3/subset.${i}.bim
-done >> s6/NoMHC_GPHN.txt
-
-cut -f 2 chr6noMHC.bed >> s6/NoMHC_GPHN.txt
-
-for i in `seq 7 13`
-do cut -f 2 s3/subset.${i}.bim
-done >> s6/NoMHC_GPHN.txt
-
-cut -f 2 chr14noGPHN.bed >> s6/NoMHC_GPHN.txt
-
-for i in `seq 15 22`
-do cut -f 2 s3/subset.${i}.bim
-done >> s6/NoMHC_GPHN.txt
 
 #conda create --name ldsr python=2
 source activate ldsr
@@ -53,11 +43,11 @@ source activate ldsr
 
 # ========= ld score estimation =========
 
-# create annot files
+# create annot files 
 bash src/s6-create-annot.sh -f s3/subset. oldannots/* roadmapannots/* pecannots/* rnaannots/* atacseqannots/* consannots/* spliceannots/*
 
 # create ldscore files based on annots (takes 24h at 8x parallel)
-bash src/s7-create-ldscores.sh  -f -j 8
+bash src/s7-create-ldscores.sh  -f -j 24 --print-snps RawData/NoMHC_GPHN_SNPlist.txt
 
 # ======== prepare summary stats ========
 
