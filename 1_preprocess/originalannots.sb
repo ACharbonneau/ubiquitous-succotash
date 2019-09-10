@@ -32,8 +32,8 @@ mkdir original_annots
 cd original_annots || exit
 
 rm *_LDSR.txt
-#for col in `seq 6 57`
-for col in 6 8 11 36 38 40 50 52 54
+#for col in `seq 6 57` 
+for col in 6 8 38 40 50 52 54 # removed 11 (CTCF_Hoffman.extend.500.bed), 36 (Intron_UCSC.bed)
     do for baseline in `seq 1 22`
         do NAME=`zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | head -1 | cut -f ${col}`
         zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' >> ${NAME}_LDSR.txt
