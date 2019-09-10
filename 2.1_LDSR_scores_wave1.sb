@@ -44,9 +44,9 @@ source activate ldsr
 # ========= ld score estimation =========
 
 # create annot files 
-bash src/s6-create-annot.sh -f s3/subset. *_annots/*_LDSR.txt
+bash src/s6-create-annot.sh s3/subset. *_annots/*_LDSR.txt
 
 # create ldscore files based on annots (takes 24h at 8x parallel)
-bash src/s7-create-ldscores.sh  -f -j 24 --print-snps RawData/NoMHC_GPHN_SNPlist.txt
+bash src/s7-create-ldscores.sh -j 24
 
 
