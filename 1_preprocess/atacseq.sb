@@ -24,9 +24,9 @@ cd $SLURM_SUBMIT_DIR || exit                 ### change to the directory where y
 # and doing a backwards liftover of some of the files after filtering
 ################# Only use ACC_neuron and ACC_glia
 
-mkdir atacseq
+mkdir atacseq_annots
 
-cd atacseq || exit
+cd atacseq_annots || exit
 
 # To run interactivly do 
 ## qsub -I -l nodes=1:ppn=1,walltime=24:00:00,mem=100gb -N myjob
