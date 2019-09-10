@@ -28,8 +28,8 @@ cd $SLURM_SUBMIT_DIR || exit
 
 # First, make a list of features to search for in the Ensembl genome gff, then loop through searching for them
 
-mkdir originalannots
-cd originalannots || exit
+mkdir original_annots
+cd original_annots || exit
 
 rm *_LDSR.txt
 #for col in `seq 6 57`
