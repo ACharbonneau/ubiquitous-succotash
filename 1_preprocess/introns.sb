@@ -20,9 +20,9 @@ module load BEDTools
 
 cd $SLURM_SUBMIT_DIR || exit 
 
-mkdir introns
+mkdir introns_annots
 
-cd introns || exit
+cd introns_annots || exit
 
 # To run interactivly do 
 ## qsub -I -l nodes=1:ppn=1,walltime=24:00:00,mem=100gb -N myjob
