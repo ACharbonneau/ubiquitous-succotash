@@ -41,8 +41,8 @@ mysql.server start
 ### HPC bash
 
 ``` HPC bash
-mkdir ConsPeaks
-cd ConsPeaks/ || exit
+mkdir ConsPeaks_annots
+cd ConsPeaks_annots/ || exit
 ```
 
 ### local bash
