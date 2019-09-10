@@ -100,10 +100,10 @@ done
 rm temp
 
 # File has lots of mostly duplicate rows because many genes have more than one mrna that use the same exons. 
-# Need to remove duplicates and Reduce matrix to: chr, snpstart, snpend, rsID, allele, alt, intronstart, intronstop, strand, genename
+# Need to remove duplicates and Reduce matrix to: chr, snpstart, snpend, rsID, intronstart, intronstop, strand, genename
 
 for feature in ${featurelist}
-    do awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $13 "\t" $15 }' ${feature}_SNP_Somatic.txt | sed 's/ID=transcript:\w\+;//g' | sed 's/ID=gene://g' | sed 's/Parent=gene://g' | cut -f 1 -d ';' | sort | uniq > ${feature}_SNP_Filtered.txt 
+    do awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t"  $8 "\t" $9 "\t" $11 "\t" $13 }' ${feature}_SNP_Somatic.txt | sed 's/ID=transcript:\w\+;//g' | sed 's/ID=gene://g' | sed 's/Parent=gene://g' | cut -f 1 -d ';' | sort | uniq > ${feature}_SNP_Filtered.txt 
 done
 
 
@@ -118,11 +118,11 @@ mkdir ../ConsBySplice
 cd ../ConsBySplice || exit
 
 
-cut -f 1,2,3,4,5,6 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
-cut -f 1,2,3,4,5,6 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
 
-../RawData/liftOver first50_mrna_introns_SNP_Filtered.bed hg19ToHg38.over.chain.gz first50_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
-../RawData/liftOver last50_mrna_introns_SNP_Filtered.bed hg19ToHg38.over.chain.gz last50_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
+../RawData/liftOver first50_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz first50_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
+../RawData/liftOver last50_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz last50_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
@@ -132,10 +132,10 @@ cd ../ConsByBase || exit
 python3 ../ubiquitous-succotash/1_preprocess/ConservationByBase.py
 
 #slower than expected evolution
-sed 's/, /\t/g' ConsByBase.csv | awk '{if($7>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7}' > ConsByBase.tsv
+sed 's/, /\t/g' ConsByBase.csv | awk '{if($7>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsByBase.tsv
 
 #to add faster than expected evolution
-#sed 's/, /\t/g' ConsByBase.csv | awk '{if($7<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7}' >> ConsByBase.tsv
+#sed 's/, /\t/g' ConsByBase.csv | awk '{if($7<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' >> ConsByBase.tsv
 
 awk '{ print $4 }' ConsByBase.tsv > ConsByBase_LDSR.txt
 
