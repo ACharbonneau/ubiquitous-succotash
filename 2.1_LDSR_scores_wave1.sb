@@ -1,0 +1,52 @@
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+#SBATCH --time=4:00:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --nodes=1-24                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
+#SBATCH --ntasks=24                # number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem-per-cpu=64G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
+#SBATCH --job-name Wave2      # you can give your job a name for easier identification (same as -J)
+ 
+########## Command Lines to Run ##########
+ 
+module purge
+
+#module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
+cd $SLURM_SUBMIT_DIR || exit 
+export PATH=$PATH:$PWD/tools/bin/
+
+
+#### NOTES ####
+## This LDSR program is ridiculously finicky. You can't have any modules loaded, or anything in your path 
+## it doesn't expect. I also had to uninstall linuxbrew completely, because for some reason it was 
+## still trying to use the linuxbrew glibc *even though it was absolutly not in my path anymore* I 
+## don't even know how that's possible.
+#######################
+
+
+#screen 
+
+#qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
+
+
+module load Anaconda2/4.2.0
+
+
+#conda create --name ldsr python=2
+source activate ldsr
+# pip install pandas==0.17.0 numpy==1.8.0 scipy==0.11.0 bitarray==0.8.3
+
+
+# Annotations: Atac-Seq peaks, primate conservation-PhastCons, within 50 nt of splice site, Coding_UCSC, Conserved_LindbladToh, PromoterFlanking_Hoffman, Promoter_UCSC, TSS_Hoffman, UTR_3_UCSC, UTR_5_UCSC, PEC_snps, BivFlnk, Enh, EnhBiv, EnhG, Het, ReprPC, ReprPCWk, TssA, TssAFlnk, TssBiv, Tx, TxWk, ZNF_Rpts, antisense, lincRNA, miRNA
+
+
+# ========= ld score estimation =========
+
+# create annot files 
+bash src/s6-create-annot.sh -f s3/subset. *_annots/*_LDSR.txt
+
+# create ldscore files based on annots (takes 24h at 8x parallel)
+bash src/s7-create-ldscores.sh  -f -j 24 --print-snps RawData/NoMHC_GPHN_SNPlist.txt
+
+
