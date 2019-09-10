@@ -114,8 +114,8 @@ for feature in ${featurelist}
 done
 
 
-mkdir ../ConsBySplice
-cd ../ConsBySplice || exit
+mkdir ../ConsBySplice_annots
+cd ../ConsBySplice_annots || exit
 
 
 cut -f 1,2,3,4 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
@@ -126,8 +126,8 @@ cut -f 1,2,3,4 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_int
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
-mkdir ../ConsByBase
-cd ../ConsByBase || exit
+mkdir ../ConsByBase_annots
+cd ../ConsByBase_annots || exit
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationByBase.py
 
