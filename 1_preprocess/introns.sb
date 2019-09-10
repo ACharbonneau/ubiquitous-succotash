@@ -132,10 +132,10 @@ cd ../ConsByBase || exit
 python3 ../ubiquitous-succotash/1_preprocess/ConservationByBase.py
 
 #slower than expected evolution
-sed 's/, /\t/g' ConsByBase.csv | awk '{if($7>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsByBase.tsv
+sed 's/, /\t/g' ConsByBase.csv | awk '{if($5>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsByBase.tsv
 
 #to add faster than expected evolution
-#sed 's/, /\t/g' ConsByBase.csv | awk '{if($7<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' >> ConsByBase.tsv
+#sed 's/, /\t/g' ConsByBase.csv | awk '{if($5<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' >> ConsByBase.tsv
 
 awk '{ print $4 }' ConsByBase.tsv > ConsByBase_LDSR.txt
 
