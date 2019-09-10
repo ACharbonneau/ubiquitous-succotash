@@ -121,6 +121,9 @@ cd ../ConsBySplice || exit
 cut -f 1,2,3,4,5,6 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
 cut -f 1,2,3,4,5,6 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
 
+../RawData/liftOver first50_mrna_introns_SNP_Filtered.bed hg19ToHg38.over.chain.gz first50_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
+../RawData/liftOver last50_mrna_introns_SNP_Filtered.bed hg19ToHg38.over.chain.gz last50_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
+
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
 mkdir ../ConsByBase
