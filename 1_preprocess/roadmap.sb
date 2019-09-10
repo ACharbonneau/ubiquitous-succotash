@@ -27,7 +27,8 @@ cd $SLURM_SUBMIT_DIR || exit
 mkdir roadmap
 cd roadmap || exit
 
-featurelist="10_TssBiv 11_BivFlnk 12_EnhBiv 13_ReprPC 14_ReprPCWk 15_Quies 1_TssA 2_TssAFlnk 3_TxFlnk 4_Tx 5_TxWk 6_EnhG 7_Enh 8_ZNF 9_Het"
+featurelist="10_TssBiv 11_BivFlnk 12_EnhBiv 13_ReprPC 14_ReprPCWk 1_TssA 2_TssAFlnk 4_Tx 5_TxWk 6_EnhG 7_Enh 8_ZNF 9_Het"
+# Removed 15_Quies, 3_TxFlnk
 
 for feature in ${featurelist}
    do
