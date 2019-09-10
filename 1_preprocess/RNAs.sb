@@ -27,8 +27,8 @@ cd $SLURM_SUBMIT_DIR || exit
 
 # First, make a list of features to search for in the Ensembl genome gff, then loop through searching for them
 
-mkdir rnas
-cd rnas || exit
+mkdir rnas_annots
+cd rnas_annots || exit
 
 featurelist="lincRNA antisense snoRNA miRNA"
 
