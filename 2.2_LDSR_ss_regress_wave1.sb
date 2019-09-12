@@ -126,3 +126,14 @@ bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.Pankratz_Parkinsons_22687-SuppTable1.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.AD_sumstats_Jansenetal.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.ILAE_All_Epi_11.8.14.sumstats.gz
+
+
+
+for i in *.sumstats.results
+    do awk '{
+        if ($7<0.0000001)
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" 0.0000001;
+        else
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
+}' ${i} > ${i}.winsorized
+done
