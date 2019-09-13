@@ -52,7 +52,7 @@ TLDR:
 |**Behavioral** | | | | | | |
 | Education | GWAS_EA_excl23andMe.txt | 766345 |-|-| http://www.thessgac.org/data | https://doi.org/10.1038/s41588-018-0147-3 |
 | Extraversion | GPC-2.EXTRAVERSION.full.txt | 63030 |  |   |    |   |
-|*IQ* | |269867 | SavageJansen_2018_intelligence_metaanalysis.txt| | | Savage et al., 2018|
+|*IQ* | SavageJansen_2018_intelligence_metaanalysis.txt |269867 | | | | Savage et al., 2018|
 | *Neuroticism* | GPC-2.NEUROTICISM.full.txt | 63661 | - | - |   | De Moor et al. (2015). JAMA Psychiatry|
 |*Risky Behavior* | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
 |*Well-being*  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
