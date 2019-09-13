@@ -51,22 +51,22 @@ TLDR:
 |Alcohol use | pgc_alcdep.eur_discovery.aug2018_release.txt.gz | 46568 | 11569 | 34999 | https://www.med.unc.edu/pgc/results-and-downloads/alcohol-dependence/ | http://dx.doi.org/10.1038/s41593-018-0275-1 |
 |**Behavioral** | | | | | | |
 | Education | GWAS_EA_excl23andMe.txt | 766345 |-|-| http://www.thessgac.org/data | https://doi.org/10.1038/s41588-018-0147-3 |
-| Extraversion | GPC-2.EXTRAVERSION.full.txt | 63030 |  |   |    |   |
+| Extraversion | GPC-2.EXTRAVERSION.full.txt | 63030 |  |   |  http://www.tweelingenregister.org/GPC/  |   |
 |IQ | SavageJansen_2018_intelligence_metaanalysis.txt |269867 | | | | Savage et al., 2018|
-| Neuroticism | GPC-2.NEUROTICISM.full.txt | 63661 | - | - |   | De Moor et al. (2015). JAMA Psychiatry|
+| Neuroticism | GPC-2.NEUROTICISM.full.txt | 63661 | - | - | http://www.tweelingenregister.org/GPC/  | De Moor et al. (2015). JAMA Psychiatry|
 |Risky Behavior | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
 |Well-being  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
 |**Neurological** | | | | | | |
-| Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |    |                 *** Jansen et al 2018|
+| Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
-| Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |    | International League Against Epilepsy Consortium on Complex Epilepsies|
+| Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |  http://www.epigad.org/gwas_ilae2014/  | International League Against Epilepsy Consortium on Complex Epilepsies|
 | Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
 |**Negative Control**  | | | | | | |  
-|Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285|  | Fristche et al. 2013|
-|BMI| Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - |   |  Yengo et al. (2018) |
-| Height | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - |   |   Yengo et al. (2018)|
-|Ulcerative Colitis | imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | 452264 | 3497 | 448767 |  | K51 Ulcerative Colitis from the GeneAtlas UKBB |
+|Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285| https://grasp.nhlbi.nih.gov/downloads/ResultsOctober2016/Fritsche/Fristche_AMDGene2013_Neovascular_v_Controls.txt | Fristche et al. 2013|
+|BMI| Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - | http://portals.broadinstitute.org/collaboration/giant/images/c/c8/Meta-analysis_Locke_et_al%2BUKBiobank_2018_UPDATED.txt.gz  |  Yengo et al. (2018) |
+| Height | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - | http://cnsgenomics.com/data.html  |   Yengo et al. (2018)|
+|Ulcerative Colitis | imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | 452264 | 3497 | 448767 | http://static.geneatlas.roslin.ed.ac.uk/gwas/allWhites/imputed/data.chromX/base/imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | K51 Ulcerative Colitis from the GeneAtlas UKBB |
 
 
 #### Annotations 
