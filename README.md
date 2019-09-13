@@ -63,7 +63,7 @@ TLDR:
 | Multiple Sclerosis | clinical_c_G35.v2.tar |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
 |**Negative Control**  | | | | | | |  
-|Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	Ncases |	Ncontrols|  | Fristche et al. 2013|
+|Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285|  | Fristche et al. 2013|
 |BMI| Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - |   |  Yengo et al. (2018) |
 | Height | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - |   |   Yengo et al. (2018)|
 |Ulcerative Colitis | clinical_c_K51.v2.tar | 452264 | 3497 | 448767 |  | K51 Ulcerative Colitis from the GeneAtlas UKBB |
