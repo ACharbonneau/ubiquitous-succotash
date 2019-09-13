@@ -57,7 +57,7 @@ TLDR:
 |*Risky Behavior* | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
 |*Well-being*  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
 |**Neurological** | | | | | | |
-| Alzheimers 1| AD_sumstats_Jansenetal.txt | | | |    |                 *** Jansen et al 2018|
+| Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |    |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
 | Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |    | International League Against Epilepsy Consortium on Complex Epilepsies|
 | Multiple Sclerosis | clinical_c_G35.v2.tar |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  |  |  |  | Pankratz et al. |
