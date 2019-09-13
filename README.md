@@ -42,7 +42,7 @@ TLDR:
 | Trait | Filename |  N | Case | Control | Data Link | Reference |
 |-------|----------|----|------|---------|------|-----------|
 |**Psychiatric Traits**| | | | | | |
-|*Anxiety* |anxiety.meta.full.fs.tbl.gz |18186 | - | - | | ANGST  - Otowa et al. 2016|
+|Anxiety |anxiety.meta.full.fs.tbl.gz |18186 | - | - | | ANGST  - Otowa et al. 2016|
 | Autism | iPSYCH-PGC_ASD_Nov2017  | 46351 | 18382 | 27969 |  https://www.med.unc.edu/pgc/results-and-downloads/asd/?choice=Autism+Spectrum+Disorder+%28ASD%29#  | https://doi.org/10.1186/s13229-017-0137-9 |
 | Bipolar | daner_PGC_BIP32b_mds7a_0416a | 51710 | 20352 |	31358  | http://www.med.unc.edu/pgc/results-and-downloads  |    |   
 | Major Depressive Disorder | MDD2018_ex23andMe.gz | 173005 | 59851 | 113154 | https://www.med.unc.edu/pgc/results-and-downloads/mdd/ | 
@@ -52,10 +52,10 @@ TLDR:
 |**Behavioral** | | | | | | |
 | Education | GWAS_EA_excl23andMe.txt | 766345 |-|-| http://www.thessgac.org/data | https://doi.org/10.1038/s41588-018-0147-3 |
 | Extraversion | GPC-2.EXTRAVERSION.full.txt | 63030 |  |   |    |   |
-|*IQ* | SavageJansen_2018_intelligence_metaanalysis.txt |269867 | | | | Savage et al., 2018|
-| *Neuroticism* | GPC-2.NEUROTICISM.full.txt | 63661 | - | - |   | De Moor et al. (2015). JAMA Psychiatry|
-|*Risky Behavior* | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
-|*Well-being*  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
+|IQ | SavageJansen_2018_intelligence_metaanalysis.txt |269867 | | | | Savage et al., 2018|
+| Neuroticism | GPC-2.NEUROTICISM.full.txt | 63661 | - | - |   | De Moor et al. (2015). JAMA Psychiatry|
+|Risky Behavior | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
+|Well-being  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
 |**Neurological** | | | | | | |
 | Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |    |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
@@ -63,11 +63,10 @@ TLDR:
 | Multiple Sclerosis | clinical_c_G35.v2.tar |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
 |**Negative Control**  | | | | | | |  
-|*Age-rel macular degen* |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	Ncases |	Ncontrols|  | Fristche et al. 2013|
-|*BMI* | Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - |   |  Yengo et al. (2018) |
-| *Diabetes*|  |   |   | |  http://diagram-consortium.org/downloads.html |  Mahajan et al (2018b)| 
-| *Height* | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - |   |   Yengo et al. (2018)|
-|*Ulcerative Colitis* | clinical_c_K51.v2.tar | 452264 | 3497 | 448767 |  | K51 Ulcerative Colitis from the GeneAtlas UKBB |
+|Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	Ncases |	Ncontrols|  | Fristche et al. 2013|
+|BMI| Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - |   |  Yengo et al. (2018) |
+| Height | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - |   |   Yengo et al. (2018)|
+|Ulcerative Colitis | clinical_c_K51.v2.tar | 452264 | 3497 | 448767 |  | K51 Ulcerative Colitis from the GeneAtlas UKBB |
 
 
 #### Annotations 
