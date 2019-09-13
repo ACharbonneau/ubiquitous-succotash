@@ -61,7 +61,7 @@ TLDR:
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
 | Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |    | International League Against Epilepsy Consortium on Complex Epilepsies|
 | Multiple Sclerosis | clinical_c_G35.v2.tar |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
-| Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  |  |  |  | Pankratz et al. |
+| Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
 |**Negative Control**  | | | | | | |  
 |*Age-rel macular degen* |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	Ncases |	Ncontrols|  | Fristche et al. 2013|
 |*BMI* | Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - |   |  Yengo et al. (2018) |
