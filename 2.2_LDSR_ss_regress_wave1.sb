@@ -8,14 +8,6 @@
 #SBATCH --mem-per-cpu=64G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
 #SBATCH --job-name Wave2.2      # you can give your job a name for easier identification (same as -J)
  
-########## Command Lines to Run ##########
- 
-module purge
-
-#module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
-cd $SLURM_SUBMIT_DIR || exit 
-export PATH=$PATH:$PWD/tools/bin/
-
 
 #### NOTES ####
 ## This LDSR program is ridiculously finicky. You can't have any modules loaded, or anything in your path 
@@ -24,14 +16,21 @@ export PATH=$PATH:$PWD/tools/bin/
 ## don't even know how that's possible.
 #######################
 
-
+##### For interactive testing:
 #screen 
-
 #qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
+#######################
 
+
+########## Command Lines to Run ##########
+ 
+module purge
+
+#module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
+cd $SLURM_SUBMIT_DIR || exit 
+export PATH=$PATH:$PWD/tools/bin/
 
 module load Anaconda2/4.2.0
-
 
 #conda create --name ldsr python=2
 source activate ldsr
@@ -46,21 +45,25 @@ mkdir -p mss
 mkdir -p wmss
 mkdir -p wss
 
+##############################################
 ## Psychiatric Traits
 
 ### Anxiety
-
-anxiety.meta.full.fs.tbl.gz
+# view columns
 bash src/s5-provide-summary-statistics.sh ss/anxiety.meta.full.fs.tbl.gz
+# munge data
 python tools/ldsc/munge_sumstats.py --sumstats ss/anxiety.meta.full.fs.tbl.gz --out mss/munged.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
 
-gzip ss/SavageJansen_2018_intelligence_metaanalysis.txt
+### Autism
+# view columns for Autism and munge
+# N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
+bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
+
+### Bipolar
+# view columns for Bipolar and munge
 bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
-
-
-
-# view columns for Bipolar
-bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
+# Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
 zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk '{
         if ($11<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
@@ -68,49 +71,16 @@ zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk '{
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
 }' > wss/daner_PGC_BIP32b_mds7a_0416a
 gzip wss/daner_PGC_BIP32b_mds7a_0416a
-# munge bipolar
 # let it calculate N from daner columns
 python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
 python tools/ldsc/munge_sumstats.py --sumstats wss/daner_PGC_BIP32b_mds7a_0416a.gz --out wmss/munged.winz.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
 
-# view columns for Education and munge
-# N from http://ssgac.org/documents/README_EA3.txt
-bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
-zcat ss/GWAS_EA_excl23andMe.txt.gz | awk '{
-        if ($9<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
-        else
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
-}' > wss/GWAS_EA_excl23andMe.txt
-gzip wss/GWAS_EA_excl23andMe.txt
-python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
-python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --out wmss/munged.winz.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+### MDD (major depressive disorder)
+# view columns for MDD and munge
+bash src/s5-provide-summary-statistics.sh ss/MDD2018_ex23andMe.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/MDD2018_ex23andMe.gz --out mss/munged.MDD2018_ex23andMe.gz --a1-inc --N-cas 59851 --N-con 113154
 
-# view columns for Parkinsons and munge
-bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
-zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk '{
-        if ($6<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
-        else
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
-}' > wss/Pankratz_Parkinsons_22687-SuppTable1.txt
-gzip wss/Pankratz_Parkinsons_22687-SuppTable1.txt
-python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
-python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out wmss/munged.winz.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
-
-# view columns for Alzheimers and munge
-bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
-zcat ss/AD_sumstats_Jansenetal.txt.gz | awk '{
-        if ($8<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
-        else
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
-}' > wss/AD_sumstats_Jansenetal.txt
-gzip wss/AD_sumstats_Jansenetal.txt
-python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
-python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz --out wmss/munged.winz.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
-
-# scz 
+# view columns for scz and munge and do winsorized version
 bash src/s5-provide-summary-statistics.sh ss/pgc.scz2.gz
 zcat ss/pgc.scz2.gz | awk '{
         if ($9<0.0000001)
@@ -124,50 +94,151 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.scz2.gz --out wmss/munged
 
 
 
+##############################################
+## Substance Use traits
 
-# view columns for Autism and munge
-# N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
-bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
+### Alcohol Use Disorder
+# view columns for AUD (alcoholism) and munge
+# NOTE must prepare.pgc.aud.sh to clean original data
+cd ss/ || exit
+pgc_alcdep.eur_discovery.aug2018_release.txt.gz
+gzip -dc pgc_alcdep.eur_discovery.aug2018_release.txt.gz | awk -F' ' -v OFS='\t' 'NR==1 {print($1,$2,$3,$4,$5,$6,$7,$8)} NR>1 {split($2,b,":"); print($1,b[1],$3,$4,$5,$6,$7,$8)}' > cleaned.pgc.aud
+gzip -c cleaned.pgc.aud > pgc.aud.gz
+cd .. || exit
+bash src/s5-provide-summary-statistics.sh ss/pgc.aud.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
 
+##############################################
+## Behavioral traits
+
+### Educational Attainment
+# view columns for Education and munge
+# N from http://ssgac.org/documents/README_EA3.txt
+bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
+zcat ss/GWAS_EA_excl23andMe.txt.gz | awk '{
+        if ($9<0.0000001)
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
+        else
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
+}' > wss/GWAS_EA_excl23andMe.txt
+gzip wss/GWAS_EA_excl23andMe.txt
+python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --out wmss/munged.winz.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+
+### Extraversion
 # view columns for Extraversion and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
 python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
+### IQ
+# view columns for IQ and munge
+bash src/s5-provide-summary-statistics.sh ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz --out mss/munged.SavageJansen_2018_intelligence_metaanalysis.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 269867
 
+### Neuroticism
+# File doesn't have header row, assuming its the same as ss/GPC-2.EXTRAVERSION.full.txt.gz
+zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | head -n 1 > ss/newGPC
+cat ss/newGPC ss/GPC-2.NEUROTICISM.full.txt > ss/GPC-2.NEUROTICISM.edit
+gzip ss/GPC-2.NEUROTICISM.edit
+# view columns for neuroticism and munge
+bash src/s5-provide-summary-statistics.sh ss/GPC-2.NEUROTICISM.edit
+python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.NEUROTICISM.edit.gz --out mss/munged.GPC-2.NEUROTICISM.edit --merge-alleles s5/w_hm3.snplist --a1-inc --N 63661 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
-# view columns for Multiple Sclerosis and munge  
-#bash src/s5-provide-summary-statistics.sh ss/clinical_c_G35.v2.tar
+### Risky Behavior
+# view columns for risky behavior and munge
+bash src/s5-provide-summary-statistics.sh ss/RISK_GWAS_MA_UKB+replication.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/RISK_GWAS_MA_UKB+replication.txt.gz --out mss/munged.RISK_GWAS_MA_UKB+replication.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 466571 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 
+### Well-being
+# view columns for well being and munge
+bash src/s5-provide-summary-statistics.sh ss/SWB_Full.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/SWB_Full.txt.gz --out mss/munged.SWB_Full.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 298420 --snp MarkerName --a1 A1 --a2 A2 --p Pval
+
+##############################################
+## Neurological Traits
+
+### Alzheimers 1
+# view columns for Alzheimers and munge
+bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
+zcat ss/AD_sumstats_Jansenetal.txt.gz | awk '{
+        if ($8<0.0000001)
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
+        else
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
+}' > wss/AD_sumstats_Jansenetal.txt
+gzip wss/AD_sumstats_Jansenetal.txt
+python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
+python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz --out wmss/munged.winz.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
+
+### Alzheimers 2
+# view columns for Alzheimers and munge
+bash src/s5-provide-summary-statistics.sh ss/Kunkle_etal_Stage1_results.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/Kunkle_etal_Stage1_results.txt.gz --out mss/munged.Kunkle_etal_Stage1_results.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 21982 --N-con 41944 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
+
+### Epilepsy
 # view columns for Epilepsy and munge  
 bash src/s5-provide-summary-statistics.sh ss/ILAE_All_Epi_11.8.14.gz
 python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
+### Multiple Sclerosis : Need to figure out how to get both alleles
+# view columns for Multiple Sclerosis and munge  
+#bash src/s5-provide-summary-statistics.sh ss/imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz
+#python tools/ldsc/munge_sumstats.py --sumstats ss/imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz --out mss/munged.imputed.allWhites.combined.clinical_c_G35.chrX.csv --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 1406 --N-con 450858 --snp SNP --a2 ALLELE --p combined_PV-clinical_c_G35
+
+### Parkinsons Disease
+# view columns for Parkinsons and munge
+bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
+zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk '{
+        if ($6<0.0000001)
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
+        else
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
+}' > wss/Pankratz_Parkinsons_22687-SuppTable1.txt
+gzip wss/Pankratz_Parkinsons_22687-SuppTable1.txt
+python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out wmss/munged.winz.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
 
-# view columns for AD (autism) and munge
-bash src/s5-provide-summary-statistics.sh ss/niagads.ad.gz
-# munge ad gwas niagadds.ad
-python tools/ldsc/munge_sumstats.py --sumstats ss/niagads.ad.gz --out mss/munged.niagads.ad --a1-inc --N-cas 30344 --N-con 52427 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
+##############################################
+## Negative Control
 
-# view columns for AUD (alcoholism) and munge
-# NOTE must go to ss/ and run prepare.pgc.aud.sh to clean data.
-bash src/s5-provide-summary-statistics.sh ss/pgc.aud.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
+### Age-related macular degeneration
+# view columns for ARMD and munge
+bash src/s5-provide-summary-statistics.sh ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz --out mss/munged.Fristche_AMDGene2013_Neovascular_v_Controls.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 2281 --N-con 8285 --snp Marker --a1 Allele1 --a2 Allele2 --p GC.Pvalue
 
-# same thing for MDD (depression)
-mv mss/munged.sumstats.gz mss/munged.pgc.aud.gz
-bash src/s5-provide-summary-statistics.sh ss/pgc.mdd.gz
-python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.mdd --a1-inc --N-cas 59851 --N-con 113154
+### BMI
+# view columns for BMI and munge
+bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz --out mss/munged.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 681275 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
+
+### Height
+# view columns for height and munge
+bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz
+python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz --out mss/munged.Meta-analysis_Wood_et_al+UKBiobank_2018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 693529 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
+
+### Ulcerative Colitis : Need to figure out how to get both alleles
+# view columns for UC and munge
+#bash src/s5-provide-summary-statistics.sh ss/
+
+
+##############################################
+
+
 
 
 # ======== perform a regression =========
 
 # perform the regression for niagads.ad
-# copy sumstats to expected location
+
+
+mss/munged.anxiety.meta.full.fs.tbl
+
+
+
 bash src/s8-do-regression.sh mss/munged.pgc.scz2.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.niagads.ad.sumstats.gz
-bash src/s8-do-regression.sh mss/munged.pgc.mdd.sumstats.gz
+bash src/s8-do-regression.sh mss/munged.MDD2018_ex23andMe.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.pgc.aud.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.daner_PGC_BIP32b_mds7a_0416a.sumstats.gz
 bash src/s8-do-regression.sh mss/munged.GWAS_EA_excl23andMe.sumstats.gz
