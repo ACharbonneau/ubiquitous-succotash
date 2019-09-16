@@ -45,9 +45,9 @@ source activate ldsr
 # ========= ld score estimation =========
 
 # create annot files 
-bash src/s6-create-annot.sh s3/subset. *_annots/*_LDSR.txt
+bash src/s6-create-annot.sh s3/subset. *_annots/*_LDSR.txt -f
 
 # create ldscore files based on annots (takes 24h at 8x parallel)
-bash src/s7-create-ldscores.sh -j 48
+bash src/s7-create-ldscores.sh -j 24 -f
 
 
