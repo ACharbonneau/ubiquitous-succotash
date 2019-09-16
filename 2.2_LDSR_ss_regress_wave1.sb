@@ -248,7 +248,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/Kunkle_etal_Stage1_results.txt.gz
 zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk '{
-        if ($8<0.0000001)
+        if ($8<1e-07)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
@@ -310,7 +310,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Fristche_AMDGene2013_Neovascu
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz
 zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | awk '{
         if ($9<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $0.0000001 "\t" $10;
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
@@ -323,7 +323,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Locke_et_al+UKB
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz
 zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | awk '{
         if ($9<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $0.0000001 "\t" $10;
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
