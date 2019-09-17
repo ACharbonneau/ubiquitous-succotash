@@ -18,7 +18,7 @@
 
 ##### For interactive testing:
 #screen 
-#qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'
+#qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=04:00:00,feature='intel18'
 #######################
 
 
