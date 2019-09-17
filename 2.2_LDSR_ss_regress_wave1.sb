@@ -53,7 +53,7 @@ mkdir -p wss
 bash src/s5-provide-summary-statistics.sh ss/anxiety.meta.full.fs.tbl.gz
 # Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
 zcat ss/anxiety.meta.full.fs.tbl.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
@@ -68,7 +68,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/anxiety.meta.full.fs.tbl.gz -
 # N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
 bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
 zcat ss/iPSYCH-PGC_ASD_Nov2017.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 ;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
@@ -82,7 +82,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/iPSYCH-PGC_ASD_Nov2017.gz --o
 bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
 # Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
 zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk '{
-        if ($11<0.0000001)
+        if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
@@ -96,7 +96,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/daner_PGC_BIP32b_mds7a_0416a.
 # view columns for MDD and munge
 bash src/s5-provide-summary-statistics.sh ss/MDD2018_ex23andMe.gz
 zcat ss/MDD2018_ex23andMe.gz | awk '{
-        if ($11<0.0000001)
+        if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
@@ -109,7 +109,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/MDD2018_ex23andMe.gz --out wm
 # view columns for schizophrenia and munge and do winsorized version
 bash src/s5-provide-summary-statistics.sh ss/pgc.scz2.gz
 zcat ss/pgc.scz2.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
@@ -133,7 +133,7 @@ cd .. || exit
 # view columns for AUD (alcoholism) and munge
 bash src/s5-provide-summary-statistics.sh ss/pgc.aud.gz
 zcat ss/pgc.aud.gz | awk '{
-        if ($7<0.0000001)
+        if ((0+$7)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" 0.0000001 "\t" $8 ;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
@@ -150,7 +150,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.aud.gz --out wmss/munged.
 # N from http://ssgac.org/documents/README_EA3.txt
 bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
 zcat ss/GWAS_EA_excl23andMe.txt.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
@@ -163,7 +163,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --
 # view columns for Extraversion and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
 zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | awk '{
-        if ($8<0.0000001)
+        if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
@@ -176,7 +176,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.EXTRAVERSION.full.txt.g
 # view columns for IQ and munge
 bash src/s5-provide-summary-statistics.sh ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz
 zcat ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz | awk '{
-        if ($11<0.0000001)
+        if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
@@ -193,7 +193,7 @@ gzip ss/GPC-2.NEUROTICISM.edit
 # view columns for neuroticism and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.NEUROTICISM.edit.gz
 zcat ss/GPC-2.NEUROTICISM.edit.gz | awk '{
-        if ($8<0.0000001)
+        if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 ;
@@ -206,7 +206,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.NEUROTICISM.edit.gz --o
 # view columns for risky behavior and munge
 bash src/s5-provide-summary-statistics.sh ss/RISK_GWAS_MA_UKB+replication.txt.gz
 zcat ss/RISK_GWAS_MA_UKB+replication.txt.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
@@ -219,7 +219,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/RISK_GWAS_MA_UKB+replication.
 # view columns for well being and munge
 bash src/s5-provide-summary-statistics.sh ss/SWB_Full.txt.gz
 zcat ss/SWB_Full.txt.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
@@ -235,7 +235,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/SWB_Full.txt.gz --out wmss/mu
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
 zcat ss/AD_sumstats_Jansenetal.txt.gz | awk '{
-        if ($8<0.0000001)
+        if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
@@ -248,7 +248,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/Kunkle_etal_Stage1_results.txt.gz
 zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk '{
-        if ($8<1e-07)
+        if ((0+$8)<1e-07)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
@@ -261,7 +261,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Kunkle_etal_Stage1_results.tx
 # view columns for Epilepsy and munge  
 bash src/s5-provide-summary-statistics.sh ss/ILAE_All_Epi_11.8.14.gz
 zcat ss/ILAE_All_Epi_11.8.14.gz | awk '{
-        if ($6<0.0000001)
+        if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
@@ -279,7 +279,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/ILAE_All_Epi_11.8.14.gz --out
 # view columns for Parkinsons and munge
 bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
 zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk '{
-        if ($6<0.0000001)
+        if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
@@ -296,7 +296,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-Sup
 # view columns for ARMD and munge
 bash src/s5-provide-summary-statistics.sh ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz
 zcat ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz | awk '{
-        if ($6<0.0000001)
+        if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
@@ -309,7 +309,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Fristche_AMDGene2013_Neovascu
 # view columns for BMI and munge
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz
 zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
@@ -322,7 +322,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Locke_et_al+UKB
 # view columns for height and munge
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz
 zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | awk '{
-        if ($9<0.0000001)
+        if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
