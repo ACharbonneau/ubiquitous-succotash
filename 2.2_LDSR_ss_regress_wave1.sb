@@ -58,7 +58,7 @@ zcat ss/anxiety.meta.full.fs.tbl.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/anxiety.meta.full.fs.tbl
-gzip wss/anxiety.meta.full.fs.tbl
+gzip -f wss/anxiety.meta.full.fs.tbl
 # munge data
 python tools/ldsc/munge_sumstats.py --sumstats ss/anxiety.meta.full.fs.tbl.gz --out mss/munged.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
 python tools/ldsc/munge_sumstats.py --sumstats wss/anxiety.meta.full.fs.tbl.gz --out wmss/munged.winz.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
@@ -73,7 +73,7 @@ zcat ss/iPSYCH-PGC_ASD_Nov2017.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
 }' > wss/iPSYCH-PGC_ASD_Nov2017
-gzip wss/iPSYCH-PGC_ASD_Nov2017
+gzip -f wss/iPSYCH-PGC_ASD_Nov2017
 python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
 python tools/ldsc/munge_sumstats.py --sumstats wss/iPSYCH-PGC_ASD_Nov2017.gz --out wmss/munged.winz.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
 
@@ -87,7 +87,7 @@ zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
 }' > wss/daner_PGC_BIP32b_mds7a_0416a
-gzip wss/daner_PGC_BIP32b_mds7a_0416a
+gzip -f wss/daner_PGC_BIP32b_mds7a_0416a
 # let it calculate N from daner columns
 python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
 python tools/ldsc/munge_sumstats.py --sumstats wss/daner_PGC_BIP32b_mds7a_0416a.gz --out wmss/munged.winz.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
@@ -101,7 +101,7 @@ zcat ss/MDD2018_ex23andMe.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
 }' > wss/MDD2018_ex23andMe
-gzip wss/MDD2018_ex23andMe
+gzip -f wss/MDD2018_ex23andMe
 python tools/ldsc/munge_sumstats.py --sumstats ss/MDD2018_ex23andMe.gz --out mss/munged.MDD2018_ex23andMe.gz --a1-inc --N-cas 59851 --N-con 113154
 python tools/ldsc/munge_sumstats.py --sumstats wss/MDD2018_ex23andMe.gz --out wmss/munged.winz.MDD2018_ex23andMe.gz --a1-inc --N-cas 59851 --N-con 113154
 
@@ -114,7 +114,7 @@ zcat ss/pgc.scz2.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/pgc.scz2
-gzip wss/pgc.scz2
+gzip -f wss/pgc.scz2
 python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.scz2.gz --out mss/munged.pgc.scz2 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 36989 --N-con 113075 --snp snpid --a1 a1 --a2 a2 --p p
 python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.scz2.gz --out wmss/munged.winz.pgc.scz2 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 36989 --N-con 113075 --snp snpid --a1 a1 --a2 a2 --p p
 
@@ -138,7 +138,7 @@ zcat ss/pgc.aud.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
 }' > wss/pgc.aud
-gzip wss/pgc.aud
+gzip -f wss/pgc.aud
 python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.aud.gz --out wmss/munged.winz.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
 
@@ -155,7 +155,7 @@ zcat ss/GWAS_EA_excl23andMe.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
 }' > wss/GWAS_EA_excl23andMe.txt
-gzip wss/GWAS_EA_excl23andMe.txt
+gzip -f wss/GWAS_EA_excl23andMe.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --out wmss/munged.winz.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 
@@ -168,7 +168,7 @@ zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/GPC-2.EXTRAVERSION.full.txt
-gzip wss/GPC-2.EXTRAVERSION.full.txt
+gzip -f wss/GPC-2.EXTRAVERSION.full.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.EXTRAVERSION.full.txt.gz --out wmss/munged.winz.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
@@ -181,7 +181,7 @@ zcat ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
 }' > wss/SavageJansen_2018_intelligence_metaanalysis.txt
-gzip wss/SavageJansen_2018_intelligence_metaanalysis.txt
+gzip -f wss/SavageJansen_2018_intelligence_metaanalysis.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz --out mss/munged.SavageJansen_2018_intelligence_metaanalysis.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 269867
 python tools/ldsc/munge_sumstats.py --sumstats wss/SavageJansen_2018_intelligence_metaanalysis.txt.gz --out wmss/munged.winz.SavageJansen_2018_intelligence_metaanalysis.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 269867
 
@@ -189,7 +189,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/SavageJansen_2018_intelligenc
 # File doesn't have header row, assuming its the same as ss/GPC-2.EXTRAVERSION.full.txt.gz
 zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | head -n 1 > ss/newGPC
 cat ss/newGPC ss/GPC-2.NEUROTICISM.full.txt > ss/GPC-2.NEUROTICISM.edit
-gzip ss/GPC-2.NEUROTICISM.edit
+gzip -f ss/GPC-2.NEUROTICISM.edit
 # view columns for neuroticism and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.NEUROTICISM.edit.gz
 zcat ss/GPC-2.NEUROTICISM.edit.gz | awk '{
@@ -198,7 +198,7 @@ zcat ss/GPC-2.NEUROTICISM.edit.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 ;
 }' > wss/GPC-2.NEUROTICISM.edit
-gzip wss/GPC-2.NEUROTICISM.edit
+gzip -f wss/GPC-2.NEUROTICISM.edit
 python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.NEUROTICISM.edit.gz --out mss/munged.GPC-2.NEUROTICISM.edit --merge-alleles s5/w_hm3.snplist --a1-inc --N 63661 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.NEUROTICISM.edit.gz --out wmss/munged.winz.GPC-2.NEUROTICISM.edit --merge-alleles s5/w_hm3.snplist --a1-inc --N 63661 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 
@@ -211,7 +211,7 @@ zcat ss/RISK_GWAS_MA_UKB+replication.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
 }' > wss/RISK_GWAS_MA_UKB+replication.txt
-gzip wss/RISK_GWAS_MA_UKB+replication.txt
+gzip -f wss/RISK_GWAS_MA_UKB+replication.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/RISK_GWAS_MA_UKB+replication.txt.gz --out mss/munged.RISK_GWAS_MA_UKB+replication.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 466571 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/RISK_GWAS_MA_UKB+replication.txt.gz --out wmss/munged.winz.RISK_GWAS_MA_UKB+replication.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 466571 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 
@@ -224,7 +224,7 @@ zcat ss/SWB_Full.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
 }' > wss/SWB_Full.txt
-gzip wss/SWB_Full.txt
+gzip -f wss/SWB_Full.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/SWB_Full.txt.gz --out mss/munged.SWB_Full.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 298420 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/SWB_Full.txt.gz --out wmss/munged.winz.SWB_Full.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 298420 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 
@@ -240,7 +240,7 @@ zcat ss/AD_sumstats_Jansenetal.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
 }' > wss/AD_sumstats_Jansenetal.txt
-gzip wss/AD_sumstats_Jansenetal.txt
+gzip -f wss/AD_sumstats_Jansenetal.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
 python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz --out wmss/munged.winz.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
 
@@ -253,7 +253,7 @@ zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
 }' > wss/Kunkle_etal_Stage1_results.txt
-gzip wss/Kunkle_etal_Stage1_results.txt
+gzip -f wss/Kunkle_etal_Stage1_results.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Kunkle_etal_Stage1_results.txt.gz --out mss/munged.Kunkle_etal_Stage1_results.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 21982 --N-con 41944 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
 python tools/ldsc/munge_sumstats.py --sumstats wss/Kunkle_etal_Stage1_results.txt.gz --out wmss/munged.winz.Kunkle_etal_Stage1_results.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 21982 --N-con 41944 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
 
@@ -266,7 +266,7 @@ zcat ss/ILAE_All_Epi_11.8.14.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
 }' > wss/ILAE_All_Epi_11.8.14
-gzip wss/ILAE_All_Epi_11.8.14
+gzip -f wss/ILAE_All_Epi_11.8.14
 python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 python tools/ldsc/munge_sumstats.py --sumstats wss/ILAE_All_Epi_11.8.14.gz --out wmss/munged.winz.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
@@ -284,7 +284,7 @@ zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
 }' > wss/Pankratz_Parkinsons_22687-SuppTable1.txt
-gzip wss/Pankratz_Parkinsons_22687-SuppTable1.txt
+gzip -f wss/Pankratz_Parkinsons_22687-SuppTable1.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out wmss/munged.winz.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
@@ -301,7 +301,7 @@ zcat ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
 }' > wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
-gzip wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
+gzip -f wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz --out mss/munged.Fristche_AMDGene2013_Neovascular_v_Controls.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 2281 --N-con 8285 --snp Marker --a1 Allele1 --a2 Allele2 --p GC.Pvalue
 python tools/ldsc/munge_sumstats.py --sumstats wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz --out wmss/munged.winz.Fristche_AMDGene2013_Neovascular_v_Controls.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 2281 --N-con 8285 --snp Marker --a1 Allele1 --a2 Allele2 --p GC.Pvalue
 
@@ -314,7 +314,7 @@ zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
-gzip wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
+gzip -f wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz --out mss/munged.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 681275 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz --out wmss/munged.winz.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 681275 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 
@@ -327,7 +327,7 @@ zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | awk '{
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' > wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
-gzip wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
+gzip -f wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz --out mss/munged.Meta-analysis_Wood_et_al+UKBiobank_2018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 693529 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz --out wmss/munged.winz.Meta-analysis_Wood_et_al+UKBiobank_2018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 693529 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 
