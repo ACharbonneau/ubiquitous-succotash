@@ -29,7 +29,7 @@ cd RawData || exit                  ### change to the directory where your code 
 
 #wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 
-unzip boca_peaks.zip
+#unzip boca_peaks.zip
 
 ## Human gene list with exons, as gff3: for introns.sb and RNAs.sb
 
@@ -127,6 +127,7 @@ for i in `seq 1 22`
 do cat ../s3/subset.${i}.bim
 done >> allchr.bim
 
+cut -f 1 w_hm3.snplist > names_w_hm3.snplist
 grep -Fwf names_w_hm3.snplist allchr.bim | awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' > w_hm3.bed
 
 ## The conservation data we need only comes in Hg38. This is the 
