@@ -30,7 +30,7 @@ cd $SLURM_SUBMIT_DIR || exit
 mkdir rnas_annots
 cd rnas_annots || exit
 
-featurelist="lincRNA antisense miRNA snoRNA rRNA"
+featurelist="lincRNA antisense miRNA snoRNA rRNA 3prime_overlapping_ncrna misc_RNA Mt_rRNA Mt_tRNA snRNA"
 
 # Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
