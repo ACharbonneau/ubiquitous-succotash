@@ -28,12 +28,22 @@ cd $SLURM_SUBMIT_DIR || exit
 
 # First, make a list of features to search for in the Ensembl genome gff, then loop through searching for them
 
+# 6 Coding_UCSC
+# 8 Conserved_LindbladToh
+# 11 CTCF_Hoffman.extend.500.bed
+# 36 Intron_UCSC.bed
+# 38 PromoterFlanking_Hoffman.bed
+# 40 Promoter_UCSC.bed
+# 50 TSS_Hoffman.bed
+# 52 UTR_3_UCSC.bed
+# 54 UTR_5_UCSC.bed
+
 mkdir original_annots
 cd original_annots || exit
 
 rm *_LDSR.txt
 #for col in `seq 6 57` 
-for col in 6 8 38 40 50 52 54 # removed 11 (CTCF_Hoffman.extend.500.bed), 36 (Intron_UCSC.bed)
+for col in 6 8 40 50 52 54 # removed 11, 36, 38
     do for baseline in `seq 1 22`
         do NAME=`zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | head -1 | cut -f ${col}`
         zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' >> ${NAME}_LDSR.txt
