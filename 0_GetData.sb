@@ -27,7 +27,7 @@ cd RawData || exit                  ### change to the directory where your code 
 
 ## ATACseq peaks: for atacseq.sb
 
-wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
+#wget https://bendlj01.u.hpc.mssm.edu/multireg/resources/boca_peaks.zip
 
 unzip boca_peaks.zip
 
@@ -37,11 +37,11 @@ wget ftp://ftp.ensembl.org/pub/grch37/current/gff3/homo_sapiens/Homo_sapiens.GRC
 
 ## Roadmap Chromatin states Core 15-state model (5 marks, 127 epigenomes) E067: for roadmap.sb
 
-https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E067_15_coreMarks_mnemonics.bed.gz
+#https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/E067_15_coreMarks_mnemonics.bed.gz
 
 ## PsychENCODE enhancer list and H3K27ac peaks: for psychencode.sb
 
-wget http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed
+#wget http://resource.psychencode.org/Datasets/Derived/DER-03a_hg19_PEC_enhancers.bed
 
 ## Some annotations from the original paper. https://www.nature.com/articles/s41588-018-0081-4
 
