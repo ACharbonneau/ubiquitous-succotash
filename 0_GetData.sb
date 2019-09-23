@@ -117,7 +117,7 @@ done >> NoMHC_GPHN_SNP.txt
 awk '{ print "chr" $1 "\t" $4 "\t" $4+1 "\t" $2}' NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNP.bed
 
 
-## This suilds a list of just the SNP names, which is what the --print-snps flag expects
+## This builds a list of just the SNP names, which is what the --print-snps flag expects
 cut -f 2 NoMHC_GPHN_SNP.txt > NoMHC_GPHN_SNPlist.txt
 
 ## The hm3 SNP list doesn't have locations. So, to compare the output from using the
