@@ -42,47 +42,49 @@ rm mrnas.txt
 
 bedtools subtract -a hg37mRNA.gff -b mrna_exons.gff -s > mrna_introns.gff
 
-# Get coordinates that are first 100 bases (replace start coordinate with starting -50, end coordinate with starting coordinate + 50)
+# Get coordinates that are first 140 bases (replace start coordinate with starting -70, end coordinate with starting coordinate + 70)
 
-awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 -50 "\t" $4 + 50 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > first50_mrna_introns.gff
+awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 -70 "\t" $4 + 70 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > first70_mrna_introns.gff
 
-# Get coordinates that are last 100 bases (replace start coordinate with ending coordinate - 50, ending coordinate with ending + 50)
+# Get coordinates that are last 140 bases (replace start coordinate with ending coordinate - 70, ending coordinate with ending + 70)
 
-awk '{ print $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 +50 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > last50_mrna_introns.gff
+awk '{ print $1 "\t" $2 "\t" $3, "\t" $5 - 70 "\t" $5 +70 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > last70_mrna_introns.gff
 
 
-# Remove overlap for any introns < 100 bases (overlap stays in first 50 file, is removed from last 50 file)
+# Remove overlap for any introns < 140 bases (overlap stays in first 70 file, is removed from last 70 file)
 
-bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > last50_mrna_introns_trun.gff
+bedtools subtract -a last70_mrna_introns.gff -b first70_mrna_introns.gff -s > last70_mrna_introns_trun.gff
 
 
 ## Was only getting intron side, now getting both (above)
 # Get coordinates that are first 50 bases (replace end coordinate with starting coordinate + 50)
 
-#awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $4 + 50 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > first50_mrna_introns.gff
+#awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $4 + 50 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > first70_mrna_introns.gff
 
 # Get coordinates that are last 50 bases (replace start coordinate with ending coordinate + 50)
 
-#awk '{ print $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > last50_mrna_introns.gff
+#awk '{ print $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' mrna_introns.gff > last70_mrna_introns.gff
 
 # Remove overlap for any introns < 100 bases (overlap stays in first 50 file, is removed from last 50 file)
 
-#bedtools subtract -a last50_mrna_introns.gff -b first50_mrna_introns.gff -s > last50_mrna_introns_trun.gff
+#bedtools subtract -a last70_mrna_introns.gff -b first70_mrna_introns.gff -s > last70_mrna_introns_trun.gff
 
 #Remove any exon sequence that was added by addition/subtraction operations (for very short introns)
 
-#bedtools subtract -a last50_mrna_introns_trun.gff -b mrna_exons.gff > last50_mrna_introns_final.gff
+#bedtools subtract -a last70_mrna_introns_trun.gff -b mrna_exons.gff > last70_mrna_introns_final.gff
 
-#bedtools subtract -a first50_mrna_introns.gff -b mrna_exons.gff > first50_mrna_introns_final.gff
+#bedtools subtract -a first70_mrna_introns.gff -b mrna_exons.gff > first70_mrna_introns_final.gff
+
+
 
 # Rename chromosomes in feature gffs to match SNP location file from NoMHC_GPHN_SNP.bed
 
-mv last50_mrna_introns_trun.gff last50_mrna_introns.gff
+mv last70_mrna_introns_trun.gff last70_mrna_introns.gff
 
-featurelist="last50_mrna_introns first50_mrna_introns"
+featurelist="last70_mrna_introns first70_mrna_introns"
 
 for feature in ${featurelist}
-   do awk '{ print "chr" $1 "\t" $2 "\t" $3, "\t" $5 - 50 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
+   do awk '{ print "chr" $1 "\t" $2 "\t" $3, "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9}' ${feature}.gff > ${feature}_chr.gff
 done
 
 
@@ -118,11 +120,11 @@ mkdir ../ConsBySplice_annots
 cd ../ConsBySplice_annots || exit
 
 
-cut -f 1,2,3,4 ../introns/first50_mrna_introns_SNP_Filtered.txt > first50_mrna_introns_SNP_Filtered.bed
-cut -f 1,2,3,4 ../introns/last50_mrna_introns_SNP_Filtered.txt > last50_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns/first70_mrna_introns_SNP_Filtered.txt > first70_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns/last70_mrna_introns_SNP_Filtered.txt > last70_mrna_introns_SNP_Filtered.bed
 
-../RawData/liftOver first50_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz first50_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
-../RawData/liftOver last50_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz last50_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
+../RawData/liftOver first70_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz first70_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
+../RawData/liftOver last70_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz last70_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
