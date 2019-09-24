@@ -120,8 +120,8 @@ mkdir ../ConsBySplice_annots
 cd ../ConsBySplice_annots || exit
 
 
-cut -f 1,2,3,4 ../introns/first70_mrna_introns_SNP_Filtered.txt > first70_mrna_introns_SNP_Filtered.bed
-cut -f 1,2,3,4 ../introns/last70_mrna_introns_SNP_Filtered.txt > last70_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns_annots/first70_mrna_introns_SNP_Filtered.txt > first70_mrna_introns_SNP_Filtered.bed
+cut -f 1,2,3,4 ../introns_annots/last70_mrna_introns_SNP_Filtered.txt > last70_mrna_introns_SNP_Filtered.bed
 
 ../RawData/liftOver first70_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz first70_mrna_introns_SNP_Filtered_Hg38.bed unMappedfirst
 ../RawData/liftOver last70_mrna_introns_SNP_Filtered.bed ../RawData/hg19ToHg38.over.chain.gz last70_mrna_introns_SNP_Filtered_Hg38.bed unMappedlast
