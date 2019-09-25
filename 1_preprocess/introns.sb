@@ -128,8 +128,12 @@ cut -f 1,2,3,4 ../introns_annots/last70_mrna_introns_SNP_Filtered.txt > last70_m
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
-sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceFirst70.tsv
-sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceLast70.tsv
+sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5>0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceFirst70.tsv
+sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceFirst70.tsv
+
+
+sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceLast70.tsv
+sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceLast70.tsv
 
 
 mkdir ../ConsByBase_annots
