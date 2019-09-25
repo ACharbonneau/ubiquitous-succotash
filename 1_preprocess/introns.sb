@@ -109,13 +109,6 @@ for feature in ${featurelist}
 done
 
 
-# Make files for LDSR
-
-for feature in ${featurelist}
-   do awk '{ print $4 }' ${feature}_SNP_Filtered.txt | sort | uniq  > ${feature}_LDSR.txt
-done
-
-
 mkdir ../ConsBySplice_annots
 cd ../ConsBySplice_annots || exit
 
@@ -134,6 +127,14 @@ sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3
 
 sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceLast70.tsv
 sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceLast70.tsv
+
+# Make files for LDSR. 
+
+filelist="ConsBySpliceFirst70 EvolveBySpliceFirst70 ConsBySpliceLast70 EvolveBySpliceLast70"
+
+for filename in ${filelist}
+   do awk '{ print $4 }' ${filename}.tsv | sort | uniq  > ${filename}_LDSR.txt
+done
 
 
 mkdir ../ConsByBase_annots
