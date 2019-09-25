@@ -70,4 +70,15 @@ for feature in ${featurelist}
    do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LDSR.txt
 done
 
+cat 3prime_overlapping_ncrna_LDSR.txt misc_RNA_LDSR.txt  Mt_rRNA_LDSR.txt Mt_tRNA_LDSR.txt snoRNA_LDSR.txt snRNA_LDSR.txt | sort | uniq > other_RNA_LDSR.txt
+
+mkdir otherRNAs
+
+mv 3prime_overlapping_ncrna_LDSR.txt otherRNAs/
+mv misc_RNA_LDSR.txt otherRNAs/
+mv Mt_rRNA_LDSR.txt otherRNAs/
+mv Mt_tRNA_LDSR.txt otherRNAs/
+mv snoRNA_LDSR.txt otherRNAs/
+mv snRNA_LDSR.txt otherRNAs/
+
 scontrol show job $SLURM_JOB_ID 
