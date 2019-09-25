@@ -53,12 +53,21 @@ done
     
 # exclude SNPs already annotated as coding_UCSC from SNPs annotated as 3’UTR
 
-sort UTR_3_UCSC.bed_LDSR.txt > UTR_3_UCSC.bed_LDSR.sorted
+mv UTR_3_UCSC.bed_LDSR.txt UTR_3_UCSC.bed_LDSR.old
+sort UTR_3_UCSC.bed_LDSR.old > UTR_3_UCSC.bed_LDSR.sorted
 sort Coding_UCSC.bed_LDSR.txt > Coding_UCSC.bed_LDSR.sorted
 
 comm -12 UTR_3_UCSC.bed_LDSR.sorted Coding_UCSC.bed_LDSR.sorted > temp
 
 comm -23 UTR_3_UCSC.bed_LDSR.sorted temp > UTR_3_UCSC.bed_LDSR.txt
+
+# exclude SNPs from primate conservation (ConsPeaks_annots/30Cons_LDSR.txt) that are in all mammal conservation (LindbladToh)
+
+mv ../ConsPeaks_annots/30Cons_LDSR.txt ../ConsPeaks_annots/30Cons_LDSR.old
+sort ../ConsPeaks_annots/30Cons_LDSR.old > ../ConsPeaks_annots/30Cons_LDSR.sorted
+sort Conserved_LindbladToh.bed_LDSR.txt > Conserved_LindbladToh.bed_LDSR.sorted
+comm -12 ../ConsPeaks_annots/30Cons_LDSR.sorted Conserved_LindbladToh.bed_LDSR.sorted > temp
+comm -23 ../ConsPeaks_annots/30Cons_LDSR.sorted temp > ../ConsPeaks_annots/30Cons_LDSR.txt
 
 
 scontrol show job $SLURM_JOB_ID 
