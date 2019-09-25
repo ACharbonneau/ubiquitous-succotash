@@ -49,7 +49,10 @@ for col in 6 8 40 50 52 54 # removed 11, 36, 38
         zcat ../RawData/baseline_v1.1/baseline.${baseline}.annot.gz | cut -f 3,${col} | awk '{if($2==1)print $1}' >> ${NAME}_LDSR.txt
     done 
 done
-        
+    
+    
+# exclude SNPs already annotated as coding_UCSC from SNPs annotated as 3’UTR
+
 sort UTR_3_UCSC.bed_LDSR.txt > UTR_3_UCSC.bed_LDSR.sorted
 sort Coding_UCSC.bed_LDSR.txt > Coding_UCSC.bed_LDSR.sorted
 
