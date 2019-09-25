@@ -50,5 +50,12 @@ for col in 6 8 40 50 52 54 # removed 11, 36, 38
     done 
 done
         
+sort UTR_3_UCSC.bed_LDSR.txt > UTR_3_UCSC.bed_LDSR.sorted
+sort Coding_UCSC.bed_LDSR.txt > Coding_UCSC.bed_LDSR.sorted
+
+comm -12 UTR_3_UCSC.bed_LDSR.sorted Coding_UCSC.bed_LDSR.sorted > temp
+
+comm -23 UTR_3_UCSC.bed_LDSR.sorted temp > UTR_3_UCSC.bed_LDSR.txt
+
 
 scontrol show job $SLURM_JOB_ID 
