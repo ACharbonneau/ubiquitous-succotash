@@ -52,12 +52,13 @@ mkdir -p wss
 # view columns
 bash src/s5-provide-summary-statistics.sh ss/anxiety.meta.full.fs.tbl.gz
 # Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
-zcat ss/anxiety.meta.full.fs.tbl.gz | awk '{
+zcat ss/anxiety.meta.full.fs.tbl.gz | head -n 1 > wss/anxiety.meta.full.fs.tbl
+zcat ss/anxiety.meta.full.fs.tbl.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
-}' > wss/anxiety.meta.full.fs.tbl
+}' >> wss/anxiety.meta.full.fs.tbl
 gzip -f wss/anxiety.meta.full.fs.tbl
 # munge data
 python tools/ldsc/munge_sumstats.py --sumstats ss/anxiety.meta.full.fs.tbl.gz --out mss/munged.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
@@ -67,12 +68,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/anxiety.meta.full.fs.tbl.gz -
 # view columns for Autism and munge
 # N from Table S6 of https://www.biorxiv.org/content/10.1101/428391v2.full
 bash src/s5-provide-summary-statistics.sh ss/iPSYCH-PGC_ASD_Nov2017.gz
-zcat ss/iPSYCH-PGC_ASD_Nov2017.gz | awk '{
+zcat ss/iPSYCH-PGC_ASD_Nov2017.gz | head -n 1 > wss/iPSYCH-PGC_ASD_Nov2017
+zcat ss/iPSYCH-PGC_ASD_Nov2017.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 ;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
-}' > wss/iPSYCH-PGC_ASD_Nov2017
+}' >> wss/iPSYCH-PGC_ASD_Nov2017
 gzip -f wss/iPSYCH-PGC_ASD_Nov2017
 python tools/ldsc/munge_sumstats.py --sumstats ss/iPSYCH-PGC_ASD_Nov2017.gz --out mss/munged.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
 python tools/ldsc/munge_sumstats.py --sumstats wss/iPSYCH-PGC_ASD_Nov2017.gz --out wmss/munged.winz.iPSYCH-PGC_ASD_Nov2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 18381 --N-con 27969
@@ -81,12 +83,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/iPSYCH-PGC_ASD_Nov2017.gz --o
 # view columns for Bipolar and munge
 bash src/s5-provide-summary-statistics.sh ss/daner_PGC_BIP32b_mds7a_0416a.gz
 # Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
-zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk '{
+zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | head -n 1 > wss/daner_PGC_BIP32b_mds7a_0416a
+zcat ss/daner_PGC_BIP32b_mds7a_0416a.gz | awk 'FNR > 1{
         if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
-}' > wss/daner_PGC_BIP32b_mds7a_0416a
+}' >> wss/daner_PGC_BIP32b_mds7a_0416a
 gzip -f wss/daner_PGC_BIP32b_mds7a_0416a
 # let it calculate N from daner columns
 python tools/ldsc/munge_sumstats.py --sumstats ss/daner_PGC_BIP32b_mds7a_0416a.gz --out mss/munged.daner_PGC_BIP32b_mds7a_0416a --a1-inc --daner-n --snp SNP --a1 A1 --a2 A2 --p P 
@@ -95,12 +98,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/daner_PGC_BIP32b_mds7a_0416a.
 ### MDD (major depressive disorder)
 # view columns for MDD and munge
 bash src/s5-provide-summary-statistics.sh ss/MDD2018_ex23andMe.gz
-zcat ss/MDD2018_ex23andMe.gz | awk '{
+zcat ss/MDD2018_ex23andMe.gz | head -n 1 > wss/MDD2018_ex23andMe
+zcat ss/MDD2018_ex23andMe.gz | awk 'FNR > 1{
         if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15 "\t" $16 "\t" $17 "\t" $18 "\t" $19;
-}' > wss/MDD2018_ex23andMe
+}' >> wss/MDD2018_ex23andMe
 gzip -f wss/MDD2018_ex23andMe
 python tools/ldsc/munge_sumstats.py --sumstats ss/MDD2018_ex23andMe.gz --out mss/munged.MDD2018_ex23andMe.gz --a1-inc --N-cas 59851 --N-con 113154
 python tools/ldsc/munge_sumstats.py --sumstats wss/MDD2018_ex23andMe.gz --out wmss/munged.winz.MDD2018_ex23andMe.gz --a1-inc --N-cas 59851 --N-con 113154
@@ -108,16 +112,16 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/MDD2018_ex23andMe.gz --out wm
 ### Schizophrenia
 # view columns for schizophrenia and munge and do winsorized version
 bash src/s5-provide-summary-statistics.sh ss/pgc.scz2.gz
-zcat ss/pgc.scz2.gz | awk '{
+zcat ss/pgc.scz2.gz | head -n 1 > wss/pgc.scz2
+zcat ss/pgc.scz2.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
-}' > wss/pgc.scz2
+}' >> wss/pgc.scz2
 gzip -f wss/pgc.scz2
 python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.scz2.gz --out mss/munged.pgc.scz2 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 36989 --N-con 113075 --snp snpid --a1 a1 --a2 a2 --p p
 python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.scz2.gz --out wmss/munged.winz.pgc.scz2 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 36989 --N-con 113075 --snp snpid --a1 a1 --a2 a2 --p p
-
 
 
 ##############################################
@@ -132,12 +136,13 @@ gzip -c cleaned.pgc.aud > pgc.aud.gz
 cd .. || exit
 # view columns for AUD (alcoholism) and munge
 bash src/s5-provide-summary-statistics.sh ss/pgc.aud.gz
-zcat ss/pgc.aud.gz | awk '{
+zcat ss/pgc.aud.gz | head -n 1 > wss/pgc.aud
+zcat ss/pgc.aud.gz | awk 'FNR > 1{
         if ((0+$7)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" 0.0000001 "\t" $8 ;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
-}' > wss/pgc.aud
+}' >> wss/pgc.aud
 gzip -f wss/pgc.aud
 python tools/ldsc/munge_sumstats.py --sumstats ss/pgc.aud.gz --out mss/munged.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.aud.gz --out wmss/munged.winz.pgc.aud --a1-inc --N-cas 11569 --N-con 34999 --snp SNP --a1 A1 --a2 A2 --p P
@@ -149,12 +154,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/pgc.aud.gz --out wmss/munged.
 # view columns for Education and munge
 # N from http://ssgac.org/documents/README_EA3.txt
 bash src/s5-provide-summary-statistics.sh ss/GWAS_EA_excl23andMe.txt.gz
-zcat ss/GWAS_EA_excl23andMe.txt.gz | awk '{
+zcat ss/GWAS_EA_excl23andMe.txt.gz | head -n 1 > wss/GWAS_EA_excl23andMe.txt
+zcat ss/GWAS_EA_excl23andMe.txt.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
-}' > wss/GWAS_EA_excl23andMe.txt
+}' >> wss/GWAS_EA_excl23andMe.txt
 gzip -f wss/GWAS_EA_excl23andMe.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/GWAS_EA_excl23andMe.txt.gz --out mss/munged.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --out wmss/munged.winz.GWAS_EA_excl23andMe --merge-alleles s5/w_hm3.snplist --a1-inc --N 766345 --snp MarkerName --a1 A1 --a2 A2 --p Pval
@@ -162,12 +168,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GWAS_EA_excl23andMe.txt.gz --
 ### Extraversion
 # view columns for Extraversion and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.EXTRAVERSION.full.txt.gz
-zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | awk '{
+zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | head -n 1 > wss/GPC-2.EXTRAVERSION.full.txt
+zcat ss/GPC-2.EXTRAVERSION.full.txt.gz | awk 'FNR > 1{
         if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
-}' > wss/GPC-2.EXTRAVERSION.full.txt
+}' >> wss/GPC-2.EXTRAVERSION.full.txt
 gzip -f wss/GPC-2.EXTRAVERSION.full.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.EXTRAVERSION.full.txt.gz --out mss/munged.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.EXTRAVERSION.full.txt.gz --out wmss/munged.winz.GPC-2.EXTRAVERSION.full --merge-alleles s5/w_hm3.snplist --a1-inc --N 63030 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
@@ -175,12 +182,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.EXTRAVERSION.full.txt.g
 ### IQ
 # view columns for IQ and munge
 bash src/s5-provide-summary-statistics.sh ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz
-zcat ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz | awk '{
+zcat ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz | head -n 1 > wss/SavageJansen_2018_intelligence_metaanalysis.txt
+zcat ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz | awk 'FNR > 1{
         if ((0+$11)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" 0.0000001 "\t" $12 "\t" $13 "\t" $14;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
-}' > wss/SavageJansen_2018_intelligence_metaanalysis.txt
+}' >> wss/SavageJansen_2018_intelligence_metaanalysis.txt
 gzip -f wss/SavageJansen_2018_intelligence_metaanalysis.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/SavageJansen_2018_intelligence_metaanalysis.txt.gz --out mss/munged.SavageJansen_2018_intelligence_metaanalysis.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 269867
 python tools/ldsc/munge_sumstats.py --sumstats wss/SavageJansen_2018_intelligence_metaanalysis.txt.gz --out wmss/munged.winz.SavageJansen_2018_intelligence_metaanalysis.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 269867
@@ -192,12 +200,13 @@ cat ss/newGPC ss/GPC-2.NEUROTICISM.full.txt > ss/GPC-2.NEUROTICISM.edit
 gzip -f ss/GPC-2.NEUROTICISM.edit
 # view columns for neuroticism and munge
 bash src/s5-provide-summary-statistics.sh ss/GPC-2.NEUROTICISM.edit.gz
-zcat ss/GPC-2.NEUROTICISM.edit.gz | awk '{
+zcat ss/GPC-2.NEUROTICISM.edit.gz | head -n 1 > wss/GPC-2.NEUROTICISM.edit
+zcat ss/GPC-2.NEUROTICISM.edit.gz | awk 'FNR > 1{
         if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 ;
-}' > wss/GPC-2.NEUROTICISM.edit
+}' >> wss/GPC-2.NEUROTICISM.edit
 gzip -f wss/GPC-2.NEUROTICISM.edit
 python tools/ldsc/munge_sumstats.py --sumstats ss/GPC-2.NEUROTICISM.edit.gz --out mss/munged.GPC-2.NEUROTICISM.edit --merge-alleles s5/w_hm3.snplist --a1-inc --N 63661 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
 python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.NEUROTICISM.edit.gz --out wmss/munged.winz.GPC-2.NEUROTICISM.edit --merge-alleles s5/w_hm3.snplist --a1-inc --N 63661 --snp RSNUMBER --a1 Allele1 --a2 Allele2 --p PVALUE
@@ -205,12 +214,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/GPC-2.NEUROTICISM.edit.gz --o
 ### Risky Behavior
 # view columns for risky behavior and munge
 bash src/s5-provide-summary-statistics.sh ss/RISK_GWAS_MA_UKB+replication.txt.gz
-zcat ss/RISK_GWAS_MA_UKB+replication.txt.gz | awk '{
+zcat ss/RISK_GWAS_MA_UKB+replication.txt.gz | head -n 1 > wss/RISK_GWAS_MA_UKB+replication.txt
+zcat ss/RISK_GWAS_MA_UKB+replication.txt.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
-}' > wss/RISK_GWAS_MA_UKB+replication.txt
+}' >> wss/RISK_GWAS_MA_UKB+replication.txt
 gzip -f wss/RISK_GWAS_MA_UKB+replication.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/RISK_GWAS_MA_UKB+replication.txt.gz --out mss/munged.RISK_GWAS_MA_UKB+replication.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 466571 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/RISK_GWAS_MA_UKB+replication.txt.gz --out wmss/munged.winz.RISK_GWAS_MA_UKB+replication.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 466571 --snp MarkerName --a1 A1 --a2 A2 --p Pval
@@ -218,12 +228,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/RISK_GWAS_MA_UKB+replication.
 ### Well-being
 # view columns for well being and munge
 bash src/s5-provide-summary-statistics.sh ss/SWB_Full.txt.gz
-zcat ss/SWB_Full.txt.gz | awk '{
+zcat ss/SWB_Full.txt.gz | head -n 1 > wss/SWB_Full.txt
+zcat ss/SWB_Full.txt.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9;
-}' > wss/SWB_Full.txt
+}' >> wss/SWB_Full.txt
 gzip -f wss/SWB_Full.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/SWB_Full.txt.gz --out mss/munged.SWB_Full.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 298420 --snp MarkerName --a1 A1 --a2 A2 --p Pval
 python tools/ldsc/munge_sumstats.py --sumstats wss/SWB_Full.txt.gz --out wmss/munged.winz.SWB_Full.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 298420 --snp MarkerName --a1 A1 --a2 A2 --p Pval
@@ -234,12 +245,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/SWB_Full.txt.gz --out wmss/mu
 ### Alzheimers 1
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/AD_sumstats_Jansenetal.txt.gz
-zcat ss/AD_sumstats_Jansenetal.txt.gz | awk '{
+zcat ss/AD_sumstats_Jansenetal.txt.gz | head -n 1 > wss/AD_sumstats_Jansenetal.txt
+zcat ss/AD_sumstats_Jansenetal.txt.gz | awk 'FNR > 1{
         if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14;
-}' > wss/AD_sumstats_Jansenetal.txt
+}' >> wss/AD_sumstats_Jansenetal.txt
 gzip -f wss/AD_sumstats_Jansenetal.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/AD_sumstats_Jansenetal.txt.gz --out mss/munged.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
 python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz --out wmss/munged.winz.AD_sumstats_Jansenetal --merge-alleles s5/w_hm3.snplist --a1-inc --N 381761
@@ -247,12 +259,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz
 ### Alzheimers 2
 # view columns for Alzheimers and munge
 bash src/s5-provide-summary-statistics.sh ss/Kunkle_etal_Stage1_results.txt.gz
-zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk '{
+zcat ss/Kunkle_etal_Stage1_results.txt.gz | head -n 1 > wss/Kunkle_etal_Stage1_results.txt
+zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk 'FNR > 1{
         if ((0+$8)<1e-07)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
-}' > wss/Kunkle_etal_Stage1_results.txt
+}' >> wss/Kunkle_etal_Stage1_results.txt
 gzip -f wss/Kunkle_etal_Stage1_results.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Kunkle_etal_Stage1_results.txt.gz --out mss/munged.Kunkle_etal_Stage1_results.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 21982 --N-con 41944 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
 python tools/ldsc/munge_sumstats.py --sumstats wss/Kunkle_etal_Stage1_results.txt.gz --out wmss/munged.winz.Kunkle_etal_Stage1_results.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 21982 --N-con 41944 --snp MarkerName --a1 Effect_allele --a2 Non_Effect_allele --p Pvalue
@@ -260,12 +273,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Kunkle_etal_Stage1_results.tx
 ### Epilepsy
 # view columns for Epilepsy and munge  
 bash src/s5-provide-summary-statistics.sh ss/ILAE_All_Epi_11.8.14.gz
-zcat ss/ILAE_All_Epi_11.8.14.gz | awk '{
+zcat ss/ILAE_All_Epi_11.8.14.gz | head -n 1 > wss/ILAE_All_Epi_11.8.14
+zcat ss/ILAE_All_Epi_11.8.14.gz | awk 'FNR > 1{
         if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
-}' > wss/ILAE_All_Epi_11.8.14
+}' >> wss/ILAE_All_Epi_11.8.14
 gzip -f wss/ILAE_All_Epi_11.8.14
 python tools/ldsc/munge_sumstats.py --sumstats ss/ILAE_All_Epi_11.8.14.gz --out mss/munged.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 python tools/ldsc/munge_sumstats.py --sumstats wss/ILAE_All_Epi_11.8.14.gz --out wmss/munged.winz.ILAE_All_Epi_11.8.14 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 15212 --N-con 29677 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
@@ -278,12 +292,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/ILAE_All_Epi_11.8.14.gz --out
 ### Parkinsons Disease
 # view columns for Parkinsons and munge
 bash src/s5-provide-summary-statistics.sh ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz
-zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk '{
+zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | head -n 1 > wss/Pankratz_Parkinsons_22687-SuppTable1.txt
+zcat ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz | awk 'FNR > 1{
         if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
-}' > wss/Pankratz_Parkinsons_22687-SuppTable1.txt
+}' >> wss/Pankratz_Parkinsons_22687-SuppTable1.txt
 gzip -f wss/Pankratz_Parkinsons_22687-SuppTable1.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out mss/munged.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-SuppTable1.txt.gz --out wmss/munged.winz.Pankratz_Parkinsons_22687-SuppTable1 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 857 --N-con 867 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
@@ -295,12 +310,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Pankratz_Parkinsons_22687-Sup
 ### Age-related macular degeneration
 # view columns for ARMD and munge
 bash src/s5-provide-summary-statistics.sh ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz
-zcat ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz | awk '{
+zcat ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz | head -n 1 > wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
+zcat ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz | awk 'FNR > 1{
         if ((0+$6)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" 0.0000001 "\t" $7;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7;
-}' > wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
+}' >> wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
 gzip -f wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz --out mss/munged.Fristche_AMDGene2013_Neovascular_v_Controls.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 2281 --N-con 8285 --snp Marker --a1 Allele1 --a2 Allele2 --p GC.Pvalue
 python tools/ldsc/munge_sumstats.py --sumstats wss/Fristche_AMDGene2013_Neovascular_v_Controls.txt.gz --out wmss/munged.winz.Fristche_AMDGene2013_Neovascular_v_Controls.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas 2281 --N-con 8285 --snp Marker --a1 Allele1 --a2 Allele2 --p GC.Pvalue
@@ -308,12 +324,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Fristche_AMDGene2013_Neovascu
 ### BMI
 # view columns for BMI and munge
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz
-zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | awk '{
+zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | head -n 1 > wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
+zcat ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
-}' > wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
+}' >> wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
 gzip -f wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz --out mss/munged.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 681275 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.gz --out wmss/munged.winz.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 681275 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
@@ -321,12 +338,13 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Locke_et_al+UKB
 ### Height
 # view columns for height and munge
 bash src/s5-provide-summary-statistics.sh ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz
-zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | awk '{
+zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | head -n 1 > wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
+zcat ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
-}' > wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
+}' >> wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
 gzip -f wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz --out mss/munged.Meta-analysis_Wood_et_al+UKBiobank_2018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 693529 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
 python tools/ldsc/munge_sumstats.py --sumstats wss/Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz --out wmss/munged.winz.Meta-analysis_Wood_et_al+UKBiobank_2018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 693529 --snp SNP --a1 Tested_Allele --a2 Other_Allele --p P
