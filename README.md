@@ -69,35 +69,4 @@ TLDR:
 |Ulcerative Colitis | imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | 452264 | 3497 | 448767 | http://static.geneatlas.roslin.ed.ac.uk/gwas/allWhites/imputed/data.chromX/base/imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | K51 Ulcerative Colitis from the GeneAtlas UKBB |
 
 
-#### Annotations 
-
-| Annotation | Filename | Creation Code | Original Data Link | Reference |
-|------------|----------|---------------|--------------------|-----------|
-Atac-Seq peaks |  |  |  |  |
-primate conservation-PhastCons |  |  |  |  |
-within 50 nt of splice site |  |  |  |  |
-Coding_UCSC |  |  |  |  |
-Conserved_LindbladToh |  |  |  |  |
-PromoterFlanking_Hoffman |  |  |  |  |
-Promoter_UCSC  |  |  |  |  |
-TSS_Hoffman |  |  |  |  |
-UTR_3_UCSC |  |  |  |  |
-UTR_5_UCSC |  |  |  |  |
-PEC_snps |  |  |  |  |
-BivFlnk |  |  |  |  |
-Enh |  |  |  |  |
-EnhBiv |  |  |  |  |
-EnhG |  |  |  |  |
-Het |  |  |  |  |
-ReprPC |  |  |  |  |
-ReprPCWk |  |  |  |  |
-TssA |  |  |  |  |
-TssAFlnk |  |  |  |  |
-TssBiv |  |  |  |  |
-Tx |  |  |  |  |
-TxWk |  |  |  |  |
-ZNF_Rpts |  |  |  |  |
-antisense |  |  |  |  |
-lincRNA |  |  |  |  |
-miRNA |  |  |  |  |
 
