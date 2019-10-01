@@ -54,6 +54,8 @@ awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $
 
 
 # Make files for LDSR
-awk '{ print $4 }' CTCF_comb_peaks_SNP_Final.txt | sort | uniq  > CTCF_comb_peaks_LSDR.txt
+awk '{ print $4 }' CTCF_comb_peaks_SNP_Final.txt | sort | uniq  > CTCF_comb_peaks_LDSR.txt
+
+Add Conservation!!
 
 scontrol show job $SLURM_JOB_ID 
