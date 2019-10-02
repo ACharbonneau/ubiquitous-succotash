@@ -133,7 +133,7 @@ sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>0.5)print $1 "\t" $2 "\t" $
 
 # Make files for LDSR. 
 
-filelist="ConsBySpliceFirst70  ConsBySpliceLast70" # dropping EvolveBySpliceFirst70 and EvolveBySpliceLast70
+filelist="ConsBySpliceFirst70 ConsBySpliceLast70" # dropping EvolveBySpliceFirst70 and EvolveBySpliceLast70
 
 for filename in ${filelist}
    do awk '{ print $4 }' ${filename}.tsv | sort | uniq  > ${filename}_LDSR.txt
