@@ -50,14 +50,29 @@ rm temp
 
 awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 }' CTCF_comb_peaks_SNP_Somatic.txt  > CTCF_comb_peaks_SNP.bed 
 
+
+# Get all the SNPs that are conserved by at least .5 by phylop
 ../RawData/liftOver CTCF_comb_peaks_SNP.bed  ../RawData/hg19ToHg38.over.chain.gz CTCF_comb_peaks_SNP_Filtered_Hg38.bed unMapped
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationByCTCF.py
 
 sed 's/, /\t/g' CTCF_comb_peaks_SNP.csv | awk '{if($5>0.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > CTCF_comb_peaks_SNP.tsv
 
+#Get all the SNPs that are conserved according to fastcons
+
+bedtools intersect -wa -wb -a CTCF_comb_peaks_SNP_Filtered_Hg38.bed -b ../ConsPeaks_annots/phastConsElements30way.bed > 30Cons_CTCF_SNP_Locations.txt
+
+#Get all the SNPs that are conserved according to Conserved_LindbladToh.bed_LDSR.txt
+
+awk '{ print $4 }' CTCF_comb_peaks_SNP_Filtered_Hg38.bed | sort > all_CTCF_SNPS.txt
+
+comm -12 all_CTCF_SNPS.txt ../original_annots/Conserved_LindbladToh.bed_LDSR.sorted > LindbladToh_SNPs.txt
+
 
 # Make files for LDSR
-awk '{ print $4 }' CTCF_comb_peaks_SNP.tsv | sort | uniq  > CTCF_comb_peaks_LDSR.txt
+awk '{ print $4 }' CTCF_comb_peaks_SNP.tsv > temp
+awk '{ print $4 }' 30Cons_CTCF_SNP_Locations.txt >> temp
+cat LindbladToh_SNPs.txt >> temp
+cat temp | sort | uniq > CTCF_comb_peaks_LDSR.txt
 
 scontrol show job $SLURM_JOB_ID 
