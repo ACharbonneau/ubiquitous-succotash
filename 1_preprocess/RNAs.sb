@@ -30,7 +30,7 @@ cd $SLURM_SUBMIT_DIR || exit
 mkdir rnas_annots
 cd rnas_annots || exit
 
-featurelist="lincRNA antisense miRNA snoRNA rRNA 3prime_overlapping_ncrna misc_RNA Mt_rRNA Mt_tRNA snRNA"
+featurelist="lincRNA miRNA snoRNA rRNA 3prime_overlapping_ncrna misc_RNA Mt_rRNA Mt_tRNA snRNA" #dropping antisense,
 
 # Get coding regions for all these. Need to first get names, then pull out their exons. For ones without introns/exons the exons are the same locations as the overall feature
 
@@ -70,7 +70,8 @@ for feature in ${featurelist}
    do awk '{ print $1 }' ${feature}_final.txt > ${feature}_LDSR.txt
 done
 
-cat 3prime_overlapping_ncrna_LDSR.txt misc_RNA_LDSR.txt  Mt_rRNA_LDSR.txt Mt_tRNA_LDSR.txt snoRNA_LDSR.txt snRNA_LDSR.txt | sort | uniq > other_RNA_LDSR.txt
+# dropping other_rna
+#cat 3prime_overlapping_ncrna_LDSR.txt misc_RNA_LDSR.txt  Mt_rRNA_LDSR.txt Mt_tRNA_LDSR.txt snoRNA_LDSR.txt snRNA_LDSR.txt | sort | uniq > other_RNA_LDSR.txt
 
 mkdir otherRNAs
 
