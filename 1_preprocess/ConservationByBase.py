@@ -1,4 +1,4 @@
-# called from introns.sh
+# called from ctcf.sb
 
 import pyBigWig
 bw = pyBigWig.open("../RawData/hg38.phyloP30way.bw")
