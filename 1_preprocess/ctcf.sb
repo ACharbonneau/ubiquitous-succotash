@@ -24,13 +24,12 @@ cd $SLURM_SUBMIT_DIR || exit                 ### change to the directory where y
 # and doing a backwards liftover of some of the files after filtering
 ################# Only use ACC_neuron and ACC_glia
 
-mkdir ctcf_annots
 
-cd ctcf_annots || exit
+# CTCF annotataions, filtered by conservation
 
-# To run interactivly do 
-## qsub -I -l nodes=1:ppn=1,walltime=04:00:00,mem=100gb -N myjob
+mkdir ../ctcf_annots
 
+cd ../ctcf_annots || exit
 
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, ctcf file
@@ -47,15 +46,18 @@ grep -v chrY temp > CTCF_comb_peaks_SNP_Somatic.txt
 
 rm temp
 
-# Reduce matrix to: chr, snpstart, snpend, rsID, allele, alt, intronstart, intronstop, strand, genename
+# Reduce matrix to: chr, snpstart, snpend
 
-awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $10 "\t" $11 "\t" $13 "\t" $15 }' CTCF_comb_peaks_SNP_Somatic.txt  > CTCF_comb_peaks_SNP_Final.txt 
+awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 }' CTCF_comb_peaks_SNP_Somatic.txt  > CTCF_comb_peaks_SNP.bed 
 
+../RawData/liftOver CTCF_comb_peaks_SNP.bed  ../RawData/hg19ToHg38.over.chain.gz CTCF_comb_peaks_SNP_Filtered_Hg38.bed unMapped
+
+python3 ../ubiquitous-succotash/1_preprocess/ConservationByCTCF.py
+
+sed 's/, /\t/g' CTCF_comb_peaks_SNP.csv | awk '{if($5>0.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > CTCF_comb_peaks_SNP.tsv
 
 
 # Make files for LDSR
-awk '{ print $4 }' CTCF_comb_peaks_SNP_Final.txt | sort | uniq  > CTCF_comb_peaks_LDSR.txt
-
-Add Conservation!!
+awk '{ print $4 }' CTCF_comb_peaks_SNP.tsv | sort | uniq  > CTCF_comb_peaks_LDSR.txt
 
 scontrol show job $SLURM_JOB_ID 
