@@ -64,7 +64,7 @@ bedtools intersect -wa -wb -a CTCF_comb_peaks_SNP_Filtered_Hg38.bed -b ../ConsPe
 
 #Get all the SNPs that are conserved according to Conserved_LindbladToh.bed_LDSR.txt
 
-awk '{ print $4 }' CTCF_comb_peaks_SNP_Filtered_Hg38.bed | sort > all_CTCF_SNPS.txt
+awk '{ print $4 }' CTCF_comb_peaks_SNP.bed | sort > all_CTCF_SNPS.txt
 
 comm -12 all_CTCF_SNPS.txt ../original_annots/Conserved_LindbladToh.bed_LDSR.sorted > LindbladToh_SNPs.txt
 
