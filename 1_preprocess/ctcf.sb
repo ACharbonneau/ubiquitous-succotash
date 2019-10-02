@@ -27,9 +27,9 @@ cd $SLURM_SUBMIT_DIR || exit                 ### change to the directory where y
 
 # CTCF annotataions, filtered by conservation
 
-mkdir ../ctcf_annots
+mkdir ctcf_annots
 
-cd ../ctcf_annots || exit
+cd ctcf_annots || exit
 
 
 # Use bedtools to find the location intersection between the SNP list from NCBI that has SNP locations, ctcf file
