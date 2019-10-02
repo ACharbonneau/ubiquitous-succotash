@@ -10,6 +10,8 @@
  
 ########## Command Lines to Run ##########
  
+# This script gets all the intron sequences, and filters them by conservation score
+ 
 module purge
 
 #module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules, e.g.
@@ -108,6 +110,7 @@ for feature in ${featurelist}
     do awk '{ print $1 "\t" $2 "\t" $3 "\t" $4 "\t"  $8 "\t" $9 "\t" $11 "\t" $13 }' ${feature}_SNP_Somatic.txt | sed 's/ID=transcript:\w\+;//g' | sed 's/ID=gene://g' | sed 's/Parent=gene://g' | cut -f 1 -d ';' | sort | uniq > ${feature}_SNP_Filtered.txt 
 done
 
+# The intron files get sent to be filtered by conservation scores
 
 mkdir ../ConsBySplice_annots
 cd ../ConsBySplice_annots || exit
@@ -121,34 +124,20 @@ cut -f 1,2,3,4 ../introns_annots/last70_mrna_introns_SNP_Filtered.txt > last70_m
 
 python3 ../ubiquitous-succotash/1_preprocess/ConservationBySplice.py
 
-sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5>0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceFirst70.tsv
-sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceFirst70.tsv
+sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5>0.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceFirst70.tsv
+#sed 's/, /\t/g' ConsBySpliceFirst70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceFirst70.tsv
 
 
-sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceLast70.tsv
-sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceLast70.tsv
+sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5>0.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsBySpliceLast70.tsv
+#sed 's/, /\t/g' ConsBySpliceLast70.csv | awk '{if($5<0)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > EvolveBySpliceLast70.tsv
 
 # Make files for LDSR. 
 
-filelist="ConsBySpliceFirst70 EvolveBySpliceFirst70 ConsBySpliceLast70 EvolveBySpliceLast70"
+filelist="ConsBySpliceFirst70  ConsBySpliceLast70" # dropping EvolveBySpliceFirst70 and EvolveBySpliceLast70
 
 for filename in ${filelist}
    do awk '{ print $4 }' ${filename}.tsv | sort | uniq  > ${filename}_LDSR.txt
 done
-
-
-mkdir ../ConsByBase_annots
-cd ../ConsByBase_annots || exit
-
-python3 ../ubiquitous-succotash/1_preprocess/ConservationByBase.py
-
-#slower than expected evolution
-sed 's/, /\t/g' ConsByBase.csv | awk '{if($5>.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' > ConsByBase.tsv
-
-#to add faster than expected evolution
-#sed 's/, /\t/g' ConsByBase.csv | awk '{if($5<-.5)print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5}' >> ConsByBase.tsv
-
-awk '{ print $4 }' ConsByBase.tsv > ConsByBase_LDSR.txt
 
 
 scontrol show job $SLURM_JOB_ID 
