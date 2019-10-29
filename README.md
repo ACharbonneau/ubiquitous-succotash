@@ -47,7 +47,7 @@ TLDR:
 | Autism | iPSYCH-PGC_ASD_Nov2017  | 46351 | 18382 | 27969 |  https://www.med.unc.edu/pgc/results-and-downloads/asd/?choice=Autism+Spectrum+Disorder+%28ASD%29#  | https://doi.org/10.1186/s13229-017-0137-9 |
 | Bipolar | daner_PGC_BIP32b_mds7a_0416a | 51710 | 20352 |	31358  | http://www.med.unc.edu/pgc/results-and-downloads  |    |   
 | Major Depressive Disorder | MDD2018_ex23andMe.gz | 173005 | 59851 | 113154 | https://www.med.unc.edu/pgc/results-and-downloads/mdd/ | 
-| Schizophrenia | gc.scz2.gz | 150064 | 36989 | 113075 | https://www.med.unc.edu/pgc/results-and-downloads/scz/ | https://doi.org/10.1038/nature13595 |
+| Schizophrenia | pgc.scz2.gz | 150064 | 36989 | 113075 | https://www.med.unc.edu/pgc/results-and-downloads/scz/ | https://doi.org/10.1038/nature13595 |
 |**Substance Use** | | | | | | |
 |Alcohol use | pgc_alcdep.eur_discovery.aug2018_release.txt.gz | 46568 | 11569 | 34999 | https://www.med.unc.edu/pgc/results-and-downloads/alcohol-dependence/ | http://dx.doi.org/10.1038/s41593-018-0275-1 |
 |**Behavioral** | | | | | | |
