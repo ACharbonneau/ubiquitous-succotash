@@ -261,7 +261,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/AD_sumstats_Jansenetal.txt.gz
 bash src/s5-provide-summary-statistics.sh ss/Kunkle_etal_Stage1_results.txt.gz
 zcat ss/Kunkle_etal_Stage1_results.txt.gz | head -n 1 > wss/Kunkle_etal_Stage1_results.txt
 zcat ss/Kunkle_etal_Stage1_results.txt.gz | awk 'FNR > 1{
-        if ((0+$8)<1e-07)
+        if ((0+$8)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" 0.0000001;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8;
