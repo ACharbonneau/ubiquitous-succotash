@@ -1,0 +1,28 @@
+
+
+# Mark thinks that we can discover enhancers by finding SNPs in conserved regions that can't be put into other catagories
+# So, I need to remove SNPs that are in other annotation catagories, and only keep the unknowns
+
+mkdir annotsorting
+sort ConsPeaks_annots/30Cons_LDSR.txt > annotsorting/30Cons_LDSR.sort
+
+sort original_annots/Coding_UCSC.bed_LDSR.txt > annotsorting/Coding_UCSC.bed_LDSR.sort
+sort original_annots/Promoter_UCSC.bed_LDSR.txt > annotsorting/Promoter_UCSC.bed_LDSR.sort
+sort original_annots/UTR_3_UCSC.bed_LDSR.txt > annotsorting/UTR_3_UCSC.bed_LDSR.sort
+sort original_annots/UTR_5_UCSC.bed_LDSR.txt > annotsorting/UTR_5_UCSC.bed_LDSR.sort
+sort original_annots/Conserved_LindbladToh.bed_LDSR.txt > annotsorting/Conserved_LindbladToh.bed_LDSR.sort
+sort rnas_annots/lincRNA_LDSR.txt > annotsorting/lincRNA_LDSR.sort
+sort rnas_annots/miRNA_LDSR.txt > annotsorting/miRNA_LDSR.sort
+sort rnas_annots/rRNA_LDSR.txt > annotsorting/rRNA_LDSR.sort
+sort roadmap_annots/2_TssAFlnk_LDSR.txt > annotsorting/2_TssAFlnk_LDSR.sort
+
+comm -23 annotsorting/30Cons_LDSR.sort annotsorting/Coding_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 annotsorting/Promoter_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 annotsorting/UTR_3_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 annotsorting/UTR_5_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 annotsorting/Conserved_LindbladToh.bed_LDSR.sort > temp1
+comm -23 temp1 annotsorting/lincRNA_LDSR.sort > temp2
+comm -23 temp2 annotsorting/miRNA_LDSR.sort > temp1
+comm -23 temp1 annotsorting/rRNA_LDSR.sort > temp2
+comm -23 temp2 annotsorting/2_TssAFlnk_LDSR.sort > annotsorting/ConsPeaks_FilterByAll_LDSR.txt
+
