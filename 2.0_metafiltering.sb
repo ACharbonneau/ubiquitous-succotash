@@ -46,7 +46,13 @@ comm -23 temp1 miRNA_LDSR.sort > temp2
 comm -23 temp2 rRNA_LDSR.sort > temp1
 comm -23 temp1 2_TssAFlnk_LDSR.sort > Conserved_LindbladToh.bed_LDSR.txt
 
+# exclude SNPs already annotated as coding_UCSC from SNPs annotated as 3’UTR
 
+mv ../original_annots/UTR_3_UCSC.bed_LDSR.txt UTR_3_UCSC.bed_LDSR.old
+
+comm -12 UTR_3_UCSC.bed_LDSR.sort Coding_UCSC.bed_LDSR.sort > temp
+
+comm -23 UTR_3_UCSC.bed_LDSR.sort temp > UTR_3_UCSC.bed_LDSR.txt
 
 
 # Only for TF motif scans
