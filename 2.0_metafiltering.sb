@@ -3,29 +3,66 @@
 # Mark thinks that we can discover enhancers by finding SNPs in conserved regions that can't be put into other catagories
 # So, I need to remove SNPs that are in other annotation catagories, and only keep the unknowns
 
-mkdir annotsorting
-sort ConsPeaks_annots/30Cons_LDSR.txt > annotsorting/30Cons_LDSR.sort
-sort original_annots/Conserved_LindbladToh.bed_LDSR.txt > annotsorting/Conserved_LindbladToh.bed_LDSR.sort
+mkdir ConsPeaks_annots/
+cd ConsPeaks_annots/
+sort ../ConsPeaks_initial/30Cons_LDSR.txt > 30Cons_LDSR.sort
+sort ../original_annots/Conserved_LindbladToh.bed_LDSR.txt > Conserved_LindbladToh.bed_LDSR.sort
+ 
+# don't use original Conserved_LindbladToh.bed_LDSR.txt in later pipeline
+mv ../original_annots/Conserved_LindbladToh.bed_LDSR.txt ../original_annots/Conserved_LindbladToh.bed_LDSR.old
 
-sort original_annots/Coding_UCSC.bed_LDSR.txt > annotsorting/Coding_UCSC.bed_LDSR.sort
-sort original_annots/Promoter_UCSC.bed_LDSR.txt > annotsorting/Promoter_UCSC.bed_LDSR.sort
-sort original_annots/UTR_3_UCSC.bed_LDSR.txt > annotsorting/UTR_3_UCSC.bed_LDSR.sort
-sort original_annots/UTR_5_UCSC.bed_LDSR.txt > annotsorting/UTR_5_UCSC.bed_LDSR.sort
-sort rnas_annots/lincRNA_LDSR.txt > annotsorting/lincRNA_LDSR.sort
-sort rnas_annots/miRNA_LDSR.txt > annotsorting/miRNA_LDSR.sort
-sort rnas_annots/rRNA_LDSR.txt > annotsorting/rRNA_LDSR.sort
-sort roadmap_annots/2_TssAFlnk_LDSR.txt > annotsorting/2_TssAFlnk_LDSR.sort
+sort ../original_annots/Coding_UCSC.bed_LDSR.txt > Coding_UCSC.bed_LDSR.sort
+sort ../original_annots/Promoter_UCSC.bed_LDSR.txt > Promoter_UCSC.bed_LDSR.sort
+sort ../original_annots/UTR_3_UCSC.bed_LDSR.txt > UTR_3_UCSC.bed_LDSR.sort
+sort ../original_annots/UTR_5_UCSC.bed_LDSR.txt > UTR_5_UCSC.bed_LDSR.sort
+sort ../rnas_annots/lincRNA_LDSR.txt > lincRNA_LDSR.sort
+sort ../rnas_annots/miRNA_LDSR.txt > miRNA_LDSR.sort
+sort ../rnas_annots/rRNA_LDSR.txt > rRNA_LDSR.sort
+sort ../roadmap_annots/2_TssAFlnk_LDSR.txt > 2_TssAFlnk_LDSR.sort
 
-# Combine 30Cons_LDSR.sort and Conserved_LindbladToh.bed_LDSR.sort
-cat annotsorting/30Cons_LDSR.sort annotsorting/Conserved_LindbladToh.bed_LDSR.sort | sort | uniq | sort > annotsorting/conserved.sort
+# if a SNP is in a conserved file AND in another annotation file, it should be removed from the annotation file
+# if a SNP is conserved in mammals and primates, it should be removed from primates
+
+# remove snps from primate conservation file 30Cons_LDSR.sort
+
+comm -23 30Cons_LDSR.sort Coding_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 Promoter_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 UTR_3_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 UTR_5_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 lincRNA_LDSR.sort > temp1
+comm -23 temp1 miRNA_LDSR.sort > temp2
+comm -23 temp2 rRNA_LDSR.sort > temp1
+comm -23 temp1 2_TssAFlnk_LDSR.sort > temp2
+comm -23 temp2 Conserved_LindbladToh.bed_LDSR.sort > 30Cons_LDSR.txt
+
+# remove snps from mammal conservation file Conserved_LindbladToh.bed_LDSR.sort
+
+comm -23 Conserved_LindbladToh.bed_LDSR.sort Coding_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 Promoter_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 UTR_3_UCSC.bed_LDSR.sort > temp1
+comm -23 temp1 UTR_5_UCSC.bed_LDSR.sort > temp2
+comm -23 temp2 lincRNA_LDSR.sort > temp1
+comm -23 temp1 miRNA_LDSR.sort > temp2
+comm -23 temp2 rRNA_LDSR.sort > temp1
+comm -23 temp1 2_TssAFlnk_LDSR.sort > Conserved_LindbladToh.bed_LDSR.txt
 
 
-comm -23 annotsorting/conserved.sort annotsorting/Coding_UCSC.bed_LDSR.sort > temp1
-comm -23 temp1 annotsorting/Promoter_UCSC.bed_LDSR.sort > temp2
-comm -23 temp2 annotsorting/UTR_3_UCSC.bed_LDSR.sort > temp1
-comm -23 temp1 annotsorting/UTR_5_UCSC.bed_LDSR.sort > temp2
-comm -23 temp2 annotsorting/lincRNA_LDSR.sort > temp1
-comm -23 temp1 annotsorting/miRNA_LDSR.sort > temp2
-comm -23 temp2 annotsorting/rRNA_LDSR.sort > temp1
-comm -23 temp1 annotsorting/2_TssAFlnk_LDSR.sort > annotsorting/ConsPeaks_FilterByAll_LDSR.txt
+
+
+# Only for TF motif scans
+
+# mkdir annotsorting
+
+## Combine 30Cons_LDSR.sort and Conserved_LindbladToh.bed_LDSR.sort
+# cat ConsPeaks_initial/30Cons_LDSR.sort original_annots/Conserved_LindbladToh.bed_LDSR.sort | sort | uniq | sort > annotsorting/conserved.sort
+
+
+# comm -23 annotsorting/conserved.sort annotsorting/Coding_UCSC.bed_LDSR.sort > temp1
+# comm -23 temp1 annotsorting/Promoter_UCSC.bed_LDSR.sort > temp2
+# comm -23 temp2 annotsorting/UTR_3_UCSC.bed_LDSR.sort > temp1
+# comm -23 temp1 annotsorting/UTR_5_UCSC.bed_LDSR.sort > temp2
+# comm -23 temp2 annotsorting/lincRNA_LDSR.sort > temp1
+# comm -23 temp1 annotsorting/miRNA_LDSR.sort > temp2
+# comm -23 temp2 annotsorting/rRNA_LDSR.sort > temp1
+# comm -23 temp1 annotsorting/2_TssAFlnk_LDSR.sort > annotsorting/ConsPeaks_FilterByAll_LDSR.txt
 
