@@ -5,6 +5,9 @@
 
 mkdir ConsPeaks_annots/
 cd ConsPeaks_annots/
+
+#All the files need to be sorted to run the comparison
+
 sort ../ConsPeaks_initial/30Cons_LDSR.txt > 30Cons_LDSR.sort
 sort ../original_annots/Conserved_LindbladToh.bed_LDSR.txt > Conserved_LindbladToh.bed_LDSR.sort
  
@@ -57,7 +60,7 @@ comm -23 UTR_3_UCSC.bed_LDSR.sort temp > UTR_3_UCSC.bed_LDSR.txt
 rm temp*
 
 
-# Only for TF motif scans
+# Only run the below for TF motif scans
 
 # mkdir annotsorting
 
