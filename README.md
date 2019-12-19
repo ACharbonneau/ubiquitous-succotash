@@ -30,8 +30,12 @@ TLDR:
   
 6. Most of the phenotype data is controlled access and must be downloaded *manually and individually*. Filenames and links to the data portals for these files are provided in the **Traits** section below. These files must be saved in a folder called "ss" in the main directory
 7. You'll also need some things that Jory made/built in ways that are mysterious to me. These are two tools folders: `tools/bin/` and `src`, which are some mix of Jory code and the original LDSR code. And the s3 folder contents, which are the files [here](https://data.broadinstitute.org/alkesgroup/LDSCORE/1000G_Phase3_plinkfiles.tgz), but renamed somehow.
-8. Run 2_LDSR_wave1.sh which processes all of the above files into a LDSR run. This will take days to run. I've been using interactive jobs, because it crashes often: `qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=47:58:00,feature='intel18'`
-  - All of the raw phenotype data files need to be plain text files that are gzipped and stored in the ss folder. If you have downloaded them from their sources, they will be a random mix of files, and need to be individually fixed. If the 2.2_LDSR_ss_regress_wave1.sb code breaks, it's likely that your copies of the files are at a different compression level, and need to be *just* gzipped, OR, that you have copies where the header has been changed. 
+8. Run 2.0_metafiltering.sb which does several filtering steps to ensure that the catagories are non-overlapping. It essentially filters the conserved SNPs by the other catagories so that if a SNP was in both the general conserved list and a more specific annotation, it stays in only the more specific list.
+9. 2.1_LDSR_scores_wave1.sb which processes all of the above files into a LDSR matrix. This will take ~24 hours to run. I've been using interactive jobs, because it crashes often.  To run the code interactively:
+  - start the interactive session: `qsub -I -N MyJobName -l nodes=1:ppn=8,mem=64gb,walltime=48:58:00,feature='intel18'`
+  - Copy paste anything from the script file after the ########## Command Lines to Run ########## line
+10. Run 2.2_LDSR_ss_regress_wave1.sb which both formats each GWAS summary file and runs the actual regression on it.
+  - Note that all of the raw phenotype data files need to be plain text files that are gzipped and stored in the ss folder. If you have downloaded them from their sources, they will be a random mix of files, and need to be individually fixed. If the 2.2_LDSR_ss_regress_wave1.sb code breaks, it's likely that your copies of the files are at a different compression level, and need to be *just* gzipped, OR, that you have copies where the header has been changed. 
   - The LDSR program is also hardcoded, and extremely finicky. You can't have anything extra in your path, or any unnecessary modules loaded, or it throws seemingly nonsensical errors. 
 
 
