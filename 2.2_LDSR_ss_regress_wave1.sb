@@ -451,3 +451,4 @@ bash src/s8-do-regression.sh wmss/munged.winz.Meta-analysis_Locke_et_al+UKBioban
 bash src/s8-do-regression.sh wmss/munged.winz.Meta-analysis_Wood_et_al+UKBiobank_2018.txt.sumstats.gz
 ### Ulcerative Colitis
 
+scontrol show job $SLURM_JOB_ID 
