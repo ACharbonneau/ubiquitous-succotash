@@ -19,7 +19,7 @@ pandoc 1.17.3
 
 mySQL 5.7 
 
-TLDR:
+Workflow:
 
 1. Make a main directory
 2. Clone repo into that directory
