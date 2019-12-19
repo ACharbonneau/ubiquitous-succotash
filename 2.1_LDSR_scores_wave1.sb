@@ -50,3 +50,4 @@ bash src/s6-create-annot.sh s3/subset. *_annots/*_LDSR.txt -f
 bash src/s7-create-ldscores.sh -j 24 -f
 
 
+scontrol show job $SLURM_JOB_ID 
