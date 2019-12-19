@@ -1,7 +1,19 @@
-
-
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+#SBATCH --time=4:00:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --nodes=1-48                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
+#SBATCH --ntasks=48                # number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem-per-cpu=64G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
+#SBATCH --job-name metafilter      # you can give your job a name for easier identification (same as -J)
+ 
+########## Command Lines to Run ##########
+ 
+ 
 # Mark thinks that we can discover enhancers by finding SNPs in conserved regions that can't be put into other catagories
 # So, I need to remove SNPs that are in other annotation catagories, and only keep the unknowns
+
 
 mkdir ConsPeaks_annots/
 cd ConsPeaks_annots/
@@ -77,3 +89,4 @@ rm temp*
 # comm -23 temp2 annotsorting/rRNA_LDSR.sort > temp1
 # comm -23 temp1 annotsorting/2_TssAFlnk_LDSR.sort > annotsorting/ConsPeaks_FilterByAll_LDSR.txt
 
+scontrol show job $SLURM_JOB_ID 
