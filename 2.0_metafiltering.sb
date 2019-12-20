@@ -14,6 +14,23 @@
 # Mark thinks that we can discover enhancers by finding SNPs in conserved regions that can't be put into other catagories
 # So, I need to remove SNPs that are in other annotation catagories, and only keep the unknowns
 
+# Assuming you ran all the the 1_preprocess scripts, at the end of this filtering you should have:
+#
+# ConsBySpliceFirst70_LDSR.txt: 70 bases before splice, with a phylop score > .5 (conserved base)
+# ConsBySpliceLast70_LDSR.txt: 70 bases after splice, with a phylop score > .5 (conserved base)
+# 30Cons_LDSR.txt:  SNPs from conserved peaks from UCSC with a fastcons score > .5 minus SNPs from any other catagory
+# CTCF_comb_peaks_LDSR.txt: SNPs from CTCF that also (have a phylop score > .5 OR are in LindbladToh OR have a fastcons >.5)
+# Coding_UCSC.bed_LDSR.txt: SNPs from LDSC paper
+# Conserved_LindbladToh.bed_LDSR.txt: SNPs from LDSC paper minus SNPs from any other catagory except 30Cons
+# Promoter_UCSC.bed_LDSR.txt: SNPs from LDSC paper
+# TSS_Hoffman.bed_LDSR.txt: SNPs from LDSC paper
+# UTR_3_UCSC.bed_LDSR.txt: SNPs from LDSC paper minus Coding_UCSC.bed_LDSR.txt SNPs
+# UTR_5_UCSC.bed_LDSR.txt: SNPs from LDSC paper
+# lincRNA_LDSR.txt: from Ensembl
+# miRNA_LDSR.txt: from Ensembl
+# rRNA_LDSR.txt: from Ensembl
+# 2_TssAFlnk_LDSR.txt: SNPs from roadmap
+
 
 mkdir ConsPeaks_annots/
 cd ConsPeaks_annots/
