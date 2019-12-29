@@ -48,20 +48,58 @@ mkdir -p wss
 ##############################################
 ## Psychiatric Traits
 
+## Each of these traits (Anxiety, Bipolar, etc) has it's own version of the code, because the GWAS summary file are all formatted 
+## differently, so you can't just loop through them. For most of them, there are 6 lines of code to run. They are labeled in the 
+## Anxiety code below, and explained in detail here:
+## 1. run bash src/s5-provide-summary-statistics.sh on it. This is a script Jory wrote, and it essentially looks to see how 
+##    different that summary stat file is from the expected format, and tells you what columns it couldn't locate. It will
+##    print the first line of the file to the screen, and also give you a copy-pasteable line of code for running munge_sumstats.py
+##    with asterisks where you need to fill in info. Just paste the correct column name for each set of asterisks so it can find the
+##    the correct columns.
+## Lines 2-4: Mark wanted to Winsorize the pvalues to see if it changes the results. Lines 2-4 do that operation. It replaces any pvalue
+##      less than 1e-7 with 1e-7. In this code $X specifies a column, by number and "\t" in the print statement inserts a tab character.
+## 2. Prints the column names from the original file to the new winsorized file
+## 3. Uses awk to do a find and replace for the pvalues and print it all to the new winsorized file.
+## 4. Zips new winsorized file
+## 5. Runs munge_sumstats.py on the original, non-winsorized file
+## 6. Runs munge_sumstats.py on the new, winsorized file
+
+## To make a new code block so you can add a new summary stats file. Copy the Anxiety code block and then:
+## In line:
+## 1. Change the file name anxiety.meta.full.fs.tbl.gz to name_of_new_file
+## 2. Change both instances of anxiety.meta.full.fs.tbl.gz to name_of_new_file
+## 3. Change both instances of anxiety.meta.full.fs.tbl.gz to name_of_new_file AND 
+##    Change the first $9 to $X where X is the number of the column where the pvalues are in the new file AND
+##    Move the 0.0000001 in the first print statement to replace the $X AND
+##    Replace the space left by 0.0000001 with $9 AND
+##    Add or subtract instances of tabs and column calls in both print statements so that all columns from the origianl file 
+##       are printed and have tabs between them
+## 4. Change the file name anxiety.meta.full.fs.tbl.gz to name_of_new_file
+## 5. Actually manually run the first line of code, copy out the line indicated, edit as necessary for this file
+## 6. Copy the line from 5, but change the directories as follows:
+##        ss becomes wss
+##        mss becomes wmss
+
+
 ### Anxiety
-# view columns
+# Code line 1: view columns
 bash src/s5-provide-summary-statistics.sh ss/anxiety.meta.full.fs.tbl.gz
 # Winsorizing the pvalues from the trait file. All values less than 1e-7 get changes to 1e-7. Winsorized files in wss and wmss folders
+# Code line 2: Get the column names
 zcat ss/anxiety.meta.full.fs.tbl.gz | head -n 1 > wss/anxiety.meta.full.fs.tbl
+# Code line 3: Replace the values in the pvalue column with 1e-7 if they are less than 1e-7
 zcat ss/anxiety.meta.full.fs.tbl.gz | awk 'FNR > 1{
         if ((0+$9)<0.0000001)
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" 0.0000001 "\t" $10;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10;
 }' >> wss/anxiety.meta.full.fs.tbl
+# Code line 4: Zip the winsorized file
 gzip -f wss/anxiety.meta.full.fs.tbl
 # munge data
+# Code line 5: Run munge_sumstats on the non-winsorized file
 python tools/ldsc/munge_sumstats.py --sumstats ss/anxiety.meta.full.fs.tbl.gz --out mss/munged.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
+# Code line 6: Run munge_sumstats on the non-winsorized file
 python tools/ldsc/munge_sumstats.py --sumstats wss/anxiety.meta.full.fs.tbl.gz --out wmss/munged.winz.anxiety.meta.full.fs.tbl --merge-alleles s5/w_hm3.snplist --a1-inc --N 18186 --snp SNPID --a1 Allele1 --a2 Allele2 --p P.value
 
 ### Autism
