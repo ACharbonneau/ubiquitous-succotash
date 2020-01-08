@@ -47,31 +47,34 @@ Workflow:
 | Trait | Filename |  N | Case | Control | Data Link | Reference |
 |-------|----------|----|------|---------|------|-----------|
 |**Psychiatric Traits**| | | | | | |
-|Anxiety |anxiety.meta.full.fs.tbl.gz |18186 | - | - | | ANGST  - Otowa et al. 2016|
+| Anxiety |anxiety.meta.full.fs.tbl.gz |18186 | - | - | | ANGST  - Otowa et al. 2016|
 | Autism | iPSYCH-PGC_ASD_Nov2017  | 46351 | 18382 | 27969 |  https://www.med.unc.edu/pgc/results-and-downloads/asd/?choice=Autism+Spectrum+Disorder+%28ASD%29#  | https://doi.org/10.1186/s13229-017-0137-9 |
-| Bipolar | daner_PGC_BIP32b_mds7a_0416a | 51710 | 20352 |	31358  | http://www.med.unc.edu/pgc/results-and-downloads  |    |   
-| Major Depressive Disorder | MDD2018_ex23andMe.gz | 173005 | 59851 | 113154 | https://www.med.unc.edu/pgc/results-and-downloads/mdd/ | 
+| Bipolar | daner_PGC_BIP32b_mds7a_0416a | 51710 | 20352 |	31358  | http://www.med.unc.edu/pgc/results-and-downloads  |  https://www.nature.com/articles/s41588-019-0397-8  |   
+| Major Depressive Disorder | MDD2018_ex23andMe.gz | 173005 | 59851 | 113154 | https://www.med.unc.edu/pgc/results-and-downloads/mdd/ | Wray et al. Nat. Genet. 2018 |
 | Schizophrenia | pgc.scz2.gz | 150064 | 36989 | 113075 | https://www.med.unc.edu/pgc/results-and-downloads/scz/ | https://doi.org/10.1038/nature13595 |
+| Attention Deficit Hyperactivity Disorder | package.zip | 55374 | - | - | https://www.med.unc.edu/pgc/results-and-downloads/adhd | Demontis et al. Nat. Genet. 2019 |
 |**Substance Use** | | | | | | |
 |Alcohol use | pgc_alcdep.eur_discovery.aug2018_release.txt.gz | 46568 | 11569 | 34999 | https://www.med.unc.edu/pgc/results-and-downloads/alcohol-dependence/ | http://dx.doi.org/10.1038/s41593-018-0275-1 |
 |**Behavioral** | | | | | | |
 | Education | GWAS_EA_excl23andMe.txt | 766345 |-|-| http://www.thessgac.org/data | https://doi.org/10.1038/s41588-018-0147-3 |
 | Extraversion | GPC-2.EXTRAVERSION.full.txt | 63030 |  |   |  http://www.tweelingenregister.org/GPC/  |   |
 |IQ | SavageJansen_2018_intelligence_metaanalysis.txt |269867 | | | | Savage et al., 2018|
-| Neuroticism | GPC-2.NEUROTICISM.full.txt | 63661 | - | - | http://www.tweelingenregister.org/GPC/  | De Moor et al. (2015). JAMA Psychiatry|
+| Neuroticism | sumstats_neuroticism_ctg_format.txt.gz | 380506  | - | - | https://ctg.cncr.nl/documents/p1651/sumstats_neuroticism_ctg_format.txt.gz | Nagel et al. Nat. Genet. 2018|
 |Risky Behavior | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
 |Well-being  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
+| Cognative Function | Davies_NC_2018.zip | 282014 | - | - | http://www.psy.ed.ac.uk/ccace/downloads/Davies_NC_2018.zip | Davies et al., Nat. Comm. 2018 |
+| Insomnia | Insomnia_sumstats_Jansenetal.txt.gz | 386533 | - | - | https://ctg.cncr.nl/documents/p1651/Insomnia_sumstats_Jansenetal.txt.gz | Jansen et al. biorXiv 2018 |
 |**Neurological** | | | | | | |
 | Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
 | Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |  http://www.epigad.org/gwas_ilae2014/  | International League Against Epilepsy Consortium on Complex Epilepsies|
 | Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
+| Amyotrophic Lateral Sclerosis | Summary_Statistics_GWAS_2016.tar | 36052 |  |  |  http://databrowser.projectmine.com/ | van Rheenen et al. Nat. Genet. 2016
 |**Negative Control**  | | | | | | |  
 |Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285| https://grasp.nhlbi.nih.gov/downloads/ResultsOctober2016/Fritsche/Fristche_AMDGene2013_Neovascular_v_Controls.txt | Fristche et al. 2013|
 |BMI| Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt |  681275 | - | - | http://portals.broadinstitute.org/collaboration/giant/images/c/c8/Meta-analysis_Locke_et_al%2BUKBiobank_2018_UPDATED.txt.gz  |  Yengo et al. (2018) |
 | Height | Meta-analysis_Wood_et_al+UKBiobank_2018.txt.gz |  693529 | - | - | http://cnsgenomics.com/data.html  |   Yengo et al. (2018)|
 |Ulcerative Colitis | imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | 452264 | 3497 | 448767 | http://static.geneatlas.roslin.ed.ac.uk/gwas/allWhites/imputed/data.chromX/base/imputed.allWhites.combined.clinical_c_K51.chrX.csv.gz | K51 Ulcerative Colitis from the GeneAtlas UKBB |
-
 
 
