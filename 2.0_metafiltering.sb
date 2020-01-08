@@ -52,7 +52,7 @@ sort ../rnas_annots/miRNA_LDSR.txt > miRNA_LDSR.sort
 sort ../rnas_annots/rRNA_LDSR.txt > rRNA_LDSR.sort
 sort ../roadmap_annots/2_TssAFlnk_LDSR.txt > 2_TssAFlnk_LDSR.sort
 
-# if a SNP is in a conserved file AND in another annotation file, it should be removed from the annotation file
+# if a SNP is in a conserved file AND in another annotation file, it should be removed from the conservation file
 # if a SNP is conserved in mammals and primates, it should be removed from primates
 
 # remove snps from primate conservation file 30Cons_LDSR.sort
