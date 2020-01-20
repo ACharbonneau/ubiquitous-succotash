@@ -44,11 +44,11 @@ Workflow:
 
 #### Traits
 
-| Trait | Filename |  N | Case | Control | Data Link | Reference |
+| Trait | Filename |  N | Case | Control | Data Link | Reference 
 |-------|----------|----|------|---------|------|-----------|
 |**Psychiatric Traits**| | | | | | |
 | Anxiety |anxiety.meta.full.fs.tbl.gz |18186 | - | - | | ANGST  - Otowa et al. 2016|
-| Autism | iPSYCH-PGC_ASD_Nov2017  | 46351 | 18382 | 27969 |  https://www.med.unc.edu/pgc/results-and-downloads/asd/?choice=Autism+Spectrum+Disorder+%28ASD%29#  | https://doi.org/10.1186/s13229-017-0137-9 |
+| Autism | iPSYCH-PGC_ASD_Nov2017  | 46350 | 18382 | 27969 |  https://www.med.unc.edu/pgc/results-and-downloads/asd/?choice=Autism+Spectrum+Disorder+%28ASD%29#  | Grove et al. Nat Genetics 2019 | 10.1038/s41588-019-0344-8
 | Bipolar | daner_PGC_BIP32b_mds7a_0416a | 51710 | 20352 |	31358  | http://www.med.unc.edu/pgc/results-and-downloads  |  https://www.nature.com/articles/s41588-019-0397-8  |   
 | Major Depressive Disorder | MDD2018_ex23andMe.gz | 173005 | 59851 | 113154 | https://www.med.unc.edu/pgc/results-and-downloads/mdd/ | Wray et al. Nat. Genet. 2018 |
 | Schizophrenia | pgc.scz2.gz | 150064 | 36989 | 113075 | https://www.med.unc.edu/pgc/results-and-downloads/scz/ | https://doi.org/10.1038/nature13595 |
@@ -65,11 +65,11 @@ Workflow:
 | Cognative Function | Davies_NC_2018.zip | 282014 | - | - | http://www.psy.ed.ac.uk/ccace/downloads/Davies_NC_2018.zip | Davies et al., Nat. Comm. 2018 |
 | Insomnia | Insomnia_sumstats_Jansenetal.txt.gz | 386533 | - | - | https://ctg.cncr.nl/documents/p1651/Insomnia_sumstats_Jansenetal.txt.gz | Jansen et al. biorXiv 2018 |
 |**Neurological** | | | | | | |
-| Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
+| Alzheimers 1| AD_sumstats_Jansenetal.txt | use Neff column | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
-| Epilepsy | all_epilepsy_METAL.gz |  |  |   |  http://www.epigad.org/gwas_ilae2018_16loci/all_epilepsy_METAL.gz  | International League Against Epilepsy Consortium on Complex Epilepsies|
+| Epilepsy | all_epilepsy_METAL.gz | 44889 | 15212  | 29677  |  http://www.epigad.org/gwas_ilae2018_16loci/all_epilepsy_METAL.gz  | Khalil, Nature Communications. 2018|
 | Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
-| Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
+| Parkinsons's | PD_without23andme | 482730 |  |  | https://drive.google.com/file/d/1FZ9UL99LAqyWnyNBxxlx6qOUlfAnublN/view?usp=sharing | Nalls et al., biorXiv 2019 |
 | Amyotrophic Lateral Sclerosis | Summary_Statistics_GWAS_2016.tar | 36052 |  |  |  http://databrowser.projectmine.com/ | van Rheenen et al. Nat. Genet. 2016
 |**Negative Control**  | | | | | | |  
 |Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285| https://grasp.nhlbi.nih.gov/downloads/ResultsOctober2016/Fritsche/Fristche_AMDGene2013_Neovascular_v_Controls.txt | Fristche et al. 2013|
