@@ -69,7 +69,7 @@ Workflow:
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
 | Epilepsy | all_epilepsy_METAL.gz | 44889 | 15212  | 29677  |  http://www.epigad.org/gwas_ilae2018_16loci/all_epilepsy_METAL.gz  | Khalil, Nature Communications. 2018|
 | Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
-| Parkinsons's | PD_without23andme | 482730 |  |  | https://drive.google.com/file/d/1FZ9UL99LAqyWnyNBxxlx6qOUlfAnublN/view?usp=sharing | Nalls et al., biorXiv 2019 |
+| Parkinsons's | nallsEtAl2019_excluding23andMe_allVariants.tab | 482730 |  |  | https://drive.google.com/file/d/1FZ9UL99LAqyWnyNBxxlx6qOUlfAnublN/view?usp=sharing | Nalls et al., biorXiv 2019 |
 | Amyotrophic Lateral Sclerosis | Summary_Statistics_GWAS_2016.tar | 36052 |  |  |  http://databrowser.projectmine.com/ | van Rheenen et al. Nat. Genet. 2016
 |**Negative Control**  | | | | | | |  
 |Age-related macular degeneration |Fristche_AMDGene2013_Neovascular_v_Controls.txt | | 	2281 |	8285| https://grasp.nhlbi.nih.gov/downloads/ResultsOctober2016/Fritsche/Fristche_AMDGene2013_Neovascular_v_Controls.txt | Fristche et al. 2013|
