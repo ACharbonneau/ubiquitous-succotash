@@ -67,7 +67,7 @@ Workflow:
 |**Neurological** | | | | | | |
 | Alzheimers 1| AD_sumstats_Jansenetal.txt | 381761 | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
-| Epilepsy | ILAE_All_Epi_11.8.14.txt |  |  |   |  http://www.epigad.org/gwas_ilae2014/  | International League Against Epilepsy Consortium on Complex Epilepsies|
+| Epilepsy | all_epilepsy_METAL.gz |  |  |   |  http://www.epigad.org/gwas_ilae2018_16loci/all_epilepsy_METAL.gz  | International League Against Epilepsy Consortium on Complex Epilepsies|
 | Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | Pankratz_Parkinsons_22687-SuppTable1.txt |  | 857 | 867 |  | Pankratz et al. |
 | Amyotrophic Lateral Sclerosis | Summary_Statistics_GWAS_2016.tar | 36052 |  |  |  http://databrowser.projectmine.com/ | van Rheenen et al. Nat. Genet. 2016
