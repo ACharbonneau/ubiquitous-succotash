@@ -310,7 +310,7 @@ zcat ss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz | awk '
 }' >> wss/Davies2018_UKB_RT_summary_results_29052018.txt
 gzip -f wss/Davies2018_UKB_RT_summary_results_29052018.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out mss/munged.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
-python tools/ldsc/munge_sumstats.py --sumstats wss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out wmss/munged.winz.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
+python tools/ldsc/munge_sumstats.py --sumstats wss/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out wmss/munged.winz.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
 
 ### Insomnia
 # view columns for insomnia and munge
@@ -537,7 +537,7 @@ bash src/s8-do-regression.sh wmss/munged.winz.iPSYCH-PGC_ASD_Nov2017.sumstats.gz
 ### Bipolar
 bash src/s8-do-regression.sh wmss/munged.winz.daner_PGC_BIP32b_mds7a_0416a.sumstats.gz
 ### MDD (major depressive disorder)
-bash src/s8-do-regression.sh wmss/munged.winz.MDD2018_ex23andMe.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.MDD2018_ex23andMe.gz.sumstats.gz
 ### Schizophrenia
 bash src/s8-do-regression.sh wmss/munged.winz.pgc.scz2.sumstats.gz
 ### ADHD
@@ -559,7 +559,7 @@ bash src/s8-do-regression.sh wmss/munged.winz.SWB_Full.txt.sumstats.gz
 ### Cognative Function
 bash src/s8-do-regression.sh wmss/munged.winz.Davies2018_UKB_RT_summary_results_29052018.txt.sumstats.gz
 ### Insomnia
-bash src/s8-do-regression.sh wmss/munged.winz.Insomnia_sumstats_Jansenetal.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.Insomnia_sumstats_Jansenetal.txt.sumstats.gz
 ### Alzheimers 1
 bash src/s8-do-regression.sh wmss/munged.winz.AD_sumstats_Jansenetal.sumstats.gz
 ### Alzheimers 2
