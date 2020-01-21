@@ -401,7 +401,6 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/nallsEtAl2019_excluding23andM
 ### ALS
 # it's a tarfile, and all the chromosomes are individual files that need to be joined together
 tar -xzf ss/Summary_Statistics_GWAS_2016.tar
-chr\tsnp\tbp\ta1\ta2\tfreq\tb\tse\tp\tdirection\thet_I2\thet_Chi2\thet_p\tcases\tcontrols
 zcat ss/summary_statistics/als.sumstats.meta.chr* > ss/ALS_summary
 sed '2,${/^chr/d;}' ss/ALS_summary > ss/ALS_summary.final
 gzip ss/ALS_summary.final
@@ -415,7 +414,6 @@ zcat ss/ALS_summary.final.gz | awk 'FNR > 1{
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13 "\t" $14 "\t" $15;
 }' >> wss/ALS_summary.final
 gzip -f wss/ALS_summary.final
-
 python tools/ldsc/munge_sumstats.py --sumstats ss/ALS_summary.final.gz --out mss/munged.ALS_summary.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col cases --N-con-col controls --snp snp --a1 a1 --a2 a2 --p p
 python tools/ldsc/munge_sumstats.py --sumstats wss/ALS_summary.final.gz --out wmss/munged.ALS_summary.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col cases --N-con-col controls --snp snp --a1 a1 --a2 a2 --p p
 
