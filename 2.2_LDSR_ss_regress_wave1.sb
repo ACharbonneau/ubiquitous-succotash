@@ -250,14 +250,14 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/SavageJansen_2018_intelligenc
 ### Neuroticism
 # This file has two columns that fit the auto-nameing of munge_sumstats.py, which breaks it. Here, we're removing the column we don't need.
 zcat ss/sumstats_neuroticism_ctg_format.txt.gz | cut -f 2 --complement > ss/sumstats_neuroticism_ctg_format.test
-gzip ss/sumstats_neuroticism_ctg_format.test
+gzip -f ss/sumstats_neuroticism_ctg_format.test
 
 # view columns for neuroticism and munge
 bash src/s5-provide-summary-statistics.sh ss/sumstats_neuroticism_ctg_format.test.gz
 zcat ss/sumstats_neuroticism_ctg_format.test.gz | head -n 1 > wss/sumstats_neuroticism_ctg_format.test
 zcat ss/sumstats_neuroticism_ctg_format.test.gz | awk 'FNR > 1{
         if ((0+$10)<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $0.0000001 "\t" $11 "\t" $12;
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" 0.0000001 "\t" $11 "\t" $12;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12;
 }' >> wss/sumstats_neuroticism_ctg_format.test
@@ -318,7 +318,7 @@ bash src/s5-provide-summary-statistics.sh ss/Insomnia_sumstats_Jansenetal.txt.gz
 zcat ss/Insomnia_sumstats_Jansenetal.txt.gz | head -n 1 > wss/Insomnia_sumstats_Jansenetal.txt
 zcat ss/Insomnia_sumstats_Jansenetal.txt.gz | awk 'FNR > 1{
         if ((0+$10)<0.0000001)
-        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $0.0000001 "\t" $11 "\t" $12;
+        print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" 0.0000001 "\t" $11 "\t" $12;
         else
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12;
 }' >> wss/Insomnia_sumstats_Jansenetal.txt
