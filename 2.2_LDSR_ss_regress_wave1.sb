@@ -314,7 +314,7 @@ python tools/ldsc/munge_sumstats.py --sumstats wss/Davies_NC_2018/Davies2018_UKB
 
 ### Insomnia
 # view columns for insomnia and munge
-bash src/s5-provide-summary-statistics.sh ss/Insomnia_sumstats_Jansenetal.txt.gz	
+bash src/s5-provide-summary-statistics.sh ss/Insomnia_sumstats_Jansenetal.txt.gz
 zcat ss/Insomnia_sumstats_Jansenetal.txt.gz | head -n 1 > wss/Insomnia_sumstats_Jansenetal.txt
 zcat ss/Insomnia_sumstats_Jansenetal.txt.gz | awk 'FNR > 1{
         if ((0+$10)<0.0000001)
