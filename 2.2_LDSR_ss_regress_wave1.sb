@@ -176,7 +176,7 @@ zcat ss/adhd_jul2017.gz | awk 'FNR > 1{
 gzip -f wss/adhd_jul2017
 
 python tools/ldsc/munge_sumstats.py --sumstats ss/adhd_jul2017.gz --out mss/munged.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con **
-python tools/ldsc/munge_sumstats.py --sumstats wss/adhd_jul2017.gz --out wmss/munged.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con **
+python tools/ldsc/munge_sumstats.py --sumstats wss/adhd_jul2017.gz --out wmss/munged.winz.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con **
 
 ##############################################
 ## Substance Use traits
@@ -264,7 +264,7 @@ zcat ss/sumstats_neuroticism_ctg_format.test.gz | awk 'FNR > 1{
 gzip -f wss/sumstats_neuroticism_ctg_format.test
 
 python tools/ldsc/munge_sumstats.py --sumstats ss/sumstats_neuroticism_ctg_format.test.gz --out mss/munged.sumstats_neuroticism_ctg_format.test --merge-alleles s5/w_hm3.snplist --a1-inc --N 380506 --snp RSID --a1 A1 --a2 A2 --p P
-python tools/ldsc/munge_sumstats.py --sumstats wss/sumstats_neuroticism_ctg_format.test.gz --out wmss/munged.sumstats_neuroticism_ctg_format.test --merge-alleles s5/w_hm3.snplist --a1-inc --N 380506 --snp RSID --a1 A1 --a2 A2 --p P
+python tools/ldsc/munge_sumstats.py --sumstats wss/sumstats_neuroticism_ctg_format.test.gz --out wmss/munged.winz.sumstats_neuroticism_ctg_format.test --merge-alleles s5/w_hm3.snplist --a1-inc --N 380506 --snp RSID --a1 A1 --a2 A2 --p P
 
 
 ### Risky Behavior
@@ -310,7 +310,7 @@ zcat ss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz | awk '
 }' >> wss/Davies2018_UKB_RT_summary_results_29052018.txt
 gzip -f wss/Davies2018_UKB_RT_summary_results_29052018.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out mss/munged.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
-python tools/ldsc/munge_sumstats.py --sumstats wss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out wmss/munged.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
+python tools/ldsc/munge_sumstats.py --sumstats wss/Davies_NC_2018/Davies2018_UKB_RT_summary_results_29052018.txt.gz --out wmss/munged.winz.Davies2018_UKB_RT_summary_results_29052018.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N 282014 --snp MarkerName --a1 Effect_allele --a2 Other_allele --p P
 
 ### Insomnia
 # view columns for insomnia and munge
@@ -324,7 +324,7 @@ zcat ss/Insomnia_sumstats_Jansenetal.txt.gz | awk 'FNR > 1{
 }' >> wss/Insomnia_sumstats_Jansenetal.txt
 gzip -f wss/Insomnia_sumstats_Jansenetal.txt
 python tools/ldsc/munge_sumstats.py --sumstats ss/Insomnia_sumstats_Jansenetal.txt.gz --out mss/munged.Insomnia_sumstats_Jansenetal.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-col N
-python tools/ldsc/munge_sumstats.py --sumstats wss/Insomnia_sumstats_Jansenetal.txt.gz --out wmss/munged.Insomnia_sumstats_Jansenetal.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-col N
+python tools/ldsc/munge_sumstats.py --sumstats wss/Insomnia_sumstats_Jansenetal.txt.gz --out wmss/munged.winz.Insomnia_sumstats_Jansenetal.txt --merge-alleles s5/w_hm3.snplist --a1-inc --N-col N
 
 ##############################################
 ## Neurological Traits
@@ -369,7 +369,7 @@ zcat ss/all_epilepsy_METAL.gz | awk 'FNR > 1{
 }' >> wss/all_epilepsy_METAL
 gzip -f wss/all_epilepsy_METAL
 python tools/ldsc/munge_sumstats.py --sumstats ss/all_epilepsy_METAL.gz --out mss/munged.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con ** --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
-python tools/ldsc/munge_sumstats.py --sumstats wss/all_epilepsy_METAL.gz --out wmss/munged.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con ** --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats wss/all_epilepsy_METAL.gz --out wmss/munged.winz.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con ** --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
 
 ### Multiple Sclerosis : Need to figure out how to get both alleles
@@ -396,7 +396,7 @@ zcat ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz | awk 'FNR > 1{
 }' >> wss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
 gzip -f wss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
 python tools/ldsc/munge_sumstats.py --sumstats ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz --out mss/munged.nallsEtAl2019_excluding23andMe_allVariants.tab.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col N_cases --N-con-col N_controls --snp SNP --a1 A1 --a2 A2 --p p
-python tools/ldsc/munge_sumstats.py --sumstats wss/nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz --out wmss/munged.nallsEtAl2019_excluding23andMe_allVariants.tab.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col N_cases --N-con-col N_controls --snp SNP --a1 A1 --a2 A2 --p p
+python tools/ldsc/munge_sumstats.py --sumstats wss/nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz --out wmss/munged.winz.nallsEtAl2019_excluding23andMe_allVariants.tab.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col N_cases --N-con-col N_controls --snp SNP --a1 A1 --a2 A2 --p p
 
 ### ALS
 # it's a tarfile, and all the chromosomes are individual files that need to be joined together
@@ -415,7 +415,7 @@ zcat ss/ALS_summary.final.gz | awk 'FNR > 1{
 }' >> wss/ALS_summary.final
 gzip -f wss/ALS_summary.final
 python tools/ldsc/munge_sumstats.py --sumstats ss/ALS_summary.final.gz --out mss/munged.ALS_summary.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col cases --N-con-col controls --snp snp --a1 a1 --a2 a2 --p p
-python tools/ldsc/munge_sumstats.py --sumstats wss/ALS_summary.final.gz --out wmss/munged.ALS_summary.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col cases --N-con-col controls --snp snp --a1 a1 --a2 a2 --p p
+python tools/ldsc/munge_sumstats.py --sumstats wss/ALS_summary.final.gz --out wmss/munged.winz.ALS_summary.final --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas-col cases --N-con-col controls --snp snp --a1 a1 --a2 a2 --p p
 
 ##############################################
 ## Negative Control
@@ -487,7 +487,7 @@ bash src/s8-do-regression.sh mss/munged.MDD2018_ex23andMe.sumstats.gz
 ### Schizophrenia
 bash src/s8-do-regression.sh mss/munged.pgc.scz2.sumstats.gz
 ### ADHD
-bash src/s8-do-regression.sh mss/munged.adhd_jul2017.gz
+bash src/s8-do-regression.sh mss/munged.adhd_jul2017.sumstats.gz
 ### Alcohol Use Disorder
 bash src/s8-do-regression.sh mss/munged.pgc.aud.sumstats.gz
 ### Educational Attainment
@@ -497,28 +497,27 @@ bash src/s8-do-regression.sh mss/munged.GPC-2.EXTRAVERSION.full.sumstats.gz
 ### IQ
 bash src/s8-do-regression.sh mss/munged.SavageJansen_2018_intelligence_metaanalysis.txt.sumstats.gz
 ### Neuroticism
-sumstats_neuroticism_ctg_format.txt.gz	
-bash src/s8-do-regression.sh mss/munged.sumstats_neuroticism_ctg_format.test.gz
+bash src/s8-do-regression.sh mss/munged.sumstats_neuroticism_ctg_format.test.sumstats.gz
 ### Risky Behavior
 bash src/s8-do-regression.sh mss/munged.RISK_GWAS_MA_UKB+replication.txt.sumstats.gz
 ### Well-being
 bash src/s8-do-regression.sh mss/munged.SWB_Full.txt.sumstats.gz
 ### Cognative Function
-bash src/s8-do-regression.sh mss/munged.Davies2018_UKB_RT_summary_results_29052018.txt.gz
+bash src/s8-do-regression.sh mss/munged.Davies2018_UKB_RT_summary_results_29052018.txt.sumstats.gz
 ### Insomnia
-bash src/s8-do-regression.sh mss/munged.Insomnia_sumstats_Jansenetal.txt.gz
+bash src/s8-do-regression.sh mss/munged.Insomnia_sumstats_Jansenetal.txt.sumstats.gz
 ### Alzheimers 1
 bash src/s8-do-regression.sh mss/munged.AD_sumstats_Jansenetal.sumstats.gz
 ### Alzheimers 2
 bash src/s8-do-regression.sh mss/munged.Kunkle_etal_Stage1_results.txt.sumstats.gz
 ### Epilepsy
-bash src/s8-do-regression.sh mss/munged.all_epilepsy_METAL.gz
+bash src/s8-do-regression.sh mss/munged.all_epilepsy_METAL.sumstats.gz
 ### Multiple Sclerosis
 
 ### Parkinsons Disease
-bash src/s8-do-regression.sh mss/munged.nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz
+bash src/s8-do-regression.sh mss/munged.nallsEtAl2019_excluding23andMe_allVariants.tab.final.sumstats.gz
 ###ALS
-bash src/s8-do-regression.sh mss/munged.ALS_summary.final.gz
+bash src/s8-do-regression.sh mss/munged.ALS_summary.final.sumstats.gz
 ### Age-related macular degeneration
 bash src/s8-do-regression.sh mss/munged.Fristche_AMDGene2013_Neovascular_v_Controls.txt.sumstats.gz
 ### BMI
@@ -531,56 +530,54 @@ bash src/s8-do-regression.sh mss/munged.Meta-analysis_Wood_et_al+UKBiobank_2018.
 # perform the regression on winsorized trait files
 
 
-
 ### Anxiety
-bash src/s8-do-regression.sh wmss/munged.anxiety.meta.full.fs.tbl.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.anxiety.meta.full.fs.tbl.sumstats.gz
 ### Autism
-bash src/s8-do-regression.sh wmss/munged.iPSYCH-PGC_ASD_Nov2017.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.iPSYCH-PGC_ASD_Nov2017.sumstats.gz
 ### Bipolar
-bash src/s8-do-regression.sh wmss/munged.daner_PGC_BIP32b_mds7a_0416a.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.daner_PGC_BIP32b_mds7a_0416a.sumstats.gz
 ### MDD (major depressive disorder)
-bash src/s8-do-regression.sh wmss/munged.MDD2018_ex23andMe.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.MDD2018_ex23andMe.sumstats.gz
 ### Schizophrenia
-bash src/s8-do-regression.sh wmss/munged.pgc.scz2.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.pgc.scz2.sumstats.gz
 ### ADHD
-bash src/s8-do-regression.sh wmss/munged.adhd_jul2017.gz
+bash src/s8-do-regression.sh wmss/munged.winz.adhd_jul2017.sumstats.gz
 ### Alcohol Use Disorder
-bash src/s8-do-regression.sh wmss/munged.pgc.aud.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.pgc.aud.sumstats.gz
 ### Educational Attainment
-bash src/s8-do-regression.sh wmss/munged.GWAS_EA_excl23andMe.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.GWAS_EA_excl23andMe.sumstats.gz
 ### Extraversion
-bash src/s8-do-regression.sh wmss/munged.GPC-2.EXTRAVERSION.full.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.GPC-2.EXTRAVERSION.full.sumstats.gz
 ### IQ
-bash src/s8-do-regression.sh wmss/munged.SavageJansen_2018_intelligence_metaanalysis.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.SavageJansen_2018_intelligence_metaanalysis.txt.sumstats.gz
 ### Neuroticism
-sumstats_neuroticism_ctg_format.txt.gz	
-bash src/s8-do-regression.sh wmss/munged.sumstats_neuroticism_ctg_format.test.gz
+bash src/s8-do-regression.sh wmss/munged.winz.sumstats_neuroticism_ctg_format.test.sumstats.gz
 ### Risky Behavior
-bash src/s8-do-regression.sh wmss/munged.RISK_GWAS_MA_UKB+replication.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.RISK_GWAS_MA_UKB+replication.txt.sumstats.gz
 ### Well-being
-bash src/s8-do-regression.sh wmss/munged.SWB_Full.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.SWB_Full.txt.sumstats.gz
 ### Cognative Function
-bash src/s8-do-regression.sh wmss/munged.Davies2018_UKB_RT_summary_results_29052018.txt.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Davies2018_UKB_RT_summary_results_29052018.txt.sumstats.gz
 ### Insomnia
-bash src/s8-do-regression.sh wmss/munged.Insomnia_sumstats_Jansenetal.txt.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Insomnia_sumstats_Jansenetal.txt.sumstats.gz
 ### Alzheimers 1
-bash src/s8-do-regression.sh wmss/munged.AD_sumstats_Jansenetal.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.AD_sumstats_Jansenetal.sumstats.gz
 ### Alzheimers 2
-bash src/s8-do-regression.sh wmss/munged.Kunkle_etal_Stage1_results.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Kunkle_etal_Stage1_results.txt.sumstats.gz
 ### Epilepsy
-bash src/s8-do-regression.sh wmss/munged.all_epilepsy_METAL.gz
+bash src/s8-do-regression.sh wmss/munged.winz.all_epilepsy_METAL.sumstats.gz
 ### Multiple Sclerosis
 
 ### Parkinsons Disease
-bash src/s8-do-regression.sh wmss/munged.nallsEtAl2019_excluding23andMe_allVariants.tab.final.gz
+bash src/s8-do-regression.sh wmss/munged.winz.nallsEtAl2019_excluding23andMe_allVariants.tab.final.sumstats.gz
 ###ALS
-bash src/s8-do-regression.sh wmss/munged.ALS_summary.final.gz
+bash src/s8-do-regression.sh wmss/munged.winz.ALS_summary.final.sumstats.gz
 ### Age-related macular degeneration
-bash src/s8-do-regression.sh wmss/munged.Fristche_AMDGene2013_Neovascular_v_Controls.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Fristche_AMDGene2013_Neovascular_v_Controls.txt.sumstats.gz
 ### BMI
-bash src/s8-do-regression.sh wmss/munged.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Meta-analysis_Locke_et_al+UKBiobank_2018_UPDATED.txt.sumstats.gz
 ### Height
-bash src/s8-do-regression.sh wmss/munged.Meta-analysis_Wood_et_al+UKBiobank_2018.txt.sumstats.gz
+bash src/s8-do-regression.sh wmss/munged.winz.Meta-analysis_Wood_et_al+UKBiobank_2018.txt.sumstats.gz
 ### Ulcerative Colitis
 
 
