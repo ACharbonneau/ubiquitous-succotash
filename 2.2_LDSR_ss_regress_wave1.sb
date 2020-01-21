@@ -383,7 +383,7 @@ tail -n +2 ss/nallsEtAl2019_excluding23andMe_allVariants.tab | sort > ss/nallsEt
 sed 's/\(chr[0-9]\+\)\t\([0-9]\+\)\t[0-9]\+\t\(rs[0-9]\+\)/\1:\2\t\3/' RawData/NoMHC_GPHN_SNP.bed | sort > RawData/SNPID.txt
 join -1 1 -2 1 ss/nallsEtAl2019_excluding23andMe_allVariants.tab.sorted RawData/SNPID.txt > ss/nallsEtAl2019_excluding23andMe_allVariants.tab.named
 sed '1 i\ID A1 A2 freq b se p N_cases N_controls SNP' ss/nallsEtAl2019_excluding23andMe_allVariants.tab.named > ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
-gzip ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
+gzip -f ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
 
 # view columns for Parkinsons and munge
 bash src/s5-provide-summary-statistics.sh ss/nallsEtAl2019_excluding23andMe_allVariants.tab.final
