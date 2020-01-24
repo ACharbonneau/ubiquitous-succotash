@@ -175,8 +175,8 @@ zcat ss/adhd_jul2017.gz | awk 'FNR > 1{
 }' >> wss/adhd_jul2017
 gzip -f wss/adhd_jul2017
 
-python tools/ldsc/munge_sumstats.py --sumstats ss/adhd_jul2017.gz --out mss/munged.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con **
-python tools/ldsc/munge_sumstats.py --sumstats wss/adhd_jul2017.gz --out wmss/munged.winz.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con **
+python tools/ldsc/munge_sumstats.py --sumstats ss/adhd_jul2017.gz --out mss/munged.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N 55374 
+python tools/ldsc/munge_sumstats.py --sumstats wss/adhd_jul2017.gz --out wmss/munged.winz.adhd_jul2017 --merge-alleles s5/w_hm3.snplist --a1-inc --N 55374 
 
 ##############################################
 ## Substance Use traits
@@ -368,8 +368,8 @@ zcat ss/all_epilepsy_METAL.gz | awk 'FNR > 1{
         print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7 "\t" $8 "\t" $9 "\t" $10 "\t" $11 "\t" $12 "\t" $13;
 }' >> wss/all_epilepsy_METAL
 gzip -f wss/all_epilepsy_METAL
-python tools/ldsc/munge_sumstats.py --sumstats ss/all_epilepsy_METAL.gz --out mss/munged.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con ** --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
-python tools/ldsc/munge_sumstats.py --sumstats wss/all_epilepsy_METAL.gz --out wmss/munged.winz.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N-cas ** --N-con ** --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats ss/all_epilepsy_METAL.gz --out mss/munged.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N 44889 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
+python tools/ldsc/munge_sumstats.py --sumstats wss/all_epilepsy_METAL.gz --out wmss/munged.winz.all_epilepsy_METAL --merge-alleles s5/w_hm3.snplist --a1-inc --N 44889 --snp MarkerName --a1 Allele1 --a2 Allele2 --p P-value
 
 
 ### Multiple Sclerosis : Need to figure out how to get both alleles
