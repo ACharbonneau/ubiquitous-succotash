@@ -62,13 +62,13 @@ Workflow:
 | Neuroticism | sumstats_neuroticism_ctg_format.txt.gz | 380506  | - | - | https://ctg.cncr.nl/documents/p1651/sumstats_neuroticism_ctg_format.txt.gz | Nagel et al. Nat. Genet. 2018|
 |Risky Behavior | RISK_GWAS_MA_UKB+replication.txt | 466571 | - | - |   | Karlsson Linnér et al. (2019)|
 |Well-being  |SWB_Full.txt  | 298420 | - | - |   | Okbay et al. (2016)|
-| Cognative Function | Davies_NC_2018.zip | 282014 | - | - | http://www.psy.ed.ac.uk/ccace/downloads/Davies_NC_2018.zip | Davies et al., Nat. Comm. 2018 |
+| Cognative Function (Response Time) | Davies_NC_2018.zip | 282014 | - | - | http://www.psy.ed.ac.uk/ccace/downloads/Davies_NC_2018.zip | Davies et al., Nat. Comm. 2018 |
 | Insomnia | Insomnia_sumstats_Jansenetal.txt.gz | 386533 | - | - | https://ctg.cncr.nl/documents/p1651/Insomnia_sumstats_Jansenetal.txt.gz | Jansen et al. biorXiv 2018 |
 |**Neurological** | | | | | | |
 | Alzheimers 1| AD_sumstats_Jansenetal.txt | use Neff column | | |  https://ctg.cncr.nl/software/summary_statistics  |                 *** Jansen et al 2018|
 |Alzheimers 2| Kunkle_etal_Stage1_results.txt | 63926 | 21982 | 41944 | https://www.niagads.org/system/tdf/public_docs/Kunkle_etal_Stage1_results.txt?file=1&type=field_collection_item&id=121&force= | https://doi.org/10.1038/s41588-019-0358-2 |
 | Epilepsy | all_epilepsy_METAL.gz | 44889 | 15212  | 29677  |  http://www.epigad.org/gwas_ilae2018_16loci/all_epilepsy_METAL.gz  | Khalil, Nature Communications. 2018|
-| Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz |  |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
+| Multiple Sclerosis | imputed.allWhites.combined.clinical_c_G35.chrX.csv.gz | 44889 |  | | | G35 multiple sclerosis from the GeneAtlas UKBB|                       
 | Parkinsons's | nallsEtAl2019_excluding23andMe_allVariants.tab | 482730 |  |  | https://drive.google.com/file/d/1FZ9UL99LAqyWnyNBxxlx6qOUlfAnublN/view?usp=sharing | Nalls et al., biorXiv 2019 |
 | Amyotrophic Lateral Sclerosis | Summary_Statistics_GWAS_2016.tar | 36052 |  |  |  http://databrowser.projectmine.com/ | van Rheenen et al. Nat. Genet. 2016
 |**Negative Control**  | | | | | | |  
